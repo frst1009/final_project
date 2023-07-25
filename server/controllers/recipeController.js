@@ -14,6 +14,7 @@ const RecipeController = {
         additionalDetails: req.body.additionalDetails,
         image: req.file.path,
         title: req.body.title,
+        cookingTime: req.body.cookingTime
       });
       
    

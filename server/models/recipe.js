@@ -4,22 +4,23 @@ const recipeSchema = new mongoose.Schema({
   ingredients: [
     {
       type: String,
+      required: true
     },
   ],
   category: 
     {
-      type: String
+      type: String,
+      required: true
     }
   ,
-  user: [
+  user:
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
-  ],
   title:
     {
-      type: String,
+      type: String, required: true
     },
   tags: [
     {
@@ -29,10 +30,14 @@ const recipeSchema = new mongoose.Schema({
   ],
   additionalDetails: {
     type: String,
+    required: true
   },
   image: {
-    type: String,
+    type: String, required: true
   },
+  cookingTime: {
+    type: Number, required: true
+  }
 });
 
 const Recipe = mongoose.model("Recipe", recipeSchema);

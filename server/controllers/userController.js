@@ -20,28 +20,35 @@ register: async (req, res) => {
         password: hashedPassword,
       });
 
-      await newUser.save(); // Use await here to wait for the user to be saved
+      await newUser.save(); 
       res.status(201).json({ msg: "User registered successfully!" });
     }
   } catch (err) {
     res.status(500).json(err);
   }
 },
-  login: async (req, res) => {
+login: async (req, res) => {
+  try {
     let user = await User.findOne({
       email: req.body.email,
-    })
+    });
+
     if (!user) {
-      res.json("User is not found!");
+      return res.status(404).json({ message: "User not found!" });
     } 
-    const isPasswordValid= await bcrypt.compare(req.body.password, user.password)
-    if(!isPasswordValid){
-      res.json("Username or Password is Incorrect!")
+
+    const isPasswordValid = await bcrypt.compare(req.body.password, user.password);
+    if (!isPasswordValid) {
+      return res.status(401).json({ message: "Incorrect username or password!" });
     }
+
     let token = jwt.sign(req.body.email, privateKey);
     res.status(200).json({ token: token });
+  } catch (error) {
+    res.status(500).json({ message: "Internal server error!" });
+  }
+},
 
-  },
   token: (req, res) => {
     let token = req.body.token;
 
