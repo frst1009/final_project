@@ -42,25 +42,30 @@ login: async (req, res) => {
       return res.status(401).json({ message: "Incorrect username or password!" });
     }
 
-    let token = jwt.sign(req.body.email, privateKey);
+    let token = jwt.sign({ email: req.body.email }, privateKey)
     res.status(200).json({ token: token });
   } catch (error) {
     res.status(500).json({ message: "Internal server error!" });
   }
 },
 
-  token: (req, res) => {
-    let token = req.body.token;
+token: async (req, res) => {
+  let token = req.body.token;
+  console.log("Token:", token);
+  try {
+    const decodedToken = jwt.verify(token, privateKey);
+    const email = decodedToken.email; // Extract the email value from the decoded token
+    console.log("Decoded Email:", email);
 
-    try {
-      const email = jwt.verify(token, privateKey);
-      User.findOne({ email: email }).then(function (user) {
-        res.status(200).json({ user: user });
-      });
-    } catch (error) {
-      res.status(500).json({ message: "Token error!" });
-    }
-  },
+    const user = await User.findOne({ email: email }); // Use the email value to find the user
+    console.log("User:", user);
+    res.status(200).json({ user: user });
+  } catch (error) {
+    console.error("Token Verification Error:", error);
+    res.status(500).json({ message: "Token error!" });
+  }
+},
+
 };
 
 module.exports = {
