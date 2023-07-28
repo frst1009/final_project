@@ -31,7 +31,9 @@ const RecipeController = {
 
   getAll: async (req, res) => {
     try {
-      const recipes = await Recipe.find().populate("user")
+      const recipes = await Recipe.find()
+      .populate("user")
+      .populate("category")
       .populate("tags")
       .exec();
 
@@ -45,7 +47,7 @@ const RecipeController = {
   getById: async (req, res) => {
     try {
       const recipe = await Recipe.findById(req.params.id)
-
+        .populate("category")
         .populate("user")
         .populate("tags")
         .exec();

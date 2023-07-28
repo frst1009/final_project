@@ -9,8 +9,8 @@ const recipeSchema = new mongoose.Schema({
   ],
   category: 
     {
-      type: String,
-      required: true
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Category",
     }
   ,
   user:
@@ -22,6 +22,12 @@ const recipeSchema = new mongoose.Schema({
     {
       type: String, required: true
     },
+    likes: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Like",
+      },
+    ],
   tags: [
     {
       type: mongoose.Schema.Types.ObjectId,
@@ -37,7 +43,11 @@ const recipeSchema = new mongoose.Schema({
   },
   cookingTime: {
     type: Number, required: true
-  }
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 const Recipe = mongoose.model("Recipe", recipeSchema);
