@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faTimes,faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import { NavLink, useLocation } from "react-router-dom";
@@ -48,7 +48,7 @@ const Header = () => {
                     aria-describedby="basic-addon2"
                   />
                   <button className="input-group-text" id="basic-addon2">
-                    search
+                  <FontAwesomeIcon style={{color:"rgba(255, 255, 255, 0.536)"}} icon={faSearch} />
                   </button>
                 </div>
               </div>
@@ -126,7 +126,7 @@ const Header = () => {
                     aria-describedby="basic-addon2"
                   />
                   <button className="input-group-text" id="basic-addon2">
-                    search
+                  <FontAwesomeIcon icon={faSearch} style={{color:"rgba(255, 255, 255, 0.536)"}}/>
                   </button>
                 </div>
                 <div className="menu-links mt-2">

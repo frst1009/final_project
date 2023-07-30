@@ -7,7 +7,7 @@
   --darker:rgba(234,157,90,255);
   --lighter:#000000;
   --lighter1:#dac3d186;
-  --lighter2:#e4f0e9da;
+  --lighter2:rgba(255, 255, 255, 0.536);
   --darken: #04f428;
   --color: orangered;
   --search: #ff6200;
@@ -162,6 +162,7 @@ max-height: 43px;
 }
 
 .navbar-toggler-icon{
+  color: rgba(255, 255, 255, 0.536);
 font-size: 18px;
 display: inline;
 position: absolute;
@@ -267,6 +268,7 @@ font-size: 32px;
 .banner .back-details p{
 color: var(--primary1);
 }
+
 
 @media only screen and (max-width: 768px) {
 .banner .back-details {
@@ -571,7 +573,7 @@ footer .socials{
 #footer-link{
 font-size: 18px;
 /* margin: 0 10px; */
-color: var(--darken);
+color: var(--search);
 transition: 0.5s ease;
 }
 #footer-link:hover{
@@ -593,7 +595,7 @@ color: var(--search);
 }
 
 footer .footer-title{
-border-bottom: 2px solid var(--darken);
+border-bottom: 2px solid var(--search);
 /* width: 30%; */
 }
 

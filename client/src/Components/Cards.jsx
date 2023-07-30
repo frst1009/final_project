@@ -71,8 +71,8 @@ const Cards = () => {
     <section className="hot-deals p-5">
       <div className="container-xxl">
         <Row gutter={[16, 16]}>
-          {cardsData.map((card) => (
-            <Col key={card.id} xs={24} md={8}>
+          {cardsData.map((card, index) => (
+            <Col key={card.id} xs={24} md={8} >
               <Card
                 hoverable
                 className="custom-card"
