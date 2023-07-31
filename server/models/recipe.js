@@ -22,19 +22,13 @@ const recipeSchema = new mongoose.Schema({
     {
       type: String, required: true
     },
-    likes: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Like",
-      },
-    ],
   tags: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Tags",
     },
   ],
-  additionalDetails: {
+  instructions: {
     type: String,
     required: true
   },

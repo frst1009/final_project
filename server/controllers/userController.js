@@ -8,7 +8,8 @@ const UserController = {
 register: async (req, res) => {
   try {
     let email = req.body?.email.toLowerCase();
-    const data = await User.findOne({ email: email });
+    let username = req.body?.username.toLowerCase();
+    const data = await User.findOne({ email: email, username: username });
 
     if (data) {
       res.status(500).json({ msg: "This email already exists!" });

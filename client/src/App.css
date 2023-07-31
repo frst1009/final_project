@@ -19,7 +19,7 @@
 padding: 0;
 margin: 0;
 box-sizing: border-box;
-font-family: "DM+Sans", sans-serif;
+font-family: "Prompt", sans-serif;
 list-style: none;
 }
 .slick-slide {
@@ -242,7 +242,9 @@ color: var(--darker);
 }
 
 .banner{
-  background: url("https://www.mowglistreetfood.com/wp-content/uploads/2023/01/Landing_image_Desktop.jpg");
+  /* background: url("https://www.mowglistreetfood.com/wp-content/uploads/2023/01/Landing_image_Desktop.jpg"); */
+  background: url("https://png.pngtree.com/background/20230611/original/pngtree-what-is-anime-food-picture-image_3169536.jpg");
+
   background-size: cover;
 }
 .banner .back-details{

@@ -11,7 +11,7 @@ const RecipeController = {
         category: req.body.category,
         user: req.body.user,
         tags: req.body.tags,
-        additionalDetails: req.body.additionalDetails,
+        instructions: req.body.instructions,
         image: req.file.path,
         title: req.body.title,
         cookingTime: req.body.cookingTime
