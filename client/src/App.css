@@ -651,7 +651,9 @@ color: var(--search);
 }
 
 .login-wrapper{
-background-color: var(--lighter2);
+/* background-color: var(--lighter2); */
+background: url("https://png.pngtree.com/background/20230610/original/pngtree-in-the-style-of-anime-aesthetic-picture-image_3053864.jpg");
+
 }
 
 .login-wrapper .card{

@@ -6,23 +6,27 @@ const bcrypt = require('bcrypt');
 const UserController = {
   
 register: async (req, res) => {
+  const { username, email, password, confirmpassword } = req.body;
   try {
-    let email = req.body?.email.toLowerCase();
-    let username = req.body?.username.toLowerCase();
     const data = await User.findOne({ email: email, username: username });
 
     if (data) {
       res.status(500).json({ msg: "This email already exists!" });
-    } else {
-      const hashedPassword = await bcrypt.hash(req.body.password, 10);
-      const newUser = new User({
+    } else if(password === confirmpassword){
+      const salt = bcrypt.genSaltSync();
+      const hashedPassword = bcrypt.hashSync(password, salt);
+      const newUser = await new User({
         email: email,
-        username: req.body.username,
+        username: username,
         password: hashedPassword,
+        confirmpassword: hashedPassword
       });
 
       await newUser.save(); 
       res.status(201).json({ msg: "User registered successfully!" });
+    }
+    else {
+      res.status(400).json({ msg: "Password and confirm password do not match" });
     }
   } catch (err) {
     res.status(500).json(err);
