@@ -8,13 +8,15 @@ const RecipeController = {
   add: (req, res) => {
       const recipe = new Recipe({
         ingredients: req.body.ingredients,
-        category: req.body.category,
-        user: req.body.user,
+        category: req.body.category, 
+        title: req.body.title,
         tags: req.body.tags,
         instructions: req.body.instructions,
         image: req.file.path,
-        title: req.body.title,
-        cookingTime: req.body.cookingTime
+       
+        cookingTime: req.body.cookingTime,
+         user: req.body.user,
+
       });
       
    
@@ -33,8 +35,6 @@ const RecipeController = {
     try {
       const recipes = await Recipe.find()
       .populate("user")
-      .populate("category")
-      .populate("tags")
       .exec();
 
       res.status(200).json(recipes);
@@ -47,9 +47,7 @@ const RecipeController = {
   getById: async (req, res) => {
     try {
       const recipe = await Recipe.findById(req.params.id)
-        .populate("category")
         .populate("user")
-        .populate("tags")
         .exec();
 
       if (!recipe) {
@@ -63,6 +61,7 @@ const RecipeController = {
         .json({ error: "An error occurred while retrieving the recipe." });
     }
   },
+
 };
 
 module.exports = { RecipeController };

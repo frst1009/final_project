@@ -1,58 +1,67 @@
 const mongoose = require("mongoose");
 
 const recipeSchema = new mongoose.Schema({
+  //recipe related information
   ingredients: [
     {
       type: String,
-      required: true
-    },
-  ],
-  category: 
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Category",
-    }
-  ,
-  user:
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
       required: true,
     },
-  title:
-    {
-      type: String, required: true
-    },
-  tags: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Tags",
-    },
   ],
+  category: {
+    type: String,
+    required: true,
+  },
+  title: {
+    type: String,
+    required: true,
+  },
+  tags: [String],
   instructions: {
     type: String,
-    required: true
+    required: true,
   },
   image: {
-    type: String, required: true
+    type: String,
+    required: true,
   },
   cookingTime: {
-    type: Number, required: true
+    type: Number,
+    required: true,
   },
-  createdAt: {
-    type: Date,
-    default: Date.now,
+  //user related information
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
   },
   comments: [
     {
       user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
+        ref: "User",
         required: true,
       },
-    
-    }
-  ]
+      comment: {
+        type: String,
+        required: true,
+      },
+      default: [],
+      createdAt: {
+        type: Date,
+        default: Date.now,
+      },
+    },
+  ],
+  likes: {
+    type: Number,
+    default: 0,
+  },
+  //time of creation
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 const Recipe = mongoose.model("Recipe", recipeSchema);

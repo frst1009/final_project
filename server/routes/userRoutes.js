@@ -7,7 +7,11 @@ const UserRoutes = expres.Router();
 
 UserRoutes.post("/register", UserController.register);
 UserRoutes.post("/login", UserController.login);
-UserRoutes.post("/token", UserController.token);
+UserRoutes.post("/check", UserController.checkUser);
+UserRoutes.patch("/update", UserController.profileUpdate);
+UserRoutes.get("/:id", UserController.profileData);
+
+
 
 module.exports = {
   UserRoutes,
