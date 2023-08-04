@@ -8,7 +8,6 @@ const UserController = {
     const { username, email, password, confirmpassword } = req.body;
     try {
       const data = await User.findOne({ email: email, username: username });
-
       if (data) {
         res.status(500).json({ msg: "This email already exists!" });
       } else if (password === confirmpassword) {
@@ -19,6 +18,7 @@ const UserController = {
           username: username,
           password: hashedPassword,
           confirmpassword: hashedPassword,
+          
         });
 
         await newUser.save();
@@ -32,32 +32,7 @@ const UserController = {
       res.status(500).json(err);
     }
   },
-  // login: async (req, res) => {
-  //   try {
-  //     let user = await User.findOne({
-  //       email: req.body.email,
-  //     });
 
-  //     if (!user) {
-  //       return res.status(404).json({ message: "User not found!" });
-  //     }
-
-  //     const isPasswordValid = await bcrypt.compare(
-  //       req.body.password,
-  //       user.password
-  //     );
-  //     if (!isPasswordValid) {
-  //       return res
-  //         .status(401)
-  //         .json({ message: "Incorrect username or password!" });
-  //     }
-
-  //     let token = jwt.sign({ email: req.body.email }, privateKey);
-  //     res.status(200).json({ token: token });
-  //   } catch (error) {
-  //     res.status(500).json({ message: "Internal server error!" });
-  //   }
-  // },
   login: async(req,res)=>{
     try {
       let user = await User.findOne({
@@ -69,7 +44,10 @@ const UserController = {
                       user.password
                     );
                     if(isPasswordValid){
-      let token = jwt.sign({ email: req.body.email }, privateKey);
+      let token = jwt.sign({ _id: user._id }, privateKey,{
+				expiresIn: '30d',
+			}
+);
       if(token){
         res.status(200).json({ token: token });
       }else{
@@ -88,11 +66,9 @@ const UserController = {
     }
   },
   profileData: async (req, res) => {
-    //get_user
-    const id = req.params.id;
+    //get by id the user
     try {
-      const user = await User.findById(id);
-
+      const user = await User.findById(req.userId);
       if (user) {
         res.status(200).json({ user: user });
       } else {
@@ -104,45 +80,24 @@ const UserController = {
   },
 
   profileUpdate: async (req, res) => {
-    //update_user
     const { username, email, password } = req.body;
+    const userId = req.userId; 
     try {
-      const updateUser = await User.findOneAndUpdate(email, {
-        username: username,
-        email: email,
-        password: bcrypt.hashSync(password, bcrypt.genSaltSync()),
-        confirmpassword: bcrypt.hashSync(password, bcrypt.genSaltSync()),
-      });
-      if (updateUser) {
-        res.status(200).json({ msg: "Update Successfull!!", user: updateUser });
-      } else {
-        res.json({ msg: "user not updated" });
+      const user = await User.findById(userId);
+      if (!user) {
+        return res.status(404).json({ msg: 'User not found' });
       }
+      //here is the updated user information
+      user.username = username;
+      user.email = email;
+      user.password = bcrypt.hashSync(password, bcrypt.genSaltSync());
+      user.confirmpassword = bcrypt.hashSync(password, bcrypt.genSaltSync());
+      await user.save();
+      res.status(200).json({ msg: 'Update Successfull!', user });
     } catch (error) {
-      res.json({ msg: error.message });
+      res.status(500).json({ msg: error.message });
     }
   },
-  checkUser: async (req, res) => {
-    //verify_user
-    try {
-      if (req.body.token) {
-        const token = req.body.token;
-
-        const verifyToken = jwt.verify(token, privateKey);
-
-        if (verifyToken) {
-          res.status(200).json({ msg: "User is verified", isAuth: true });
-        } else {
-          res.json({ msg: "Login first !!", isAuth: false });
-        }
-      } else {
-        res.json({ msg: "Token not found" });
-      }
-    } catch (error) {
-      res.json({ msg: error.message, isAuth: false });
-    }
-  },
-
 };
 
 module.exports = {

@@ -3,6 +3,9 @@ const { RecipeController } = require("../controllers/recipeController");
 const multer = require('multer');
 const path = require("path");
 const { v4: uuidv4 } = require('uuid');
+const { postCreateValidation } = require("../utilities/validation");
+const validationError = require("../utilities/validationError");
+const tokenAuth = require("../utilities/tokenAuth");
 const RecipeRoutes = expres.Router();
 
 
@@ -32,9 +35,10 @@ const upload = multer({
     fileFilter: fileFilter,
 });
 
-RecipeRoutes.post("/add",  upload.single("image"), RecipeController.add);
+RecipeRoutes.post("/add",tokenAuth, postCreateValidation, validationError, upload.single("image"), RecipeController.add);
 RecipeRoutes.get("/", RecipeController.getAll);
 RecipeRoutes.get("/:id", RecipeController.getById);
+RecipeRoutes.post("/like/:id",tokenAuth, RecipeController.hanldlelike);
 
 module.exports = {
   RecipeRoutes, upload,

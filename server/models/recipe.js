@@ -35,28 +35,25 @@ const recipeSchema = new mongoose.Schema({
     ref: "User",
     required: true,
   },
-  comments: [
-    {
-      user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-        required: true,
-      },
-      comment: {
-        type: String,
-        required: true,
-      },
-      default: [],
-      createdAt: {
-        type: Date,
-        default: Date.now,
-      },
-    },
-  ],
-  likes: {
-    type: Number,
-    default: 0,
-  },
+  // comments: [
+  //   {
+  //     user: {
+  //       type: mongoose.Schema.Types.ObjectId,
+  //       ref: "User",
+  //       required: true,
+  //     },
+  //     comment: {
+  //       type: String,
+  //       required: true,
+  //     },
+  //     default: [],
+  //     createdAt: {
+  //       type: Date,
+  //       default: Date.now,
+  //     },
+  //   },
+  // ],
+  likes:[String],
   //time of creation
   createdAt: {
     type: Date,

@@ -10,14 +10,12 @@ db.connect();
 
 const { UserRoutes } = require("./routes/userRoutes");
 const { RecipeRoutes } = require("./routes/recipeRoutes");
-// const { TagsRoutes } = require("./routes/tagRoutes");
-// const { CategoryRoutes } = require("./routes/categoryRoutes");
+
 
 app.use("/uploads", express.static("uploads"))
 
 app.use("/api/user", UserRoutes);
 app.use("/api/recipe", RecipeRoutes);
-// app.use("/api/tags", TagsRoutes);
-// app.use("/api/category", CategoryRoutes);
+
 
 httpServer.listen(3040);
