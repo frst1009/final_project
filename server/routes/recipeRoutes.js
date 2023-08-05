@@ -39,6 +39,11 @@ RecipeRoutes.post("/add",tokenAuth, postCreateValidation, validationError, uploa
 RecipeRoutes.get("/", RecipeController.getAll);
 RecipeRoutes.get("/:id", RecipeController.getById);
 RecipeRoutes.post("/like/:id",tokenAuth, RecipeController.hanldlelike);
+RecipeRoutes.delete("/:id",tokenAuth, RecipeController.deleterecipe);
+RecipeRoutes.patch("/:id", postCreateValidation, validationError, RecipeController.update);
+RecipeRoutes.put("/comments",tokenAuth, RecipeController.comments);
+
+//update, comment the post
 
 module.exports = {
   RecipeRoutes, upload,

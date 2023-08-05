@@ -24,3 +24,234 @@
   //     res.status(500).json({ message: "Internal server error!" });
   //   }
   // },
+
+
+
+
+   updaterecipe: async (req, res) => {
+    const recipeId = req.params.id;
+    const updateFields = {};
+    
+    // Check and add fields to updateFields if they are provided in the request body
+    if (req.body.ingredients) {
+      updateFields.ingredients = req.body.ingredients;
+    }
+    if (req.body.category) {
+      updateFields.category = req.body.category;
+    }
+    if (req.body.title) {
+      updateFields.title = req.body.title;
+    }
+    if (req.body.tags) {
+      updateFields.tags = req.body.tags;
+    }
+    if (req.body.instructions) {
+      updateFields.instructions = req.body.instructions;
+    }
+    if (req.body.cookingTime) {
+      updateFields.cookingTime = req.body.cookingTime;
+    }
+  
+    try {
+      const recipe = await Recipe.findByIdAndUpdate(
+        recipeId,
+        updateFields,
+        { new: true } // This option returns the updated document
+      );
+  
+      if (recipe) {
+        res.json({
+          success: true,
+          recipe: recipe,
+        });
+      } else {
+        res.status(404).json({
+          message: 'Recipe not found',
+        });
+      }
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({
+        message: 'Failed to update recipe',
+      });
+    }
+  }
+
+
+
+    profileUpdate: async (req, res) => {
+    const { username, email, password } = req.body;
+    const userId = req.userId; 
+  
+    try {
+      const user = await User.findById(userId);
+      if (!user) {
+        return res.status(404).json({ msg: 'User not found' });
+      }
+  
+      // Check and update the fields if they are provided in the request body
+      if (username) {
+        user.username = username;
+      }
+      if (email) {
+        user.email = email;
+      }
+      if (password) {
+        user.password = bcrypt.hashSync(password, bcrypt.genSaltSync());
+        user.confirmpassword = bcrypt.hashSync(password, bcrypt.genSaltSync());
+      }
+  
+      await user.save();
+      res.status(200).json({ msg: 'Update Successful!', user });
+    } catch (error) {
+      res.status(500).json({ msg: error.message });
+    }
+  }
+
+
+  
+  // try {
+  //   const recipeId = req.params.id;
+  //   await Recipe.findByIdAndUpdate(
+  //       recipeId,
+  //     {
+  //       // imageUrl: req.body.imageUrl,
+  //       ingredients: req.body.ingredients,
+  //       category: req.body.category,
+  //       title: req.body.title,
+  //       tags: req.body.tags,
+  //       instructions: req.body.instructions,
+  //       // image: req.file.path,
+  //       cookingTime: req.body.cookingTime,
+  //       user: req.userId,
+  //     },
+  //   );
+  //   res.status(200).json({
+  //     success: true,
+  //   });
+  // } catch (err) {
+  //   console.log(err);
+  //   res.status(500).json({
+  //   msg: 'Could not update the recipe',
+  //   });
+  // }
+  //   updaterecipe: async(req,res)=>{
+  //   try {
+  //     const doc = req.params.id;
+  //   console.log(doc);
+  //     const recipe = await Recipe.findByIdAndUpdate(
+  //       doc,
+  //       {
+  //         ingredients: req.body.ingredients,
+  //         category: req.body.category,
+  //         title: req.body.title,
+  //         tags: req.body.tags,
+  //         instructions: req.body.instructions,
+  //         cookingTime: req.body.cookingTime,
+  //         user: req.userId,
+  //            // image: req.file.path,
+  //       },
+  //     );
+  //     console.log("before save");
+  //     await recipe.save()
+  //     if (recipe) {
+  //       res.json({
+  //         success: true,
+  //         recipe: recipe,
+  //       });
+  //     } else {console.log("recipe not found");
+  //       res.status(404).json({
+  //         message: 'Recipe not found',
+
+  //       });
+  //     }
+  //   } catch (err) {
+  //     console.log(err);
+  //     res.status(500).json({
+  //       message: 'Failed to update post',
+  //     });
+  //   }
+  // }
+
+  //  updaterecipe: async (req, res) => {
+  //     try {
+  //       const post = await Recipe.findByIdAndUpdate(req.params.id, {
+  //         ingredients: req.body.ingredients,
+  //         category: req.body.category,
+  //         title: req.body.title,
+  //         tags: req.body.tags,
+  //         instructions: req.body.instructions,
+  //         cookingTime: req.body.cookingTime,
+  //         user: req.userId,
+  //       },
+  //       { new: true });
+
+  //       if (post) {
+  //         res
+  //           .status(200)
+  //           .json({ post: post, msg: "Recipe created successfully !!" });
+
+  //       } else {
+  //         res.json({ msg: "Something wents wrong" });
+  //       }
+  //     } catch (err) {
+  //       console.log(err);
+  //       res.status(500).json({
+  //         message: 'Failed to update post',
+  //       });
+  //     }
+
+
+
+
+
+
+
+    
+  update: async (req, res) => {
+    try {
+      const postId = req.params.id;
+      const updateFields = {};
+      if (req.body.ingredients) {
+        updateFields.ingredients = req.body.ingredients;
+      }
+      if (req.body.category) {
+        updateFields.category = req.body.category;
+      }
+      if (req.body.title) {
+        updateFields.title = req.body.title;
+      }
+      if (req.body.tags) {
+        updateFields.tags = req.body.tags;
+      }
+      if (req.body.instructions) {
+        updateFields.instructions = req.body.instructions;
+      }
+      if (req.body.cookingTime) {
+        updateFields.cookingTime = req.body.cookingTime;
+      }
+      if (Object.keys(updateFields).length === 0) {
+        return res.status(400).json({ message: "No fields to update." });
+      }
+      const recipe = await Recipe.findByIdAndUpdate(
+        postId,
+        updateFields,
+        { new: true } // This option returns the updated document
+      );
+      if (recipe) {
+        res.json({
+          success: true,
+          recipe: recipe,
+        });
+      } else {
+        res.status(404).json({
+          message: "Recipe not found",
+        });
+      }
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({
+        message: "Failed to update recipe",
+      });
+    }
+  },
