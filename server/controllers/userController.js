@@ -18,7 +18,7 @@ const UserController = {
           username: username,
           password: hashedPassword,
           confirmpassword: hashedPassword,
-          
+          profilepicture: req.file.path,
         });
 
         await newUser.save();

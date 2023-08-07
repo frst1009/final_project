@@ -1,17 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@500&family=DynaPuff&family=Mulish:wght@200&family=Prompt:wght@100&family=Tektur&display=swap');
-
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@500&family=DynaPuff&family=League+Spartan:wght@300&family=Mulish:wght@200&family=Prompt:wght@100&family=Tektur&display=swap');
 :root{
   --primary: #04f428;
   --light:rgba(133,198,218,255);
   --dark:rgba(13,13,10,255);
   --darker:rgba(234,157,90,255);
-  --lighter:#000000;
+  /* --lighter:#83c4be; */
+  --lighter:#545562;
   --lighter1:#dac3d186;
-  --lighter2:rgba(255, 255, 255, 0.536);
+  --lighter2:#83c4be7b;
   --darken: #04f428;
-  --color: orangered;
-  --search: #ff6200;
-  --primary1: #2b3d4c;
+  --color: rgb(255, 255, 255);
+  --search: #ffe5d5;
+  --primary1: #250f06;
   --primary2: #354d61;
 }
 
@@ -19,9 +19,47 @@
 padding: 0;
 margin: 0;
 box-sizing: border-box;
-font-family: "Prompt", sans-serif;
+font-family: 'League Spartan',sans-serif;
 list-style: none;
 }
+/* profile */
+.profile-page {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+.profile-info {
+  margin-top: 20px;
+}
+
+label {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.unput-button {
+  width: 100%;
+  background-color: #000;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+/* profile */
+
+
 .slick-slide {
   padding: 8px; /* gap between the cards */
 }
@@ -96,8 +134,8 @@ color: var(--search);
 }
 
 h2{
-font-weight: 600;
-font-size: 24px;
+font-weight: 400;
+font-size: 20px;
 }
 
 
@@ -145,6 +183,7 @@ padding: 0 10px;
 .navbar-middle{
 background-color: var(--lighter);
 transition: 0.5s ease;
+border-bottom: 1px solid var(--primary1);
 }
 
 .navbar-middle .menu-links a{
@@ -222,7 +261,7 @@ text-decoration: underline;
 
 
 .not-active{
-color: var(--lighter2);
+color: var(--primary1);
 }
 
 
@@ -243,9 +282,13 @@ color: var(--darker);
 
 .banner{
   /* background: url("https://www.mowglistreetfood.com/wp-content/uploads/2023/01/Landing_image_Desktop.jpg"); */
-  background: url("https://png.pngtree.com/background/20230611/original/pngtree-what-is-anime-food-picture-image_3169536.jpg");
+  /* background: url("https://png.pngtree.com/background/20230611/original/pngtree-what-is-anime-food-picture-image_3169536.jpg"); */
+  /* background: url("https://images.pexels.com/photos/1640773/pexels-photo-1640773.jpeg"); */
+  /* background: url('https://wallpaperaccess.com/full/2443613.jpg'); */
+  background-image: url(./Components/img/2443613.jpg);
 
-  background-size: cover;
+  background-size: cover; 
+  /* https://terraplanetearth.com/wp-content/uploads/2020/11/Screen-Shot-2020-11-18-at-8.47.56-PM-copy.jpg */
 }
 .banner .back-details{
 /* background: url(/src/assets/images/back.jpg); */
@@ -261,10 +304,19 @@ display: flex;
 flex-direction: column;
 }
 .banner .back-details h1{
-font-size: 52px;
+/* font-size: 52px; */
+/* background-color: var(--lighter2); */
+/* border-bottom: 1px solid var(--primary1);
+border-top-right-radius: 10px; */
+/* box-shadow: 10px 30px 40px rgba(41, 46, 43, 0.432); */
+color: var(--primary1);
 }
 .banner .back-details h2{
-font-size: 32px;
+/* font-size: 32px; */
+/* background-color: var(--lighter2);
+box-shadow: 10px 30px 40px rgba(41, 46, 43, 0.432); */
+color: var(--primary1);
+width: 35%;
 }
 
 .banner .back-details p{
@@ -903,6 +955,8 @@ cursor: pointer;
 }
 .logo{
   padding-left:62px;
+  font-weight: bolder;
+  color: var(--search);
 }
 
 @media (max-width: 768px) {

@@ -14,8 +14,8 @@ const Home = () => {
             <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
               <div className="carousel-inner">
                   <div className='back-details'>
-                  <h1 style={{ textShadow:"2px 2px #ffffff"}}>Cooking monsters</h1>
-                  <h2 style={{color:"white", textShadow:"2px 2px #FF6000"}}>you totally know where GooD food recipes located!</h2>
+                  <h1 >Recipe Heaven</h1>
+                  <h2 >You totally know where good food recipes located!</h2>
                   </div>
               </div>
             </div>

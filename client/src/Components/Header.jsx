@@ -33,7 +33,7 @@ const Header = () => {
                 </span>
               </button>
 
-              <Link to="/"  className="logo" style={{color:"#FF6000", fontSize:"18px", fontWeight:"bolder"}}>Cooking Monsters</Link>
+              <Link to="/"  className="logo">Cooking Monsters</Link>
 
             </div>
 
@@ -68,9 +68,9 @@ const Header = () => {
 
                   <div className="ms-auto gap-3">
                     <NavLink
-                      to="/blog"
+                      to="/login"
                       className={
-                        location.pathname === "/blog" ? "active" : "not-active"
+                        location.pathname === "/login" ? "active" : "not-active"
                       }
                       onClick={toggleMenu}
                     >
@@ -79,9 +79,9 @@ const Header = () => {
                   </div>
                   <div className="ms-auto gap-3">
                     <NavLink
-                      to="/about"
+                      to="/signup"
                       className={
-                        location.pathname === "/about" ? "active" : "not-active"
+                        location.pathname === "/signup" ? "active" : "not-active"
                       }
                       onClick={toggleMenu}
                     >
@@ -90,9 +90,9 @@ const Header = () => {
                   </div>
                   <div className="ms-auto gap-3">
                     <NavLink
-                      to="/shop"
+                      to="/recipe"
                       className={
-                        location.pathname === "/shop" ? "active" : "not-active"
+                        location.pathname === "/recipe" ? "active" : "not-active"
                       }
                       onClick={toggleMenu}
                     >
@@ -101,11 +101,9 @@ const Header = () => {
                   </div>
                   <div className="ms-auto gap-3">
                     <NavLink
-                      to="/contact"
+                      to="/"
                       className={
-                        location.pathname === "/contact"
-                          ? "active"
-                          : "not-active"
+                        location.pathname === "/" ? "active" : "not-active"
                       }
                       onClick={toggleMenu}
                     >
@@ -115,7 +113,7 @@ const Header = () => {
                 </div>
               </div>
             </div>
-            {showMenu && (
+            {showMenu && (//this part is for the mobile versions
               <div className="col-md-10 d-md-none mt-3">
                 <div className="input-group mb-3">
                   <input
@@ -144,9 +142,9 @@ const Header = () => {
                   <div className="mb-2">
                     <NavLink
                       className={
-                        location.pathname === "/shop" ? "active" : "not-active"
+                        location.pathname === "/login" ? "active" : "not-active"
                       }
-                      to="/shop"
+                      to="/login"
                       onClick={toggleMenu}
                     >
                       Login
@@ -155,9 +153,9 @@ const Header = () => {
                   <div className="mb-2">
                     <NavLink
                       className={
-                        location.pathname === "/blog" ? "active" : "not-active"
+                        location.pathname === "/signup" ? "active" : "not-active"
                       }
-                      to="/blog"
+                      to="/signup"
                       onClick={toggleMenu}
                     >
                       Register
@@ -166,9 +164,9 @@ const Header = () => {
                   <div className="mb-2">
                     <NavLink
                       className={
-                        location.pathname === "/about" ? "active" : "not-active"
+                        location.pathname === "/recipe" ? "active" : "not-active"
                       }
-                      to="/about"
+                      to="/recipe"
                       onClick={toggleMenu}
                     >
                       Add recipe
@@ -177,11 +175,11 @@ const Header = () => {
                   <div className="mb-2">
                     <NavLink
                       className={
-                        location.pathname === "/contact"
+                        location.pathname === "/"
                           ? "active"
                           : "not-active"
                       }
-                      to="/contact"
+                      to="/"
                       onClick={toggleMenu}
                     >
                       Logout

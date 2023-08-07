@@ -1,8 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { Card, Row, Col } from 'antd';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {faHeart as heart } from "@fortawesome/free-regular-svg-icons";
+import {faHeart as solidheart } from "@fortawesome/free-solid-svg-icons";
+
 
 const Cards = () => {
+  const [isLiked, setIsLiked] = useState(false);//use it for state of like button
+  const handleClick = () => {
+    setIsLiked(!isLiked);
+  };
   // Replace this with actual data fetched from the server
   const [cardsData, setCardsData] = useState([
     {
@@ -69,6 +77,7 @@ const Cards = () => {
 
   return (
     <section className="hot-deals p-5">
+       <div style={{display: 'flex', justifyContent:"center", alignItems:"center", borderBottom:"0.8px solid #250f06", borderTop:"0.8px solid #250f06", marginBottom:"70px"}}><p style={{fontSize:"25px", fontWeight:"800"}}>Recipes</p></div>
       <div className="container-xxl">
         <Row gutter={[16, 16]}>
           {cardsData.map((card, index) => (
@@ -85,6 +94,11 @@ const Cards = () => {
                   <Link to={card.link}>
                     <button className="card-button">Learn more</button>
                   </Link>
+                  <FontAwesomeIcon
+      icon={isLiked ? solidheart : heart}
+      onClick={handleClick}
+      style={{color: "grey"}}
+    />
                 </div>
               </Card>
             </Col>

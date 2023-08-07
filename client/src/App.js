@@ -4,7 +4,9 @@ import Layout from "./Components/Layout";
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";
 import Signup from "./Pages/Sign";
-import Recipe from "./Components/Recipe";
+import Details from "./Pages/Details";
+import ProfilePage from "./Pages/ProfilePage";
+import Recipe from "./Pages/Recipe";
 
 function App() {
   return (
@@ -15,7 +17,8 @@ function App() {
           <Route path='login' element={<Login />} />
           <Route path='signup' element={<Signup />} />
           <Route path='recipe' element={<Recipe />} />
-          
+          <Route path='profile' element={<ProfilePage/>}/>
+          <Route path='details' element={<Details/>}/> 
           </Route>
         </Routes>
     </>

@@ -56,6 +56,7 @@ const CustomCarousel = () => {
 
   return (
     <div style={{ margin: "5%" }}>
+      <div style={{display: 'flex', justifyContent:"center", alignItems:"center", borderBottom:"0.8px solid #250f06", borderTop:"0.8px solid #250f06", marginBottom:"70px", marginTop:"100px"}}><p style={{fontSize:"25px", fontWeight:"800"}}>Categories</p></div>
     <Carousel slidesToShow={3} autoplay className='Card'>
       {categories.map((category) => (
         <Card

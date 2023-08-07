@@ -125,41 +125,28 @@ const RecipeController = {
   comments: async (req, res) => {
     try {
       const { comment, postId } = req.body;
-  
-      // Get the user ID from the token
-      const userId = req.userId;
-  
-      // Fetch the user from the database to get their username
-      const user = await User.findById(userId);
-  
-      // Check if the user exists
-      if (!user) {
-        return res.status(404).json({ message: 'User not found' });
+      
+      const recipe = await Recipe.findById(postId);
+      if (!recipe) {
+        return res.status(404).json({ message: 'Recipe not found' });
       }
-  
-      // Extract the username from the user object
-      const username = user.username;
-  
-      const commentsObj = {
-        user: userId,
-        username: username,
-        comment,
+      
+      const newComment = {
+        user: req.userId,
+        comment: comment,
+        postId: postId,
       };
   
-      const post = await Recipe.findById(postId);
-      if (!post) {
-        return res.status(404).json({ message: 'Post not found' });
-      }
+      recipe.comments.push(newComment);
+      await recipe.save();
   
-      post.comments.push(commentsObj);
-      await post.save();
-      res.status(200).json(post);
-    } catch (err) {
-      res.status(500).json({
-        message: 'Failed to add comment',
-        error: err.message,
+      res.status(200).json({
+        msg: "Comment Posted Successfully !!",
+        comment: newComment,
       });
-    }
-  }}
+    } catch (error) {
+      console.log(error.message);
+      res.status(500).json({ msg: "Failed to add comment" });
+    }}}
 
 module.exports = { RecipeController };

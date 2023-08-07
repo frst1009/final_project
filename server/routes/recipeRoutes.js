@@ -41,7 +41,7 @@ RecipeRoutes.get("/:id", RecipeController.getById);
 RecipeRoutes.post("/like/:id",tokenAuth, RecipeController.hanldlelike);
 RecipeRoutes.delete("/:id",tokenAuth, RecipeController.deleterecipe);
 RecipeRoutes.patch("/:id", postCreateValidation, validationError, RecipeController.update);
-RecipeRoutes.put("/comments",tokenAuth, RecipeController.comments);
+RecipeRoutes.post("/comments",tokenAuth, RecipeController.comments);
 
 //update, comment the post
 

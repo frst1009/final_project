@@ -46,10 +46,10 @@ const recipeSchema = new mongoose.Schema({
         type: String,
         required: true,
       },
-      username: {
-					type: String,
-					required: true,
-				},
+      postId:{
+        type: String,
+        required: true,
+      },
       default: [],
       createdAt: {
         type: Date,
