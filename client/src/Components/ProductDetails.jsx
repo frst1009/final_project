@@ -31,12 +31,6 @@ const ProductDetails = () => {
                 <br /> libero nemo quisquam ex assumenda corrupti rerum aut quod
                 et sint facere reprehenderit?
               </p>
-
-              <div className="d-flex justify-content-center">
-                <button id="button-link" className="myButton">
-                  comment
-                </button>
-              </div>
             </div>
           </div>
           <div className="card">

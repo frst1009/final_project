@@ -11,7 +11,7 @@ const Header = () => {
   const toggleMenu = () => {
     setShowMenu(!showMenu);
   };
-
+const isAuth=false;
   return (
     <>
       <header className="navbar-middle sticky-top p-2 p-md-2 p-lg-2">
@@ -53,65 +53,72 @@ const Header = () => {
                 </div>
               </div>
               <div className="col-md-6 m-auto">
-                <div className="menu-links mt-2 d-none d-md-flex d-lg-flex">
-                  <div className="ms-auto gap-3">
-                    <NavLink
-                      to="/"
-                      className={
-                        location.pathname === "/" ? "active" : "not-active"
-                      }
-                      onClick={toggleMenu}
-                    >
-                      Home
-                    </NavLink>
-                  </div>
+  <div className="menu-links mt-2 d-none d-md-flex d-lg-flex">
+    <div className="ms-auto gap-3">
+      <NavLink
+        to="/"
+        className={
+          location.pathname === "/" ? "active" : "not-active"
+        }
+        onClick={toggleMenu}
+      >
+        Home
+      </NavLink>
+    </div>
 
-                  <div className="ms-auto gap-3">
-                    <NavLink
-                      to="/login"
-                      className={
-                        location.pathname === "/login" ? "active" : "not-active"
-                      }
-                      onClick={toggleMenu}
-                    >
-                      Login
-                    </NavLink>
-                  </div>
-                  <div className="ms-auto gap-3">
-                    <NavLink
-                      to="/signup"
-                      className={
-                        location.pathname === "/signup" ? "active" : "not-active"
-                      }
-                      onClick={toggleMenu}
-                    >
-                      Register
-                    </NavLink>
-                  </div>
-                  <div className="ms-auto gap-3">
-                    <NavLink
-                      to="/recipe"
-                      className={
-                        location.pathname === "/recipe" ? "active" : "not-active"
-                      }
-                      onClick={toggleMenu}
-                    >
-                      Add recipe
-                    </NavLink>
-                  </div>
-                  <div className="ms-auto gap-3">
-                    <NavLink
-                      to="/"
-                      className={
-                        location.pathname === "/" ? "active" : "not-active"
-                      }
-                      onClick={toggleMenu}
-                    >
-                      Logout
-                    </NavLink>
-                  </div>
-                </div>
-              </div>
+    {!isAuth ? (
+      <>
+        <div className="ms-auto gap-3">
+          <NavLink
+            to="/login"
+            className={
+              location.pathname === "/login" ? "active" : "not-active"
+            }
+            onClick={toggleMenu}
+          >
+            Login
+          </NavLink>
+        </div>
+        <div className="ms-auto gap-3">
+          <NavLink
+            to="/signup"
+            className={
+              location.pathname === "/signup" ? "active" : "not-active"
+            }
+            onClick={toggleMenu}
+          >
+            Register
+          </NavLink>
+        </div>
+      </>
+    ) : (
+      <>
+        <div className="ms-auto gap-3">
+          <NavLink
+            to="/recipe"
+            className={
+              location.pathname === "/recipe" ? "active" : "not-active"
+            }
+            onClick={toggleMenu}
+          >
+            Add recipe
+          </NavLink>
+        </div>
+        <div className="ms-auto gap-3">
+          <NavLink
+            to="/"
+            className={
+              location.pathname === "/" ? "active" : "not-active"
+            }
+            onClick={toggleMenu}
+          >
+            Logout
+          </NavLink>
+        </div>
+      </>
+    )}
+  </div>
+</div>
             </div>
             {showMenu && (//this part is for the mobile versions
               <div className="col-md-10 d-md-none mt-3">
@@ -139,6 +146,8 @@ const Header = () => {
                       Home
                     </NavLink>
                   </div>
+                  {!isAuth ? (
+      <>
                   <div className="mb-2">
                     <NavLink
                       className={
@@ -160,7 +169,7 @@ const Header = () => {
                     >
                       Register
                     </NavLink>
-                  </div>
+                  </div></>):(<>
                   <div className="mb-2">
                     <NavLink
                       className={
@@ -185,6 +194,7 @@ const Header = () => {
                       Logout
                     </NavLink>
                   </div>
+                  </>)}
                 </div>
 
               

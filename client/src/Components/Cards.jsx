@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Card, Row, Col } from 'antd';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {faHeart as heart } from "@fortawesome/free-regular-svg-icons";
+import {faHeart as heart, faComment } from "@fortawesome/free-regular-svg-icons";
 import {faHeart as solidheart } from "@fortawesome/free-solid-svg-icons";
 
 
@@ -89,16 +89,18 @@ const Cards = () => {
               >
                 <div className="card-image" style={{ backgroundImage: `url(${card.imageUrl})` }} />
                 <div className="card-content">
-                  <h3 className="card-title">{card.title}</h3>
+                <Link to={card.link}> <h3 className="card-title">{card.title}</h3>
                   <p className="card-description">{card.description}</p>
-                  <Link to={card.link}>
-                    <button className="card-button">Learn more</button>
                   </Link>
-                  <FontAwesomeIcon
+                  <div className='card-content-icon'> 
+                   <FontAwesomeIcon
       icon={isLiked ? solidheart : heart}
       onClick={handleClick}
       style={{color: "grey"}}
     />
+<FontAwesomeIcon icon={faComment} style={{color: "grey"}}/>
+    </div>
+                 
                 </div>
               </Card>
             </Col>

@@ -1,0 +1,9 @@
+little documentation about redux:
+entire state of the app is stored in the object tree in store
+only way to change the state is by actions and then dispatching/sending it to the store
+response of state to the action is done by reducers
+reducer takes the state and action and returns new state value:
+(state, action) => newState
+reducer > dispatch > action > state
+actions are objects
+reducer is function
