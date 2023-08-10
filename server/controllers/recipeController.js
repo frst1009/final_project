@@ -9,7 +9,7 @@ const RecipeController = {
         title: req.body.title,
         tags: req.body.tags,
         instructions: req.body.instructions,
-        image: req.file.path,
+        image: req.body.image,
         cookingTime: req.body.cookingTime,
         user: req.userId,
       });
@@ -17,6 +17,7 @@ const RecipeController = {
       const doc = await recipe.save();
       res.json(doc);
     } catch (err) {
+      console.log(err);
       res.status(500).json(err);
     }
   },

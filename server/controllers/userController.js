@@ -18,7 +18,7 @@ const UserController = {
           username: username,
           password: hashedPassword,
           confirmpassword: hashedPassword,
-          profilepicture: req.file.path,
+          // profilepicture: req.file.path,
         });
 
         await newUser.save();
@@ -29,6 +29,7 @@ const UserController = {
           .json({ msg: "Password and confirm password do not match" });
       }
     } catch (err) {
+      console.log(err);
       res.status(500).json(err);
     }
   },

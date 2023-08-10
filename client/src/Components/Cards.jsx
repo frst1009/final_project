@@ -1,110 +1,83 @@
-import React, { useEffect, useState } from 'react';
-import { Card, Row, Col } from 'antd';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { Card, Row, Col } from "antd";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {faHeart as heart, faComment } from "@fortawesome/free-regular-svg-icons";
-import {faHeart as solidheart } from "@fortawesome/free-solid-svg-icons";
-
+import {
+  faHeart as heart,
+  faComment,
+} from "@fortawesome/free-regular-svg-icons";
+import { faHeart as solidheart } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchRecipes } from "../redux/slices/recipes";
 
 const Cards = () => {
-  const [isLiked, setIsLiked] = useState(false);//use it for state of like button
+  const [isLiked, setIsLiked] = useState(false);
   const handleClick = () => {
     setIsLiked(!isLiked);
   };
-  // Replace this with actual data fetched from the server
-  const [cardsData, setCardsData] = useState([
-    {
-      id: 1,
-      title: 'Card Title 1',
-      description: 'This is a description for Card 1.',
-      imageUrl: 'https://ca-times.brightspotcdn.com/dims4/default/78ccdc9/2147483647/strip/true/crop/1920x1080+0+0/resize/1200x675!/quality/80/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2Fb1%2Ffa%2F991da28e44019f3f83d083d1a966%2Ffood-1920w-0000000.jpg',
-      link: '/card1',
-    },
-    {
-      id: 2,
-      title: 'Card Title 2',
-      description: 'This is a description for Card 2.',
-      imageUrl: 'https://ca-times.brightspotcdn.com/dims4/default/78ccdc9/2147483647/strip/true/crop/1920x1080+0+0/resize/1200x675!/quality/80/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2Fb1%2Ffa%2F991da28e44019f3f83d083d1a966%2Ffood-1920w-0000000.jpg',
-      link: '/card2',
-    },
-    {
-      id: 3,
-      title: 'Card Title 2',
-      description: 'This is a description for Card 2.',
-      imageUrl: 'https://ca-times.brightspotcdn.com/dims4/default/78ccdc9/2147483647/strip/true/crop/1920x1080+0+0/resize/1200x675!/quality/80/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2Fb1%2Ffa%2F991da28e44019f3f83d083d1a966%2Ffood-1920w-0000000.jpg',
-      link: '/card2',
-    },
-    {
-      id: 4,
-      title: 'Card Title 2',
-      description: 'This is a description for Card 2.',
-      imageUrl: 'https://ca-times.brightspotcdn.com/dims4/default/78ccdc9/2147483647/strip/true/crop/1920x1080+0+0/resize/1200x675!/quality/80/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2Fb1%2Ffa%2F991da28e44019f3f83d083d1a966%2Ffood-1920w-0000000.jpg',
-      link: '/card2',
-    },
-    {
-      id: 5,
-      title: 'Card Title 2',
-      description: 'This is a description for Card 2.',
-      imageUrl: 'https://ca-times.brightspotcdn.com/dims4/default/78ccdc9/2147483647/strip/true/crop/1920x1080+0+0/resize/1200x675!/quality/80/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2Fb1%2Ffa%2F991da28e44019f3f83d083d1a966%2Ffood-1920w-0000000.jpg',
-      link: '/card2',
-    },
-    {
-      id: 6,
-      title: 'Card Title 2',
-      description: 'This is a description for Card 2.',
-      imageUrl: 'https://ca-times.brightspotcdn.com/dims4/default/78ccdc9/2147483647/strip/true/crop/1920x1080+0+0/resize/1200x675!/quality/80/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2Fb1%2Ffa%2F991da28e44019f3f83d083d1a966%2Ffood-1920w-0000000.jpg',
-      link: '/card2',
-    },
-    {
-      id: 7,
-      title: 'Card Title 2',
-      description: 'This is a description for Card 2.',
-      imageUrl: 'https://ca-times.brightspotcdn.com/dims4/default/78ccdc9/2147483647/strip/true/crop/1920x1080+0+0/resize/1200x675!/quality/80/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2Fb1%2Ffa%2F991da28e44019f3f83d083d1a966%2Ffood-1920w-0000000.jpg',
-      link: '/card2',
-    },
-    // Add more card data objects here...
-  ]);
-
-  // Fetch data from the server (useEffect, fetch, axios, etc.)
+  const dispatch = useDispatch();
+  const { recipes, tags } = useSelector((state) => state.recipes); //refering to store
+  const isPostsLoading = recipes.status == "loading";
   useEffect(() => {
-    // Fetch data from the server and setCardsData with the actual data
-    // Example:
-    // fetch('/api/cards')
-    //   .then(response => response.json())
-    //   .then(data => setCardsData(data))
-    //   .catch(error => console.error('Error fetching card data:', error));
+    dispatch(fetchRecipes());
   }, []);
+
 
   return (
     <section className="hot-deals p-5">
-       <div style={{display: 'flex', justifyContent:"center", alignItems:"center", borderBottom:"0.8px solid #250f06", borderTop:"0.8px solid #250f06", marginBottom:"70px"}}><p style={{fontSize:"25px", fontWeight:"800"}}>Recipes</p></div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          borderBottom: "0.8px solid #250f06",
+          borderTop: "0.8px solid #250f06",
+          marginBottom: "70px",
+        }}
+      >
+        <p style={{ fontSize: "25px", fontWeight: "800" }}>Recipes</p>
+      </div>
       <div className="container-xxl">
         <Row gutter={[16, 16]}>
-          {cardsData.map((card, index) => (
-            <Col key={card.id} xs={24} md={8} >
-              <Card
-                hoverable
-                className="custom-card"
-                bodyStyle={{ padding: '16px' }}
-              >
-                <div className="card-image" style={{ backgroundImage: `url(${card.imageUrl})` }} />
-                <div className="card-content">
-                <Link to={card.link}> <h3 className="card-title">{card.title}</h3>
-                  <p className="card-description">{card.description}</p>
-                  </Link>
-                  <div className='card-content-icon'> 
-                   <FontAwesomeIcon
-      icon={isLiked ? solidheart : heart}
-      onClick={handleClick}
-      style={{color: "grey"}}
-    />
-<FontAwesomeIcon icon={faComment} style={{color: "grey"}}/>
-    </div>
-                 
-                </div>
-              </Card>
-            </Col>
-          ))}
+          {isPostsLoading
+    ? [...Array(5)].map((_, index) => (
+        <Col key={index} xs={24} md={8}>
+          <Card className="custom-card loading-card" />
+        </Col>
+      ))
+    : recipes.items.map((obj) => (
+        <Col key={obj._id} xs={24} md={8}>
+          <Card
+            hoverable
+            className="custom-card"
+            bodyStyle={{ padding: "16px" }}
+          >
+                  <div
+                    className="card-image"
+                    style={{ backgroundImage: `url("${obj.image}")` }}
+                  />
+                  <div className="card-content">
+                    <Link to='/details'>
+                      {" "}
+                      <h3 className="card-title">{obj.title}</h3>
+                      <p className="card-description">{obj.instructions}</p>
+                    </Link>
+                    <div className="card-content-icon">
+                      <FontAwesomeIcon
+                        icon={isLiked ? solidheart : heart}
+                        onClick={handleClick}
+                        style={{ color: "grey" }}
+                      />
+                      <FontAwesomeIcon
+                        icon={faComment}
+                        style={{ color: "grey" }}
+                      />
+                    </div>
+                  </div>
+                </Card>
+              </Col>
+            )
+          )}
         </Row>
       </div>
     </section>
@@ -112,9 +85,6 @@ const Cards = () => {
 };
 
 export default Cards;
-
-
-
 
 // import React, { useEffect, useState } from 'react';
 // import { Link } from 'react-router-dom';
@@ -126,7 +96,7 @@ export default Cards;
 //       id: 1,
 //       title: 'Hot Deals',
 //       description: 'Buy One get One free.',
-//       imageUrl: "https://ca-times.brightspotcdn.com/dims4/default/78ccdc9/2147483647/strip/true/crop/1920x1080+0+0/resize/1200x675!/quality/80/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2Fb1%2Ffa%2F991da28e44019f3f83d083d1a966%2Ffood-1920w-0000000.jpg", 
+//       imageUrl: "https://ca-times.brightspotcdn.com/dims4/default/78ccdc9/2147483647/strip/true/crop/1920x1080+0+0/resize/1200x675!/quality/80/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2Fb1%2Ffa%2F991da28e44019f3f83d083d1a966%2Ffood-1920w-0000000.jpg",
 //       link: '/blog',
 //     },
 //     {
@@ -176,7 +146,6 @@ export default Cards;
 
 // export default Cards;
 
-
 // <section className="hot-deals p-5 d-flex flex-column flex-md-row justify-content-center align-items-center align-items-md-start">
 // <div className="container-xxl">
 //   <div className="row">
@@ -204,5 +173,3 @@ export default Cards;
 //   </div>
 // </div>
 // </section>
-
-

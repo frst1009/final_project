@@ -25,6 +25,16 @@ list-style: none;
 body{
   background-color: #eaeaea;
 }
+/* loading cards */
+.loading-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px; /* Adjust the height as needed */
+  background-color: #f0f0f0; /* Example background color */
+  /* Add any additional styling properties you want */
+}
+/* loading cards */
 /* profile */
 .profile-page {
   width: 100%;
