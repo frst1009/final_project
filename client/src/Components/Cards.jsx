@@ -9,6 +9,7 @@ import {
 import { faHeart as solidheart } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchRecipes } from "../redux/slices/recipes";
+import TagBubble from "./TagBubbles";
 
 const Cards = () => {
   const [isLiked, setIsLiked] = useState(false);
@@ -16,7 +17,7 @@ const Cards = () => {
     setIsLiked(!isLiked);
   };
   const dispatch = useDispatch();
-  const { recipes, tags } = useSelector((state) => state.recipes); //refering to store
+  const { recipes} = useSelector((state) => state.recipes); //refering to store
   const isPostsLoading = recipes.status == "loading";
   useEffect(() => {
     dispatch(fetchRecipes());
@@ -32,11 +33,12 @@ const Cards = () => {
           alignItems: "center",
           borderBottom: "0.8px solid #250f06",
           borderTop: "0.8px solid #250f06",
-          marginBottom: "70px",
+          marginBottom: "40px",
         }}
       >
         <p style={{ fontSize: "25px", fontWeight: "800" }}>Recipes</p>
-      </div>
+        
+      </div><TagBubble/>
       <div className="container-xxl">
         <Row gutter={[16, 16]}>
           {isPostsLoading
@@ -54,13 +56,17 @@ const Cards = () => {
           >
                   <div
                     className="card-image"
-                    style={{ backgroundImage: `url("${obj.image}")` }}
+                    style={{ backgroundImage: `url("https://media.istockphoto.com/id/1316145932/photo/table-top-view-of-spicy-food.jpg?s=612x612&w=0&k=20&c=eaKRSIAoRGHMibSfahMyQS6iFADyVy1pnPdy1O5rZ98=")` }}
                   />
                   <div className="card-content">
                     <Link to='/details'>
                       {" "}
                       <h3 className="card-title">{obj.title}</h3>
-                      <p className="card-description">{obj.instructions}</p>
+                    <div> <p className="card-description">
+                    {obj.instructions.length > 100
+          ? obj.instructions.substring(0, 100) + "..." 
+          : obj.instructions}
+      </p></div>  
                     </Link>
                     <div className="card-content-icon">
                       <FontAwesomeIcon
@@ -85,6 +91,16 @@ const Cards = () => {
 };
 
 export default Cards;
+
+
+// {obj.tags.length >= 3
+//           ? obj.tags.slice(0, 3).map((tag, index) => (
+//               <span key={index}>#{tag} </span>
+//             ))
+//           : obj.tags.map((tag, index) => (
+//               <span key={index}>#{tag} </span>
+//             ))}
+
 
 // import React, { useEffect, useState } from 'react';
 // import { Link } from 'react-router-dom';

@@ -6,6 +6,11 @@ export const fetchRecipes = createAsyncThunk('recipe/fetchRecipes',async()=>{
 const {data} = await axios.get('/recipe');
 return data;
 })
+export const fetchTags = createAsyncThunk('recipe/fetchTags',async()=>{
+    const {data} = await axios.get('recipe/tags');
+    return data;
+    })
+    
 
 const initialState = {
     recipes: {
@@ -33,6 +38,18 @@ const recipeSlice = createSlice({
 [fetchRecipes.rejected]: (state) => {
     state.recipes.items = [];
     state.recipes.status = 'error';
+},
+[fetchTags.pending]: (state)=>{//here we dont get to see the items its empty array
+    state.tags.items = [];
+	state.tags.status = 'loading';
+},
+[fetchTags.fulfilled]: (state, action) => {//when the items are fetched 
+    state.tags.items = action.payload;
+    state.tags.status = 'loaded';
+},
+[fetchTags.rejected]: (state) => {
+    state.tags.items = [];
+    state.tags.status = 'error';
 },
     }
 })

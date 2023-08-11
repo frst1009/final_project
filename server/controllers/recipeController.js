@@ -7,7 +7,7 @@ const RecipeController = {
         ingredients: req.body.ingredients,
         category: req.body.category,
         title: req.body.title,
-        tags: req.body.tags,
+        tags: req.body.tags.split(','),
         instructions: req.body.instructions,
         image: req.body.image,
         cookingTime: req.body.cookingTime,
@@ -27,6 +27,7 @@ const RecipeController = {
 
       res.status(200).json(recipes);
     } catch (error) {
+      
       res
         .status(500)
         .json({ error: "An error occurred while retrieving recipes." });
@@ -91,56 +92,57 @@ const RecipeController = {
   },
 
   update: async (req, res) => {
-     try {
-    const postId = req.params.id;
+    try {
+      const postId = req.params.id;
 
-    const updatedRecipe = await Recipe.findByIdAndUpdate(
-      postId,
-      {
-        ingredients: req.body.ingredients,
-        category: req.body.category,
-        title: req.body.title,
-        tags: req.body.tags,
-        instructions: req.body.instructions,
-        cookingTime: req.body.cookingTime,
-        user: req.userId,
-      },
-      { new: true } 
-    );
+      const updatedRecipe = await Recipe.findByIdAndUpdate(
+        postId,
+        {
+          ingredients: req.body.ingredients,
+          category: req.body.category,
+          title: req.body.title,
+          tags: req.body.tags,
+          instructions: req.body.instructions,
+          cookingTime: req.body.cookingTime,
+          user: req.userId,
+          image: req.body.image,
+        },
+        { new: true }
+      );
 
-    if (!updatedRecipe) {
-      return res.status(404).json({ message: "Recipe not found" });
+      if (!updatedRecipe) {
+        return res.status(404).json({ message: "Recipe not found" });
+      }
+
+      res.json({
+        success: true,
+        recipe: updatedRecipe,
+      });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({
+        message: "Failed to update the recipe",
+      });
     }
-
-    res.json({
-      success: true,
-      recipe: updatedRecipe,
-    });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json({
-      message: "Failed to update the recipe",
-    });
-  }
   },
   comments: async (req, res) => {
     try {
       const { comment, postId } = req.body;
-      
+
       const recipe = await Recipe.findById(postId);
       if (!recipe) {
-        return res.status(404).json({ message: 'Recipe not found' });
+        return res.status(404).json({ message: "Recipe not found" });
       }
-      
+
       const newComment = {
         user: req.userId,
         comment: comment,
         postId: postId,
       };
-  
+
       recipe.comments.push(newComment);
       await recipe.save();
-  
+
       res.status(200).json({
         msg: "Comment Posted Successfully !!",
         comment: newComment,
@@ -148,6 +150,28 @@ const RecipeController = {
     } catch (error) {
       console.log(error.message);
       res.status(500).json({ msg: "Failed to add comment" });
-    }}}
+    }
+  },
+
+  tags: async (req, res) => {
+    try {
+      const recipe = await Recipe.find().limit(5).exec();
+
+
+      const tags = recipe
+        .map((obj) => obj.tags)
+        .flat()
+        .slice(0, 8);
+
+
+      res.json(tags);
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({
+        error: err.message,
+      });
+    }
+  },
+};
 
 module.exports = { RecipeController };

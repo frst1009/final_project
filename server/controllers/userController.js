@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 
 const UserController = {
   register: async (req, res) => {
-    const { username, email, password, confirmpassword } = req.body;
+    const { username, email, password, confirmpassword, profilepicture } = req.body;
     try {
       const data = await User.findOne({ email: email, username: username });
       if (data) {
@@ -18,7 +18,7 @@ const UserController = {
           username: username,
           password: hashedPassword,
           confirmpassword: hashedPassword,
-          // profilepicture: req.file.path,
+          profilepicture: profilepicture,
         });
 
         await newUser.save();

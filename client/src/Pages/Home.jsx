@@ -24,7 +24,7 @@ const Home = () => {
       </div>
     </div>
   </section>
-  <CustomCarousel />
+  <CustomCarousel /> 
   <Cards/>
   <section className="blogs p-5">
   <div className="container-xxl">
@@ -80,6 +80,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+      
     </div>
   </div>
 </section>

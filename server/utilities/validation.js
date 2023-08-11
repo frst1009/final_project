@@ -13,8 +13,8 @@ const registerValidation = [
 ];
 
 const postCreateValidation = [
-	body('title', 'Enter a title').isLength({ min: 2 }).optional().isString(),
-	body('image', 'Invalid image link').optional().isString(),
+	body('title', 'Enter a title').isLength({ min: 2 }).isString(),
+	body('image', 'Invalid image link').isString(),
 ];
 
 module.exports = {
