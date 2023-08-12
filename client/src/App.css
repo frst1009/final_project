@@ -113,7 +113,9 @@ label {
 .card-content-icon{
   display: flex;
   flex-direction: row;
-   justify-content: space-between; 
+}
+.card-content-icon-heart{
+  margin-right: 30px;
 }
 .card-title {
   font-size: 24px;

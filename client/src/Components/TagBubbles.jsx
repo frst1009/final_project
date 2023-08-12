@@ -8,7 +8,6 @@ const TagBubble = () => {
     useEffect(() => {
         dispatch(fetchTags());
       }, []);
-      console.log(tags.items);
   return (
     <section className='tags-section'><div className="tag-bubble-container">
      {tags.items.map((tag, index)  => (

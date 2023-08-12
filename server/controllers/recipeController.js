@@ -7,7 +7,7 @@ const RecipeController = {
         ingredients: req.body.ingredients,
         category: req.body.category,
         title: req.body.title,
-        tags: req.body.tags.split(','),
+        tags: req.body.tags,
         instructions: req.body.instructions,
         image: req.body.image,
         cookingTime: req.body.cookingTime,
