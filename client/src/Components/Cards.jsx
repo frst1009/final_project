@@ -59,7 +59,7 @@ const Cards = () => {
                     style={{ backgroundImage: `url("https://media.istockphoto.com/id/1316145932/photo/table-top-view-of-spicy-food.jpg?s=612x612&w=0&k=20&c=eaKRSIAoRGHMibSfahMyQS6iFADyVy1pnPdy1O5rZ98=")` }}
                   />
                   <div className="card-content">
-                    <Link to='/details'>
+                  <Link to={`/details/${obj._id}`}>
                       {" "}
                       <h3 className="card-title">{obj.title}</h3>
                       <i>Created by {obj.user.username}</i>

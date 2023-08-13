@@ -2,7 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import CustomCarousel from '../Components/Carousel';
 import Cards from '../Components/Cards';
-
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Home = () => {
   return <>
@@ -16,6 +17,20 @@ const Home = () => {
                   <div className='back-details'>
                   <h1 >Recipe Heaven</h1>
                   <h2 >You totally know where good food recipes located!</h2>
+                <div className="input-group d-none d-md-flex" style={{width:"30%"}}>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Recipe?..."
+                    aria-label="Recipe?..."
+                    aria-describedby="basic-addon2"
+                    style={{backgroundColor:"grey"}}
+                  />
+                  <button className="input-group-text" id="basic-addon2">
+                  <FontAwesomeIcon style={{color:"rgba(255, 255, 255, 0.536)"}} icon={faSearch} />
+                  </button>
+                </div>
+          
                   </div>
               </div>
             </div>

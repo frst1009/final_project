@@ -1,10 +1,32 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable no-unused-vars */
-import React, { useContext } from "react";
+import axios from "../axios";
+import React, {  useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import Spinner from "./Spinner";
 
 const ProductDetails = () => {
+  const [data, setData] = useState();
+  const [loading, setLoading] = useState(true);
+  const { id } = useParams(); //just destructed id
+  useEffect(() => {
+    axios.get(`/recipe/${id}`).then(res=>{
+      setData(res.data);
+      setLoading(false)
+    })
+    .catch((err) =>{
+      console.warn(err);
+      alert("Error finding recipe!");
+      setLoading(false)
+
+    } )
+  }, []);
+
+  if(loading){
+    return  <Spinner loading={loading}/>
+  }
   return (
-    <div className="container p-5">
+    <div className="container p-5" id={data._id}>
       <div className="row">
         <div className="col-lg-6">
           <div className="card p-5 m-auto">
@@ -19,17 +41,14 @@ const ProductDetails = () => {
         <div className="col-lg-6">
           <div className="card p-3 m-auto">
             <div className="card-body">
-              <h5 className="card-title">Title</h5>
-              <h3 className="card-text">name</h3>
+              <h5 className="card-title">{data.title}</h5>
+              <h3 className="card-text">Created by:{data.user.username}</h3>
               <p className="card-text">
-                <span className="text-danger fs-4 me-2">time</span>
+                <span className="text-danger fs-4 me-2">Required cooking time: {data.cookingTime}</span>
               </p>
               <p className="card-text">like</p>
               <p className="card-text mb-3">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. <br />{" "}
-                Quibusdam tempore unde aperiam, consectetur harum a eum error,{" "}
-                <br /> libero nemo quisquam ex assumenda corrupti rerum aut quod
-                et sint facere reprehenderit?
+               {data.instructions}
               </p>
             </div>
           </div>

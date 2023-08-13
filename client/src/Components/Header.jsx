@@ -38,7 +38,7 @@ const isAuth=false;
             </div>
 
             <div className="col-md-10 row col-lg-10">
-              <div className="col-md-3 m-auto">
+              {/* <div className="col-md-3 m-auto">
                 <div className="input-group d-none d-md-flex">
                   <input
                     type="text"
@@ -46,12 +46,13 @@ const isAuth=false;
                     placeholder="Recipe?..."
                     aria-label="Recipe?..."
                     aria-describedby="basic-addon2"
+                    style={{backgroundColor:"rgba(255, 255, 255, 0.5)"}}
                   />
                   <button className="input-group-text" id="basic-addon2">
                   <FontAwesomeIcon style={{color:"rgba(255, 255, 255, 0.536)"}} icon={faSearch} />
                   </button>
                 </div>
-              </div>
+              </div> */}
               <div className="col-md-6 m-auto">
   <div className="menu-links mt-2 d-none d-md-flex d-lg-flex">
     <div className="ms-auto gap-3">

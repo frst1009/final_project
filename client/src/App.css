@@ -83,6 +83,8 @@ label {
   justify-content: center;
 }
 /* caards */
+
+
 /* Cards.css */
 
 .custom-card {
@@ -162,12 +164,11 @@ a {
 font-weight: 500;
 text-decoration: inherit;
 transition: 0.5s ease;
-color: var(--primary);
+color:var(--darker)
 }
-a:hover {
-color: #bdf253;
+.active{
+  text-decoration: underline;
 }
-
 
 p{
 text-decoration: none;
@@ -212,6 +213,10 @@ border-bottom: 1px solid var(--primary1);
   letter-spacing: 0.3;
   text-transform: uppercase;
   transition: 0.5s ease;
+  color: var(--search);
+}
+.navbar-middle .menu-links a:hover{
+  color: #bdf253;
 }
 
 .header-cart{
@@ -252,19 +257,16 @@ flex-direction: column;
 /* border-bottom: 1px solid var(--primary1);
 border-top-right-radius: 10px; */
 /* box-shadow: 10px 30px 40px rgba(41, 46, 43, 0.432); */
-color: var(--primary1);
+color: var(--search);
 }
 .banner .back-details h2{
 /* font-size: 32px; */
 /* background-color: var(--lighter2);
 box-shadow: 10px 30px 40px rgba(41, 46, 43, 0.432); */
-color: var(--primary1);
+color: var(--search);
 width: 35%;
 }
 
-.banner .back-details p{
-color: var(--primary1);
-}
 
 /* TagBubble.css */
 .tag-bubble-container {
@@ -727,98 +729,3 @@ font-size: 14px;
 height: 40px;
 }
 
-/* check out */
-.checkout .card-header {
-padding: .5rem 1rem;
-margin-bottom: 0;
-background-color: rgba(0,0,0,.03);
-border-bottom: none;
-}
-
-.checkout .btn-light:focus {
-color: #212529;
-background-color: #e2e6ea;
-border-color: #dae0e5;
-box-shadow: 0 0 0 0.2rem rgba(216,217,219,.5);
-}
-
-.checkout .form-control{
-
-height: 50px;
-border: 2px solid #eee;
-border-radius: 6px;
-font-size: 14px;
-}
-
-.checkout .form-control:focus {
-color: #495057;
-background-color: #fff;
-border-color: #039be5;
-outline: 0;
-box-shadow: none;
-
-}
-
-.checkout .input{
-
-position: relative;
-}
-
-.checkout .input i{
-
-position: absolute;
-top: 16px;
-left: 11px;
-color: #989898;
-}
-
-.checkout .input input{
-
-text-indent: 25px;
-}
-
-.checkout .card-text{
-
-font-size: 13px;
-margin-left: 6px;
-}
-
-.checkout .certificate-text{
-
-font-size: 12px;
-}
-
-
-.checkout .billing{
-font-size: 11px;
-}  
-
-.checkout .super-price{
-
-top: 0px;
-font-size: 22px;
-}
-
-.checkout .super-month{
-
-font-size: 11px;
-}
-
-
-.checkout .line{
-color: #bfbdbd;
-}
-
-.checkout .free-button{
-height: 52px;
-font-size: 15px;
-border-radius: 8px;
-}
-
-
-.checkout .payment-card-body{
-
-flex: 1 1 auto;
-padding: 24px 1rem !important;
-
-}
