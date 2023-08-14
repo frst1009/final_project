@@ -62,7 +62,7 @@ const Cards = () => {
                   <Link to={`/details/${obj._id}`}>
                       {" "}
                       <h3 className="card-title">{obj.title}</h3>
-                      <i>Created by {obj.user.username}</i>
+                      <i>Created by {obj.username}</i>
                     <div> <p className="card-description">
                     {obj.instructions.length > 100
           ? obj.instructions.substring(0, 100) + "..." 

@@ -1,14 +1,14 @@
 const { body } = require('express-validator');
 
 const loginValidation = [
-	body('email', 'Invalid mail format').optional().isEmail(),
-	body('password', 'Password must contain at least 5 characters').optional().isLength({ min: 5 }),
+	body('email', 'Invalid mail format').isEmail(),
+	body('password', 'Password must contain at least 5 characters').isLength({ min: 5 }),
 ];
 
 const registerValidation = [
-	body('email', 'Invalid mail format').optional().isEmail(),
-	body('password', 'Password must contain at least 5 characters!').optional().isLength({ min: 5 }),
-	body('username', 'Name should contain at least 2 characters!').optional().isLength({ min: 2 }),
+	body('email', 'Invalid mail format').isEmail(),
+	body('password', 'Password must contain at least 5 characters!').isLength({ min: 5 }),
+	body('username', 'Name should contain at least 2 characters!').isLength({ min: 2 }),
 	body('profilepicture', 'Invalid image link').optional().isURL(),
 ];
 

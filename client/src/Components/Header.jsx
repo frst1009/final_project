@@ -3,15 +3,25 @@ import { faBars, faTimes,faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import { NavLink, useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { logout, selectIsAuth } from "../redux/slices/auth";
 
 
 const Header = () => {
+  const isAuth=useSelector(selectIsAuth);
+  const dispatch = useDispatch(selectIsAuth);
   const [showMenu, setShowMenu] = useState(false);
   const location = useLocation();
+
   const toggleMenu = () => {
     setShowMenu(!showMenu);
   };
-const isAuth=false;
+const onClickLogout = () =>{
+  if(window.confirm("Are you sure to leave?")){
+    dispatch(logout());
+    toggleMenu()
+  }
+}
   return (
     <>
       <header className="navbar-middle sticky-top p-2 p-md-2 p-lg-2">
@@ -111,7 +121,7 @@ const isAuth=false;
             className={
               location.pathname === "/" ? "active" : "not-active"
             }
-            onClick={toggleMenu}
+            onClick={onClickLogout}
           >
             Logout
           </NavLink>
@@ -190,7 +200,7 @@ const isAuth=false;
                           : "not-active"
                       }
                       to="/"
-                      onClick={toggleMenu}
+                      onClick={onClickLogout}
                     >
                       Logout
                     </NavLink>

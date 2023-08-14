@@ -54,44 +54,10 @@ const ProductDetails = () => {
           </div>
           <div className="card">
             <div className="d-flex justify-content-center flex-column align-items-center">
-              <h2 className="text-center mb-2">More products of the same</h2>
+              <h2 className="text-center mb-2">{data.ingredients}</h2>
               <p className="mb-2">
-                We have more products, visit the shop to get amazing deals from
-                us!!
+               something
               </p>
-            </div>
-            <div className="d-none d-md-block">
-              <div className="row mb-3">
-                <div className="col-6 col-md-4 col-lg-8 mx-auto">
-                  <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-3">
-                    <div className="col">
-                      <div className="card h-100">
-                        <img
-                          src="./img/cooking.png"
-                          className="card-img-top"
-                          alt="..."
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="row mb-4">
-                <div className="col-6 col-md-4 col-lg-8 mx-auto">
-                  <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-3">
-                    <div className="col">
-                      <div className="card h-100">
-                        <img
-                          src="./img/cooking.png"
-                          className="card-img-top"
-                          alt="..."
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -101,3 +67,39 @@ const ProductDetails = () => {
 };
 
 export default ProductDetails;
+
+
+
+// <div className="d-none d-md-block">
+// <div className="row mb-3">
+//   <div className="col-6 col-md-4 col-lg-8 mx-auto">
+//     <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-3">
+//       <div className="col">
+//         <div className="card h-100">
+//           <img
+//             src="./img/cooking.png"
+//             className="card-img-top"
+//             alt="..."
+//           />
+//         </div>
+//       </div>
+//     </div>
+//   </div>
+// </div>
+
+// <div className="row mb-4">
+//   <div className="col-6 col-md-4 col-lg-8 mx-auto">
+//     <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-3">
+//       <div className="col">
+//         <div className="card h-100">
+//           <img
+//             src="./img/cooking.png"
+//             className="card-img-top"
+//             alt="..."
+//           />
+//         </div>
+//       </div>
+//     </div>
+//   </div>
+// </div>
+// </div>

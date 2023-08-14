@@ -519,12 +519,12 @@ color: var(--primary);
 
 /* login starts */
 .text-center{
-color: var(--search);
+color: var(--primary1);
 }
 
 .login-wrapper{
 /* background-color: var(--lighter2); */
-background: url("https://png.pngtree.com/background/20230610/original/pngtree-in-the-style-of-anime-aesthetic-picture-image_3053864.jpg");
+/* background: url("https://png.pngtree.com/background/20230610/original/pngtree-in-the-style-of-anime-aesthetic-picture-image_3053864.jpg"); */
 
 }
 
