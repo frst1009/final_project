@@ -1,14 +1,24 @@
+import React, { useEffect} from "react";
 import {  Route,  Routes } from "react-router-dom";
 import "./App.css";
 import Layout from "./Components/Layout";
 import Home from "./Pages/Home";
-import Login from "./Pages/Login";
 import Signup from "./Pages/Sign";
 import Details from "./Pages/Details";
 import ProfilePage from "./Pages/ProfilePage";
 import Recipe from "./Pages/Recipe";
+import Login from "./Pages/Login";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchLogin, selectIsAuth } from "./redux/slices/auth";
+
 
 function App() {
+  const dispatch = useDispatch();
+    const isAuth=useSelector(selectIsAuth);
+  useEffect(() => {
+    dispatch(fetchLogin());
+  }, [])
+  
   return (
     <>
         <Routes>

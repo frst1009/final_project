@@ -1,26 +1,41 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, Navigate } from 'react-router-dom';
+import { fetchRegister, selectIsAuth } from '../redux/slices/auth';
 
 const Signup = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [error, setError] = useState('');
+  const isAuth = useSelector(selectIsAuth);
+  const dispatch = useDispatch();
+  const {
+    register,
+    handleSubmit, //funstion provided by the hook itself
+    formState: { errors, isValid },
+  } = useForm({
+    defaultValues: {
+      email: "mario@gmail.com",
+      password: "hell",
+      confirmpassword:"hell",
+      username: "mario",
+    },
+    mode:"onChange",
+  });
+  const onSubmit = async (values) => {
+    const data = await dispatch(fetchRegister(values))
+    // Dispatch the fetchUserData action to initiate the login process
+if(!data.payload){
+  return alert("Loser");
+}
+    if('token' in data.payload){
+  window.localStorage.setItem('token', data.payload.token)
+}
+}
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (password !== confirmPassword) {
-      setError('Passwords do not match');
-    } else {
-      // TODO: Send signup request to server
-      setError('Signup successful');
-      setEmail('');
-      setPassword('');
-      setConfirmPassword('');
-    }
-  };
-  
+
+if(isAuth){
+  return <Navigate to='login'/>
+}
 
   return (
     <section className="login-wrapper p-5">
@@ -31,7 +46,7 @@ const Signup = () => {
                 <div className="card-body p-5">
                   <h2 className="text-center">Sign Up</h2>
                   <p className="text-center mb-3">Join us in shopping!!</p>
-                  <form onSubmit={handleSubmit}>
+                  <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="mb-3">
                       <label htmlFor="email" className="form-label mb-3">
                         Enter Your Email address
@@ -41,10 +56,26 @@ const Signup = () => {
                         className="form-control"
                         id="email"
                         placeholder="enter email here ..."
-                        value={email}
-                        onChange={(event) => setEmail(event.target.value)}
-                        required
-                      />
+                        {...register("email", { required: "Add email!" })}
+                    />
+                    {errors.email && (
+                      <p className="text-danger">{errors.email.message}</p>
+                    )}
+                    </div>
+                    <div className="mb-3">
+                      <label htmlFor="email" className="form-label mb-3">
+                        Enter Your Name
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="username"
+                        placeholder="enter your name here ..."
+                        {...register("username", { required: "Add your name!" })}
+                    />
+                    {errors.username && (
+                      <p className="text-danger">{errors.username.message}</p>
+                    )}
                     </div>
                     <div className="mb-3">
                       <label htmlFor="password" className="form-label mb-3">
@@ -55,10 +86,11 @@ const Signup = () => {
                         className="form-control"
                         id="password"
                         placeholder="enter password here..."
-                        value={password}
-                        onChange={(event) => setPassword(event.target.value)}
-                        required
-                      />
+                        {...register("password", { required: "Add password!" })}
+                    />
+                    {errors.password && (
+                      <p className="text-danger">{errors.password.message}</p>
+                    )}
                     </div>
                     <div className="mb-3">
                       <label
@@ -70,18 +102,14 @@ const Signup = () => {
                       <input
                         type="password"
                         className="form-control"
-                        id="confirmPassword"
+                        id="confirmpassword"
                         placeholder="rewrite password here..."
-                        value={confirmPassword}
-                        onChange={(event) =>
-                          setConfirmPassword(event.target.value)
-                        }
-                        required
-                      />
+                        {...register("confirmpassword", { required: "Add password!" })}
+                        />
+                        {errors.confirmpassword && (
+                          <p className="text-danger">{errors.confirmpassword.message}</p>
+                        )}
                     </div>
-                    {error && (
-                      <div className="alert alert-danger">{error}</div>
-                    )}
                     <div className="d-flex justify-content-between align-items-center mb-3">
                       <p>
                         Have an account?
@@ -91,7 +119,7 @@ const Signup = () => {
                       </Link>
                     </div>
                     <div className="d-grid gap-2">
-                      <button type="submit">Sign Up</button>
+                      <button disabled={!isValid} type="submit">Sign Up</button>
                     </div>
                   </form>
                 </div>

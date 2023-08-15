@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from "react";
+import React from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
@@ -11,27 +11,27 @@ const Login = () => {
   const {
     register,
     handleSubmit, //funstion provided by the hook itself
-    setError,
-    formState: { errors, isvalid },
+    formState: { errors, isValid },
   } = useForm({
     defaultValues: {
-      email: "",
-      password: "",
+      email: "morales@gmail.com",
+      password: "hello",
     },
-    mode:"all",
+    mode:"onChange",
   });
 
-  const onSubmit =async (values) => {
- const data = await dispatch(fetchUserData(values));
- if(!data.payload)
- {return  alert("Could not authorize!");}
- if('token' in data.payload) {
+  const onSubmit = async (values) => {
+    const data = await dispatch(fetchUserData(values))
+    // Dispatch the fetchUserData action to initiate the login process
+if(!data.payload){
+  return alert("Loser");
+}
+    if('token' in data.payload){
   window.localStorage.setItem('token', data.payload.token)
- }
-  
-  };
+}
+}
 
-  
+
 if(isAuth){
   return <Navigate to='/'/>
 }
@@ -54,8 +54,6 @@ if(isAuth){
                       className="form-control"
                       id="email"
                       placeholder="enter email here ..."
-                      // value={email}
-                      // onChange={(event) => setEmail(event.target.value)}
                       {...register("email", { required: "Add email!" })}
                     />
                     {errors.email && (
@@ -72,19 +70,11 @@ if(isAuth){
                       id="password"
                       placeholder="enter password here..."
                       {...register("password", { required: "Add password!" })}
-                      // value={password}
-                      // onChange={(event) => setPassword(event.target.value)}
                     />
                     {errors.password && (
                       <p className="text-danger">{errors.password.message}</p>
                     )}
                   </div>
-                  {/* {error && <div className="alert alert-danger">{error}</div>} */}
-                  {/* <div className="mb-3">
-                      <Link to="/forgotpasword" className="form-link">
-                        Forgot password?
-                      </Link>
-                    </div> */}
                   <div className="d-flex justify-content-between align-items-center mb-3">
                     <p className="m-0">Dont have an account?</p>
                     <Link to="/signup" className="form-link">
@@ -92,7 +82,7 @@ if(isAuth){
                     </Link>
                   </div>
                   <div className="d-grid gap-2">
-                    <button type="submit">Login</button>
+                    <button disabled={!isValid} type="submit">Login</button>
                   </div>
                 </form>
               </div>
@@ -106,18 +96,3 @@ if(isAuth){
 
 export default Login;
 
-// const [email, setEmail] = useState('');
-// const [password, setPassword] = useState('');
-// const [error, setError] = useState('');
-
-// const handleSubmit = (event) => {
-//   event.preventDefault();
-//   if (password == '') {
-//     setError('Please enter correct details!');
-//   } else {
-//     // TODO: Send signup request to server
-//     setError('Login successful');
-//     setEmail('');
-//     setPassword('');
-//   }
-// };

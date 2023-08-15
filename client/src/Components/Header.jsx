@@ -19,6 +19,7 @@ const Header = () => {
 const onClickLogout = () =>{
   if(window.confirm("Are you sure to leave?")){
     dispatch(logout());
+    window.localStorage.removeItem('token')
     toggleMenu()
   }
 }
