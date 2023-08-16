@@ -82,7 +82,7 @@ card code
 
 // export default Cards;
 
-// <section className="hot-deals p-5 d-flex flex-column flex-md-row justify-content-center align-items-center align-items-md-start">
+// <section className="recipe-cards p-5 d-flex flex-column flex-md-row justify-content-center align-items-center align-items-md-start">
 // <div className="container-xxl">
 //   <div className="row">
 //     {cardsData.map((card) => (

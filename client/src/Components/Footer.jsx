@@ -6,7 +6,7 @@ import { faTwitter, faInstagram, faFacebook } from '@fortawesome/free-brands-svg
 
 const Footer = () => {
   return <>
-  <footer className='footer p-5' style={{borderTop:"1px solid #ff6200"}}>
+  <footer className='footer p-5'>
     <div className="container-xxl">
       <div className="row justify-content-center justify-content-md-between ">
         <div className="col-md-4 col-lg-4 mb-4 mb-md-0 ">
@@ -35,9 +35,7 @@ const Footer = () => {
         <div className="col-md-4 col-lg-4">
           <h2 className='footer-title mb-3'><b>Leave comment</b></h2>
           <p className='mb-3'>some comment</p>
-          <div className="className='mb-3 col-md-6 col-12 pay">
-          
-          </div>
+        
       
         </div>
       </div>

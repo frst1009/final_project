@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Navigate } from 'react-router-dom';
@@ -7,34 +7,31 @@ import { fetchRegister, selectIsAuth } from '../redux/slices/auth';
 
 const Signup = () => {
   const isAuth = useSelector(selectIsAuth);
-  const dispatch = useDispatch();
-  const {
-    register,
-    handleSubmit, //funstion provided by the hook itself
-    formState: { errors, isValid },
-  } = useForm({
-    defaultValues: {
-      email: "mario@gmail.com",
-      password: "hell",
-      confirmpassword:"hell",
-      username: "mario",
-    },
-    mode:"onChange",
-  });
-  const onSubmit = async (values) => {
-    const data = await dispatch(fetchRegister(values))
-    // Dispatch the fetchUserData action to initiate the login process
-if(!data.payload){
-  return alert("Loser");
-}
-    if('token' in data.payload){
-  window.localStorage.setItem('token', data.payload.token)
-}
-}
+	const dispatch = useDispatch();
+	const {
+		register,
+		handleSubmit,
+		formState: { errors, isValid },
+	} = useForm({
+		defaultValues: {
+			fullName: '',
+			email: '',
+			password: '',
+		},
+		mode: 'onChange',
+	});
+
+	const onSubmit = async (values) => {
+		const data = await dispatch(fetchRegister(values));
+
+		if ('token' in data.payload) {
+			window.localStorage.setItem('token', data.payload.token);
+		}
+	};
 
 
 if(isAuth){
-  return <Navigate to='login'/>
+  return <Navigate to='/'/>
 }
 
   return (

@@ -24,7 +24,7 @@ const Home = () => {
                     placeholder="Recipe?..."
                     aria-label="Recipe?..."
                     aria-describedby="basic-addon2"
-                    style={{backgroundColor:"grey"}}
+                    style={{backgroundColor:"#f0f0f053"}}
                   />
                   <button className="input-group-text" id="basic-addon2">
                   <FontAwesomeIcon style={{color:"rgba(255, 255, 255, 0.536)"}} icon={faSearch} />
@@ -41,7 +41,7 @@ const Home = () => {
   </section>
   <CustomCarousel /> 
   <Cards/>
-  <section className="blogs p-5">
+  <section className="replies p-5">
   <div className="container-xxl">
     <div className="row">
       <div className="col-12 text-center">
@@ -53,7 +53,7 @@ const Home = () => {
           {/* <img src={blog1} className="card-img-top img-fluid" alt="..." /> */}
           <div className="card-body">
             <p className="card-text">Some quick example text to build on the card title and make up the bulk of the cards content.</p>
-            <Link to='about'>
+            <Link to='/'>
             <button className="mt-4">Learn more</button>
             </Link>
           </div>
@@ -62,10 +62,9 @@ const Home = () => {
 
       <div className="col-md-3 col-sm-6 mb-4">
         <div className="card">
-          {/* <img src={blog2} className="card-img-top img-fluid" alt="..." /> */}
           <div className="card-body">
             <p className="card-text">Some quick example text to build on the card title and make up the bulk of the cards content.</p>
-            <Link to='about'>
+            <Link to='/'>
             <button className="mt-4">Learn more</button>
             </Link>
           </div>
@@ -77,7 +76,7 @@ const Home = () => {
           {/* <img src={blog3} className="card-img-top img-fluid" alt="..." /> */}
           <div className="card-body">
             <p className="card-text">Some quick example text to build on the card title and make up the bulk of the cards content.</p>
-            <Link to='about'>
+            <Link to='/'>
             <button className="mt-4">Learn more</button>
             </Link>
           </div>
@@ -89,7 +88,7 @@ const Home = () => {
           {/* <img src={blog4} className="card-img-top img-fluid" alt="..." /> */}
           <div className="card-body">
             <p className="card-text">Some quick example text to build on the card title and make up the bulk of the cards content.</p>
-            <Link to='about'>
+            <Link to='/'>
             <button className="mt-4">Learn more</button>
             </Link>
           </div>

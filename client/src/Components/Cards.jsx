@@ -25,14 +25,12 @@ const Cards = () => {
 
 
   return (
-    <section className="hot-deals p-5">
+    <section className="recipe-cards p-5">
       <div
         style={{
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          borderBottom: "0.8px solid #250f06",
-          borderTop: "0.8px solid #250f06",
           marginBottom: "40px",
         }}
       >

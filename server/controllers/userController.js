@@ -22,7 +22,11 @@ const UserController = {
         });
 
         await newUser.save();
-        res.status(201).json({ msg: "User registered successfully!" });
+        let token = jwt.sign({ _id: newUser._id }, privateKey,{
+          expiresIn: '30d',
+        }); if(token){
+          res.status(200).json({ token: token });
+        }
       } else {
         res
           .status(400)

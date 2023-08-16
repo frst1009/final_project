@@ -13,16 +13,17 @@ const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
   const location = useLocation();
 
-  const toggleMenu = () => {
-    setShowMenu(!showMenu);
-  };
+
 const onClickLogout = () =>{
   if(window.confirm("Are you sure to leave?")){
     dispatch(logout());
     window.localStorage.removeItem('token')
     toggleMenu()
   }
-}
+} 
+ const toggleMenu = () => {
+    setShowMenu(!showMenu);
+  };
   return (
     <>
       <header className="navbar-middle sticky-top p-2 p-md-2 p-lg-2">
@@ -48,23 +49,9 @@ const onClickLogout = () =>{
 
             </div>
 
-            <div className="col-md-10 row col-lg-10">
-              {/* <div className="col-md-3 m-auto">
-                <div className="input-group d-none d-md-flex">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Recipe?..."
-                    aria-label="Recipe?..."
-                    aria-describedby="basic-addon2"
-                    style={{backgroundColor:"rgba(255, 255, 255, 0.5)"}}
-                  />
-                  <button className="input-group-text" id="basic-addon2">
-                  <FontAwesomeIcon style={{color:"rgba(255, 255, 255, 0.536)"}} icon={faSearch} />
-                  </button>
-                </div>
-              </div> */}
-              <div className="col-md-6 m-auto">
+            <div className="col-md-10 row col-lg-10 justify-content-end">
+         
+              <div className="col-md-6">
   <div className="menu-links mt-2 d-none d-md-flex d-lg-flex">
     <div className="ms-auto gap-3">
       <NavLink
@@ -78,8 +65,37 @@ const onClickLogout = () =>{
       </NavLink>
     </div>
 
-    {!isAuth ? (
+    {isAuth ? (
       <>
+         <div className="ms-auto gap-3">
+          <NavLink
+            to="/recipe"
+            className={
+              location.pathname === "/recipe" ? "active" : "not-active"
+            }
+            onClick={toggleMenu}
+          >
+            Add recipe
+          </NavLink>
+        </div>
+        <div className="ms-auto gap-3">
+          <NavLink
+            to="/"
+            className={
+              location.pathname === "/" ? "active" : "not-active"
+            }
+            onClick={onClickLogout}
+          >
+            Logout
+          </NavLink>
+        </div>
+
+
+
+      </>
+    ) : (
+      <>
+      
         <div className="ms-auto gap-3">
           <NavLink
             to="/login"
@@ -100,31 +116,6 @@ const onClickLogout = () =>{
             onClick={toggleMenu}
           >
             Register
-          </NavLink>
-        </div>
-      </>
-    ) : (
-      <>
-        <div className="ms-auto gap-3">
-          <NavLink
-            to="/recipe"
-            className={
-              location.pathname === "/recipe" ? "active" : "not-active"
-            }
-            onClick={toggleMenu}
-          >
-            Add recipe
-          </NavLink>
-        </div>
-        <div className="ms-auto gap-3">
-          <NavLink
-            to="/"
-            className={
-              location.pathname === "/" ? "active" : "not-active"
-            }
-            onClick={onClickLogout}
-          >
-            Logout
           </NavLink>
         </div>
       </>
@@ -158,31 +149,8 @@ const onClickLogout = () =>{
                       Home
                     </NavLink>
                   </div>
-                  {!isAuth ? (
-      <>
-                  <div className="mb-2">
-                    <NavLink
-                      className={
-                        location.pathname === "/login" ? "active" : "not-active"
-                      }
-                      to="/login"
-                      onClick={toggleMenu}
-                    >
-                      Login
-                    </NavLink>
-                  </div>
-                  <div className="mb-2">
-                    <NavLink
-                      className={
-                        location.pathname === "/signup" ? "active" : "not-active"
-                      }
-                      to="/signup"
-                      onClick={toggleMenu}
-                    >
-                      Register
-                    </NavLink>
-                  </div></>):(<>
-                  <div className="mb-2">
+                  {isAuth ? (
+      <>  <div className="mb-2">
                     <NavLink
                       className={
                         location.pathname === "/recipe" ? "active" : "not-active"
@@ -206,6 +174,33 @@ const onClickLogout = () =>{
                       Logout
                     </NavLink>
                   </div>
+
+
+                  </>):(<>
+                
+
+                  <div className="mb-2">
+                    <NavLink
+                      className={
+                        location.pathname === "/login" ? "active" : "not-active"
+                      }
+                      to="/login"
+                      onClick={toggleMenu}
+                    >
+                      Login
+                    </NavLink>
+                  </div>
+                  <div className="mb-2">
+                    <NavLink
+                      className={
+                        location.pathname === "/signup" ? "active" : "not-active"
+                      }
+                      to="/signup"
+                      onClick={toggleMenu}
+                    >
+                      Register
+                    </NavLink>
+                  </div>
                   </>)}
                 </div>
 
@@ -220,3 +215,21 @@ const onClickLogout = () =>{
 };
 
 export default Header;
+
+
+
+     {/* <div className="col-md-3 m-auto">
+                <div className="input-group d-none d-md-flex">
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Recipe?..."
+                    aria-label="Recipe?..."
+                    aria-describedby="basic-addon2"
+                    style={{backgroundColor:"rgba(255, 255, 255, 0.5)"}}
+                  />
+                  <button className="input-group-text" id="basic-addon2">
+                  <FontAwesomeIcon style={{color:"rgba(255, 255, 255, 0.536)"}} icon={faSearch} />
+                  </button>
+                </div>
+              </div> */}

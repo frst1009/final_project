@@ -8,10 +8,10 @@ const recipeSchema = new mongoose.Schema({
       required: true,
     },
   ],
-  category: {
+  category: [{
     type: String,
     required: true,
-  },
+}],
   title: {
     type: String,
     required: true,
