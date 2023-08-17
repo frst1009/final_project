@@ -24,7 +24,7 @@ const Login = () => {
     const data = await dispatch(fetchUserData(values))
     // Dispatch the fetchUserData action to initiate the login process
 if(!data.payload){
-  return alert("Loser");
+  return alert("Cant log in!");
 }
     if('token' in data.payload){
   window.localStorage.setItem('token', data.payload.token)

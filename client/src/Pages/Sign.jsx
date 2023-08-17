@@ -21,14 +21,16 @@ const Signup = () => {
 		mode: 'onChange',
 	});
 
-	const onSubmit = async (values) => {
-		const data = await dispatch(fetchRegister(values));
-
-		if ('token' in data.payload) {
-			window.localStorage.setItem('token', data.payload.token);
-		}
-	};
-
+  const onSubmit = async (values) => {
+    const data = await dispatch(fetchRegister(values))
+    // Dispatch the fetchUserData action to initiate the login process
+if(!data.payload){
+  return alert("Cant register!");
+}
+    if('token' in data.payload){
+  window.localStorage.setItem('token', data.payload.token)
+}
+}
 
 if(isAuth){
   return <Navigate to='/'/>

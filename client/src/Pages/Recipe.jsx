@@ -1,24 +1,43 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectIsAuth } from "../redux/slices/auth";
 import { Navigate } from "react-router-dom";
 import { Button, Select, Upload } from "antd";
 import { Option } from "antd/es/mentions";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faImage } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faImage } from "@fortawesome/free-solid-svg-icons";
+import axios from "../axios"
 
 
 const Recipe = () => {
+
+
+
   const isAuth = useSelector(selectIsAuth);
-  const [selectedCategories, setSelectedCategories] = useState([]);
-  // const [, setfirst] = useState(second)
-  // const [first, setfirst] = useState(second)
-  // const [first, setfirst] = useState(second)
-  // const [first, setfirst] = useState(second)
+  const [title, setTitle] = useState("");
+  const [tags, setTags] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [cookingt, setCookingt] = useState("");
+  const [ingredients, setIngredients] = useState([]);
+  const [instructions, setInstructions] = useState("");
+
+
+ const handleChangeFile = async (event)=>{
+try {
+  const formData = new FormData();
+  const file = event.fileList[0].originFileObj;
+  formData.append('image',file);
+const {data} = await axios.post('/upload', formData);
+console.log(data);
+} catch (error) {
+  alert("error in file upload!")
+}
+ }
+
 
   const handleCategoryChange = (values) => {
-    setSelectedCategories(values);
+    setCategories(values);
   };
 
   if (!window.localStorage.getItem("token") && !isAuth) {
@@ -49,6 +68,8 @@ const Recipe = () => {
                         className="form-control"
                         placeholder="title"
                         aria-label="Title"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
                       />
                     </div>
                     {/* cooking time */}
@@ -64,6 +85,8 @@ const Recipe = () => {
                         className="form-control"
                         id="exampleFormControlInput1"
                         placeholder="cooking time"
+                        value={cookingt}
+                        onChange={(e) => setCookingt(e.target.value)}
                       />
                     </div>
                     {/* category */}
@@ -85,6 +108,7 @@ const Recipe = () => {
                         onChange={handleCategoryChange}
                         style={{ width: "100%" }}
                         className="custom-select"
+                        // value={categories}
                       >
                         <Option value="breakfast">Breakfast</Option>
                         <Option value="lunch">Lunch</Option>
@@ -106,8 +130,10 @@ const Recipe = () => {
                         type="text"
                         className="form-control"
                         placeholder="ingredients"
-                        // value={ingredients}
-                        // onChange={(e) => setIngredients(e.target.value.split(','))}
+                        value={ingredients}
+                        onChange={(e) =>
+                          setIngredients(e.target.value.split(","))
+                        }
                       />
                     </div>
                     {/* tags */}
@@ -118,11 +144,12 @@ const Recipe = () => {
                       >
                         Tags
                       </label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="exampleFormControlInput1"
-                        placeholder="tags"
+                      <Select
+                        mode="tags"
+                        style={{ width: "100%" }}
+                        placeholder="Enter tags"
+                        value={tags}
+                        onChange={(newTags) => setTags(newTags)}
                       />
                     </div>
                     {/* instructions */}
@@ -134,19 +161,27 @@ const Recipe = () => {
                         Write instruction
                       </label>
                       <textarea
-                        onChange={(e) => e.target.value}
+                        value={instructions}
+                        onChange={(e) => setInstructions(e.target.value)}
                         className="form-control"
                         id="exampleFormControlTextarea1"
                         rows="3"
                       ></textarea>
                     </div>
-                    
-    <div className="col-md-12">
-      <label className="form-label mb-3" style={{marginRight:"10px"}}>Image</label>
-      <Upload accept="image/*" showUploadList={false}>
-        <Button icon={<FontAwesomeIcon icon={faImage} />}>Select Image</Button>
-      </Upload>
-    </div>
+
+                    <div className="col-md-12">
+                      <label
+                        className="form-label mb-3"
+                        style={{ marginRight: "10px" }}
+                      >
+                        Image
+                      </label>
+                      <Upload accept="image/*" showUploadList={false} type="file" onChange={handleChangeFile}>
+                        <Button icon={<FontAwesomeIcon icon={faImage} />}>
+                          Select Image
+                        </Button>
+                      </Upload>
+                    </div>
                     <div className="col-12 text-center gap-2">
                       <button id="button-link" type="submit">
                         Submit
@@ -164,11 +199,3 @@ const Recipe = () => {
 };
 
 export default Recipe;
-
-// const options = [
-//   { value: 'breakfast', label: 'Breakfast' },
-//   {value:"lunch", label:'Lunch'},
-//   {value:"dinner", label:'Dinner'},
-//   {value:"snack", label:'Snacks'},
-//   {value:"desert", label:'Desert'},
-// ];

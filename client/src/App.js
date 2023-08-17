@@ -14,6 +14,7 @@ import { fetchLogin, selectIsAuth } from "./redux/slices/auth";
 
 function App() {
   const dispatch = useDispatch();
+  const isAuth = useSelector(selectIsAuth);
   useEffect(() => {
     dispatch(fetchLogin());
   }, [])

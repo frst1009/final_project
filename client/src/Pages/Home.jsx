@@ -1,12 +1,35 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import CustomCarousel from '../Components/Carousel';
 import Cards from '../Components/Cards';
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faSearch, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import axios from '../axios';
 const Home = () => {
-  return <>
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+
+  const handleSearch = async () => {
+    try {
+      const response = await axios.get(`/recipe/search?title=${searchQuery}`);
+      setSearchResults(response.data);
+    } catch (error) {
+      console.error("Error searching recipes:", error);
+    }
+  };
+
+  useEffect(() => { 
+   
+    if (searchQuery.trim() !== "") {
+      handleSearch();
+    } 
+   else  if (searchQuery === "") {
+      setSearchResults([]);
+    }
+  }, [searchQuery]);
+
+
+  return( <>
   <section className="banner">
     <div className="container-xxl">
       <div className="row">
@@ -17,19 +40,39 @@ const Home = () => {
                   <div className='back-details'>
                   <h1 >Recipe Heaven</h1>
                   <h2 >You totally know where good food recipes located!</h2>
-                <div className="input-group d-none d-md-flex" style={{width:"30%"}}>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Recipe?..."
-                    aria-label="Recipe?..."
-                    aria-describedby="basic-addon2"
-                    style={{backgroundColor:"#f0f0f053"}}
-                  />
-                  <button className="input-group-text" id="basic-addon2">
-                  <FontAwesomeIcon style={{color:"rgba(255, 255, 255, 0.536)"}} icon={faSearch} />
-                  </button>
-                </div>
+                <div className="search-container">
+      <div className="input-group d-none d-md-flex">
+        <input
+          type="text"
+          value={searchQuery}
+          className="form-control"
+          placeholder="Search recipes..."
+          aria-label="Search recipes..."
+          aria-describedby="basic-addon2"
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+        {searchQuery && (
+          <button
+            className="clear-button"
+            onClick={() => setSearchQuery("")}
+          >
+            <FontAwesomeIcon icon={faTimesCircle} />
+          </button>
+        )}
+       
+      </div>
+      <div className="search-results d-none d-md-flex flex-column">
+      {searchResults.map((recipe) => (
+    <Link key={recipe._id} to={`/details/${recipe._id}`} className="search-result">
+      {recipe.title}
+    </Link>
+  ))}
+        {searchQuery && searchResults.length === 0 && (
+          <div className="no-results">No recipes found</div>
+        )}
+      </div>
+    </div>
+                {/* </div> */}
           
                   </div>
               </div>
@@ -99,8 +142,7 @@ const Home = () => {
   </div>
 </section>
 
-  {/* <Newsletter /> */}
-  </>;
+  </>)
 }
 
 export default Home

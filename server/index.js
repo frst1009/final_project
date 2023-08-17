@@ -32,8 +32,9 @@ const storage = multer.diskStorage({
   });
   const upload = multer({ storage });
   app.use("/uploads", express.static("uploads"));
-app.post('/upload', tokenAuth, upload.single('image'), (req, res) => {
-    res.json({
+app.post('/api/upload', tokenAuth, upload.single('image'), (req, res) => {
+  console.log("Original Name:", req.file.originalname);  
+  res.json({
       url: `/uploads/${req.file.originalname}`,
     });
   });
@@ -42,6 +43,7 @@ app.post('/upload', tokenAuth, upload.single('image'), (req, res) => {
 app.post("/api/recipe/add",tokenAuth, postCreateValidation, validationError, RecipeController.add)
 app.get("/api/recipe/", RecipeController.getAll);
 app.get("/api/recipe/tags", RecipeController.tags);
+app.get("/api/recipe/search", RecipeController.searchByTitle);
 app.get("/api/recipe/:id", RecipeController.getById);
 app.post("/api/recipe/like/:id",tokenAuth, RecipeController.hanldlelike);
 app.delete("/api/recipe/:id",tokenAuth, RecipeController.deleterecipe);
@@ -49,11 +51,10 @@ app.patch("/api/recipe/:id", postCreateValidation, validationError, RecipeContro
 app.post("/api/recipe/comments",tokenAuth, RecipeController.comments);
 
 
-
 app.post("/api/user/register",registerValidation, validationError, UserController.register);
 app.post("/api/user/login", loginValidation, validationError,UserController.login);
 app.get("/api/user/authuser", tokenAuth, UserController.profileData);
 app.patch("/api/user/update", tokenAuth, UserController.profileUpdate);
-
+app.get("/api/user/getUsers", UserController.getUsers )
 
 httpServer.listen(3040);

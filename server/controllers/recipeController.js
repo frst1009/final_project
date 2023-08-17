@@ -172,6 +172,18 @@ const RecipeController = {
       });
     }
   },
+ searchByTitle: async (req, res) => {
+  const searchQuery = req.query.title; 
+  try {
+   
+    const recipes = await Recipe.find({ title: { $regex: searchQuery, $options: "i" } });
+   
+    res.status(200).json(recipes);
+  } catch (error) {
+    res.status(500).json({ message: "Error searching recipes by title." });
+  }
+},
+
 };
 
 module.exports = { RecipeController };

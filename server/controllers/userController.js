@@ -37,39 +37,39 @@ const UserController = {
       res.status(500).json(err);
     }
   },
-
-  login: async(req,res)=>{
+  login: async (req, res) => {
     try {
       let user = await User.findOne({
-              email: req.body.email,
-            });
-            if(user){
-              const isPasswordValid= await bcrypt.compareSync(
-                      req.body.password,
-                      user.password
-                    );
-                    if(isPasswordValid){
-      let token = jwt.sign({ _id: user._id }, privateKey,{
-				expiresIn: '30d',
-			}
-);
-      if(token){
-        res.status(200).json({ token: token });
-      }else{
-        res.json("Please login!")
+        email: req.body.email,
+      });
+      console.log("User:", user);
+      if (!user) {
+        return res.status(400).json({
+          message: 'User not found',}); // Return here to exit the function if user is not found
       }
-                    }
-                    else{
-                      res.json({msg : "Password does not matched"});
-                  }
-            }
-            else{
-              res.json({msg : "Email not found !!"});
-          }
+  
+      const isPasswordValid = await bcrypt.compareSync(
+        req.body.password,
+        user.password
+      );
+      if (isPasswordValid) {
+        let token = jwt.sign({ _id: user._id }, privateKey, {
+          expiresIn: "30d",
+        });
+  
+        if (token) {
+          res.status(200).json({ token: token });
+        } else {
+          res.json("Please login!");
+        }
+      } else {
+        res.json({ msg: "Password does not match" });
+      }
     } catch (error) {
-      res.json({msg : error.message});
+      res.json({ msg: error.message });
     }
   },
+  
   profileData: async (req, res) => {
     //get by id the user
     try {
@@ -104,7 +104,18 @@ const UserController = {
     }
   },
 
+  getUsers: async (req, res) => {
+    try {
+      const user = await User.find().exec();
 
+      res.status(200).json(user);
+    } catch (error) {
+      
+      res
+        .status(500)
+        .json({ error: "An error occurred while retrieving users." });
+    }
+  },
   
 };
 

@@ -7,6 +7,7 @@
   --primary1: #6f6c6b;
 --additional:#4d233f;
 --burgandy:#4d233f12;
+--recipepage: #ffe5d53a;
 }
 
 *{
@@ -152,7 +153,7 @@ a {
 font-weight: 500;
 text-decoration: inherit;
 transition: 0.5s ease;
-color:var(--darker)
+color:var(--search)
 }
 .active{
   text-decoration: underline;
@@ -301,6 +302,19 @@ transition: 0.5s ease;
 background-color: transparent;
 border: 1px solid var(--primary1);
 color: var(--primary1);
+}
+.search-container input{
+  background-color: var(--recipepage);
+}
+.search-results{
+  background-color: var(--burgandy);
+  color: white;
+  width: 188px;
+}
+.search-result{
+  border-bottom: 1px solid white;
+  border-radius: 10px;
+  padding-left: 10px;
 }
 /* home */
 
