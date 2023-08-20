@@ -3,11 +3,11 @@ import axios from "../../axios";
 
 
 export const fetchRecipes = createAsyncThunk('recipe/fetchRecipes',async()=>{
-const {data} = await axios.get('/recipe');
+const {data} = await axios.get('/api/recipe');
 return data;
 })
 export const fetchTags = createAsyncThunk('recipe/fetchTags',async()=>{
-    const {data} = await axios.get('recipe/tags');
+    const {data} = await axios.get('/api/recipe/tags');
     return data;
     })
     

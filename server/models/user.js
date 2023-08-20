@@ -6,6 +6,8 @@ const UserSchema = new mongoose.Schema({
   password: { type: String, required: true },
   confirmpassword: { type: String, required: true },
   profilepicture: { type: String },
+  resetToken: { type: String },
+  resetTokenExpiry:  { type: Date },
   
 }, { timestamps: true } );
 

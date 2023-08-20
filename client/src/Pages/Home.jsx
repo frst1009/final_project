@@ -11,7 +11,7 @@ const Home = () => {
 
   const handleSearch = async () => {
     try {
-      const response = await axios.get(`/recipe/search?title=${searchQuery}`);
+      const response = await axios.get(`/api/recipe/search?title=${searchQuery}`);
       setSearchResults(response.data);
     } catch (error) {
       console.error("Error searching recipes:", error);

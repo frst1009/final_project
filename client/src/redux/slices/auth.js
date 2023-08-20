@@ -2,15 +2,15 @@ import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../axios";
 
 export const fetchUserData=createAsyncThunk('auth/fetchUserData', async(params)=>{
-    const {data}=await axios.post('/user/login', params);
+    const {data}=await axios.post('/api/user/login', params);
     return data;
 })
 export const fetchRegister=createAsyncThunk('auth/fetchRegister', async(params)=>{
-    const {data}=await axios.post('/user/register', params);
+    const {data}=await axios.post('/api/user/register', params);
     return data;
 })
 export const fetchLogin=createAsyncThunk('auth/fetchLogin', async()=>{
-    const {data}=await axios.get('/user/authuser');
+    const {data}=await axios.get('/api/user/authuser');
     return data;
 })
 const initialState = {
@@ -37,9 +37,10 @@ const authSlice = createSlice({
             state.status = 'loaded';
             state.data = action.payload;
         },
-        [fetchUserData.rejected]: (state) => {
+        [fetchUserData.rejected]: (state, action) => {
             state.status = 'error';
             state.data = null;
+            console.log(action);
         },
         [fetchLogin.pending]: (state)=>{//here we dont get to see the items its empty array
             state.status = 'loading';

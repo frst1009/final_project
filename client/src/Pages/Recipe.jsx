@@ -2,43 +2,68 @@
 import React, { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectIsAuth } from "../redux/slices/auth";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { Button, Select, Upload } from "antd";
 import { Option } from "antd/es/mentions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faImage } from "@fortawesome/free-solid-svg-icons";
-import axios from "../axios"
-
+import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
+import axios from "../axios";
 
 const Recipe = () => {
-
-
-
+  const navigate = useNavigate();
   const isAuth = useSelector(selectIsAuth);
+  const [loading, setloading] = useState(false);
   const [title, setTitle] = useState("");
   const [tags, setTags] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [cookingt, setCookingt] = useState("");
+  const [category, setCategories] = useState([]);
+  const [cookingTime, setCookingt] = useState("");
   const [ingredients, setIngredients] = useState([]);
   const [instructions, setInstructions] = useState("");
+  const [image, setImage] = useState("");
 
-
- const handleChangeFile = async (event)=>{
-try {
-  const formData = new FormData();
-  const file = event.fileList[0].originFileObj;
-  formData.append('image',file);
-const {data} = await axios.post('/upload', formData);
-console.log(data);
-} catch (error) {
-  alert("error in file upload!")
-}
- }
-
-
+  const handleChangeFile = async (event) => {
+    try {
+      const formData = new FormData();
+      const file = event.fileList[0].originFileObj;
+      formData.append("image", file);
+      const { data } = await axios.post("/upload", formData);
+      // console.log(data);
+     setImage(data.url);
+    } catch (error) {
+      alert("error in file upload!");
+    }
+  };
+  const handleImageSelection = (event) => {
+    event.preventDefault(); // Prevent default behavior of the button
+    // Implement the logic to open the file picker dialog
+  };
   const handleCategoryChange = (values) => {
     setCategories(values);
   };
+  const onSubmit = async(event)=>{
+    event.preventDefault();
+try {
+  setloading(true);
+  const fields={
+title,
+tags,
+category,
+cookingTime,
+ingredients,
+instructions,
+image
+  };
+  const {data} = await axios.post('/api/recipe/add',fields);
+
+  const id = data._id;
+  navigate(`details/${id}`);
+} catch (error) {
+console.warn(error);
+alert('Upload error!');
+}
+  }
+  const onClickRemove=()=>{setImage("")}
 
   if (!window.localStorage.getItem("token") && !isAuth) {
     return <Navigate to="/" />;
@@ -53,6 +78,7 @@ console.log(data);
                 <h2 className="mb-4" style={{ fontWeight: "600" }}>
                   Create Recipe
                 </h2>
+                <form onSubmit={onSubmit}>
                 <div className=" d-flex align-items-center justify-content-center">
                   <div className="row g-3">
                     {/* title */}
@@ -85,7 +111,7 @@ console.log(data);
                         className="form-control"
                         id="exampleFormControlInput1"
                         placeholder="cooking time"
-                        value={cookingt}
+                        value={cookingTime}
                         onChange={(e) => setCookingt(e.target.value)}
                       />
                     </div>
@@ -176,10 +202,36 @@ console.log(data);
                       >
                         Image
                       </label>
-                      <Upload accept="image/*" showUploadList={false} type="file" onChange={handleChangeFile}>
-                        <Button icon={<FontAwesomeIcon icon={faImage} />}>
-                          Select Image
-                        </Button>
+                      <Upload
+                        accept="image/*"
+                        showUploadList={false}
+                        type="file"
+                        beforeUpload={() => false} 
+                        onChange={handleChangeFile}
+                      >
+                        {image && (
+                          <>
+                            <Button
+                              icon={<FontAwesomeIcon icon={faTrashCan} />}
+                              onClick={onClickRemove}
+                            >
+                              Delete
+                            </Button>
+                            <div className="image-preview">
+                          <img
+                            src={`http://localhost:3040${image}`}
+                            alt=""
+                            className="img-fluid" // This class makes the image responsive
+                          />
+                        </div>
+                          </>
+                        )}
+                          <Button
+            icon={<FontAwesomeIcon icon={faImage} type="button" />}
+            onClick={handleImageSelection} // Use your custom handler here
+          >
+            Select Image
+          </Button>
                       </Upload>
                     </div>
                     <div className="col-12 text-center gap-2">
@@ -189,6 +241,7 @@ console.log(data);
                     </div>
                   </div>
                 </div>
+                </form>
               </div>
             </div>
           </div>

@@ -24,7 +24,7 @@ const Login = () => {
     const data = await dispatch(fetchUserData(values))
     // Dispatch the fetchUserData action to initiate the login process
 if(!data.payload){
-  return alert("Cant log in!");
+  return alert("Wrong email or password!");
 }
     if('token' in data.payload){
   window.localStorage.setItem('token', data.payload.token)
@@ -76,9 +76,9 @@ if(isAuth){
                     )}
                   </div>
                   <div className="d-flex justify-content-between align-items-center mb-3">
-                    <p className="m-0">Dont have an account?</p>
-                    <Link to="/signup" className="form-link">
-                      Sign up
+                    <p className="m-0">Forgot Password?</p>
+                    <Link to="/forgotpassword" className="form-link">
+                     Click here!
                     </Link>
                   </div>
                   <div className="d-grid gap-2">

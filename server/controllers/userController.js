@@ -2,6 +2,8 @@ const { User } = require("../models/user");
 var jwt = require("jsonwebtoken");
 let privateKey = "ironmaiden";
 const bcrypt = require("bcrypt");
+const nodemailer = require("nodemailer");
+const crypto = require("crypto");
 
 const UserController = {
   register: async (req, res) => {
@@ -42,33 +44,38 @@ const UserController = {
       let user = await User.findOne({
         email: req.body.email,
       });
-      console.log("User:", user);
+  
       if (!user) {
         return res.status(400).json({
-          message: 'User not found',}); // Return here to exit the function if user is not found
+          message: 'User not found',
+        });
       }
   
       const isPasswordValid = await bcrypt.compareSync(
         req.body.password,
         user.password
       );
-      if (isPasswordValid) {
-        let token = jwt.sign({ _id: user._id }, privateKey, {
-          expiresIn: "30d",
-        });
   
-        if (token) {
-          res.status(200).json({ token: token });
-        } else {
-          res.json("Please login!");
-        }
+      if (!isPasswordValid) {
+        return res.status(400).json({
+          message: 'Password does not match',
+        });
+      }
+  
+      let token = jwt.sign({ _id: user._id }, privateKey, {
+        expiresIn: '30d',
+      });
+  
+      if (token) {
+        res.status(200).json({ token: token });
       } else {
-        res.json({ msg: "Password does not match" });
+        res.json('Please login!');
       }
     } catch (error) {
-      res.json({ msg: error.message });
+      res.status(500).json({ message: 'An error occurred' });
     }
   },
+  
   
   profileData: async (req, res) => {
     //get by id the user
@@ -116,8 +123,83 @@ const UserController = {
         .json({ error: "An error occurred while retrieving users." });
     }
   },
-  
-};
+    forgottenPassword: async (req,res)=>{
+      const { email } = req.body;
+      try {
+        const user=await User.findOne( {email})
+        if (!user) {
+          return res.status(404).json("Email does not exists!");
+        }
+        const resetToken = crypto.randomBytes(20).toString('hex');
+
+        user.resetToken = resetToken;
+        user.resetTokenExpiry = Date.now() + 3600000; // Token expires in 1 hour
+        await user.save();
+        transporter.sendMail({
+          from: "bwal21879@gmail.com", // sender address
+          to:email, // list of receivers
+          subject: "Change password: ", // Subject line
+          html: `
+                      <p> In order to change your password click here</p>
+                      <p> 
+                      <a href="http://localhost:3000/changepassword?token=${resetToken}&userId=${user._id}">
+                    Reset your password!
+                      </a>
+                      </p>
+                  `,
+        });
+        return res.status(200).json("Email sent")
+      } catch (error) {
+          console.log(error);
+          res.status(500).json({ error: "An error occurred" });
+      }
+    },
+    changepassword:async (req,res)=>{
+      const userId=req.query.userId
+      const token=req.query.token
+      const newPassword=req.body.password
+      try {
+        const user=await User.findById(userId)
+        if(!user){
+         res.status(404).json("User not found");
+         return;
+        }
+        console.log(user.resetToken);
+
+        if(user.resetToken!==token || Date.now() > user.resetTokenExpiry){
+          res.status(401).json("Invalid or expired token");
+          return;
+        }
+     
+    const salt = bcrypt.genSaltSync();
+    const hashedPassword = bcrypt.hashSync(newPassword, salt);
+    
+    user.password = hashedPassword;
+    user.resetToken = null;
+    user.resetTokenExpiry = null;
+    
+    await user.save();
+    res.status(200).json({
+      message: "Password changed successfully",
+      email: user.email,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "An error occurred" });
+  }
+}
+    }
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
+    auth: {
+      type: "login",
+      user: "bwal21879@gmail.com",
+      pass: "rfdhsetvgzqqdpjb",
+    },
+  });
 
 module.exports = {
   UserController,

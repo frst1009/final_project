@@ -10,7 +10,7 @@ const ProductDetails = () => {
   const [loading, setLoading] = useState(true);
   const { id } = useParams(); //just destructed id
   useEffect(() => {
-    axios.get(`/recipe/${id}`).then(res=>{
+    axios.get(`/api/recipe/${id}`).then(res=>{
       setData(res.data);
       setLoading(false)
     })
@@ -31,7 +31,7 @@ const ProductDetails = () => {
         <div className="col-lg-6">
           <div className="card p-5 m-auto">
             <img
-              src="./img/cooking.png"
+              src={`http://localhost:3040${data.image}`}
               alt=""
               className="card-img-top img-fluid p-2"
             />

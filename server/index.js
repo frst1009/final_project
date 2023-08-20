@@ -32,7 +32,7 @@ const storage = multer.diskStorage({
   });
   const upload = multer({ storage });
   app.use("/uploads", express.static("uploads"));
-app.post('/api/upload', tokenAuth, upload.single('image'), (req, res) => {
+app.post('/upload', tokenAuth, upload.single('image'), (req, res) => {
   console.log("Original Name:", req.file.originalname);  
   res.json({
       url: `/uploads/${req.file.originalname}`,
@@ -55,6 +55,9 @@ app.post("/api/user/register",registerValidation, validationError, UserControlle
 app.post("/api/user/login", loginValidation, validationError,UserController.login);
 app.get("/api/user/authuser", tokenAuth, UserController.profileData);
 app.patch("/api/user/update", tokenAuth, UserController.profileUpdate);
-app.get("/api/user/getUsers", UserController.getUsers )
+app.get("/api/user/getUsers", UserController.getUsers );
+app.post("/api/user/forgottenPassword", UserController.forgottenPassword);
+app.post("/api/user/changepassword", UserController.changepassword)
+
 
 httpServer.listen(3040);
