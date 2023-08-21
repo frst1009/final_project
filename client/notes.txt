@@ -12,11 +12,11 @@ reducer is function
 
 todo
 1.error handling 
-2.forgot password
+2.forgot password---done
 3.personal page
 4.comment
 5.likes
-6.recipe page addong place to comment
+6.recipe page addong place to comment---done
 
 
 maybes

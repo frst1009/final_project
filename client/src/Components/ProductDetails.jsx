@@ -62,6 +62,42 @@ const ProductDetails = () => {
           </div>
         </div>
       </div>
+      <div className="row">
+      <div className="col-lg-12">
+        {/* ... previous code ... */}
+        <p className="card-text mb-3">
+          {data.instructions}
+        </p>
+        {/* Comment Section */}
+        <div className="card mt-4">
+          <div className="card-header">
+            Comments
+          </div>
+          <div className="card-body">
+            {/* Comment Form */}
+            <div className="mb-3">
+              <textarea className="form-control" rows="3" placeholder="Write a comment..."></textarea>
+            </div>
+            <button className="btn btn-primary">Submit</button>
+          </div>
+          <ul className="list-group list-group-flush">
+            {/* Comment List */}
+            <li className="list-group-item">
+              <div className="d-flex">
+                <div className="flex-grow-1">
+                  <h6>User123</h6>
+                  <p>Great recipe!</p>
+                </div>
+                <div>
+                  <small>Posted 2 days ago</small>
+                </div>
+              </div>
+            </li>
+            {/* Add more comments here */}
+          </ul>
+        </div>
+      </div>
+    </div>
     </div>
   );
 };

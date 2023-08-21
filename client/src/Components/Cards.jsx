@@ -3,25 +3,25 @@ import { Card, Row, Col } from "antd";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faHeart as heart,
   faComment,
+  faHeart,
 } from "@fortawesome/free-regular-svg-icons";
-import { faHeart as solidheart } from "@fortawesome/free-solid-svg-icons";
+import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchRecipes } from "../redux/slices/recipes";
+import { fetchRecipes, likeRecipe } from "../redux/slices/recipes";
 import TagBubble from "./TagBubbles";
 
-const Cards = () => {
-  const [isLiked, setIsLiked] = useState(false);
-  const handleClick = () => {
-    setIsLiked(!isLiked);
-  };
-  const dispatch = useDispatch();
-  const { recipes } = useSelector((state) => state.recipes); //refering to store
-  const isPostsLoading = recipes.status == "loading";
-  useEffect(() => {
+const Cards = () => { 
+   const dispatch = useDispatch();  
+   const { recipes } = useSelector((state) => state.recipes); //refering to store
+   const isPostsLoading = recipes.status == "loading";
+   useEffect(() => {
     dispatch(fetchRecipes());
-  }, []);
+  }, [dispatch]);
+
+  const handleLike = (recipeId) => {
+    dispatch(likeRecipe(recipeId));
+  };
 
   return (
     <section className="recipe-cards p-5">
@@ -73,10 +73,12 @@ const Cards = () => {
                         </div>
                       </Link>
                       <div className="card-content-icon">
-                        <FontAwesomeIcon
-                          icon={isLiked ? solidheart : heart}
-                          onClick={handleClick}
-                          style={{ color: "grey" }}
+                      <FontAwesomeIcon
+                          icon={obj.isLiked ? solidHeart : faHeart}
+                          onClick={() => handleLike(obj._id)}
+                          // style={{
+                          //   color: obj.isLiked ? "red" : "grey",
+                          // }}
                           className="card-content-icon-heart"
                         />
                         <FontAwesomeIcon

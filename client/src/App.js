@@ -10,7 +10,7 @@ import Login from "./Pages/Login";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchLogin, selectIsAuth } from "./redux/slices/auth";
 import ForgotPassword from "./Pages/ForgotPas";
-import ChangePas from "./Pages/ProfilePage";
+import ChangePas from "./Pages/ChangePas";
 
 
 function App() {

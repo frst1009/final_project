@@ -133,7 +133,6 @@ const UserController = {
         const resetToken = crypto.randomBytes(20).toString('hex');
 
         user.resetToken = resetToken;
-        user.resetTokenExpiry = Date.now() + 3600000; // Token expires in 1 hour
         await user.save();
         transporter.sendMail({
           from: "bwal21879@gmail.com", // sender address
@@ -156,32 +155,29 @@ const UserController = {
     },
     changepassword:async (req,res)=>{
       const userId=req.query.userId
-      const token=req.query.token
+      const token=req.query.resetToken
       const newPassword=req.body.password
       try {
         const user=await User.findById(userId)
+        console.log(userId);
         if(!user){
+          console.log("1");
          res.status(404).json("User not found");
          return;
         }
         console.log(user.resetToken);
-
-        if(user.resetToken!==token || Date.now() > user.resetTokenExpiry){
-          res.status(401).json("Invalid or expired token");
-          return;
-        }
      
     const salt = bcrypt.genSaltSync();
     const hashedPassword = bcrypt.hashSync(newPassword, salt);
+    console.log("3");
     
     user.password = hashedPassword;
     user.resetToken = null;
     user.resetTokenExpiry = null;
-    
+    console.log("4");
     await user.save();
     res.status(200).json({
       message: "Password changed successfully",
-      email: user.email,
     });
   } catch (error) {
     console.log(error);

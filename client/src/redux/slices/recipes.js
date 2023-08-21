@@ -10,7 +10,10 @@ export const fetchTags = createAsyncThunk('recipe/fetchTags',async()=>{
     const {data} = await axios.get('/api/recipe/tags');
     return data;
     })
-    
+    export const likeRecipe = createAsyncThunk('recipe/likeRecipe', async (recipeId) => {
+        const {data} = await axios.put(`/api/recipe/like/${recipeId}`);
+        return data; 
+      });    
 
 const initialState = {
     recipes: {
@@ -51,6 +54,13 @@ const recipeSlice = createSlice({
     state.tags.items = [];
     state.tags.status = 'error';
 },
+[likeRecipe.fulfilled]: (state, action) => {
+    const { recipeId, liked } = action.payload;
+    const recipeToUpdate = state.recipes.items.find((recipe) => recipe._id === recipeId);
+    if (recipeToUpdate) {
+      recipeToUpdate.isLiked = liked;
+    }
+  },
     }
 })
 export const recipeReducer = recipeSlice.reducer;

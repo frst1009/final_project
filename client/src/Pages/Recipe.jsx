@@ -57,7 +57,7 @@ image
   const {data} = await axios.post('/api/recipe/add',fields);
 
   const id = data._id;
-  navigate(`details/${id}`);
+  navigate(`/`);
 } catch (error) {
 console.warn(error);
 alert('Upload error!');
