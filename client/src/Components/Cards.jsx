@@ -1,26 +1,40 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Card, Row, Col } from "antd";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faComment,
-  faHeart,
-} from "@fortawesome/free-regular-svg-icons";
-import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
+import { faComment, faHeart } from "@fortawesome/free-regular-svg-icons";
+import axios from "../axios";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchRecipes, likeRecipe } from "../redux/slices/recipes";
-import TagBubble from "./TagBubbles";
+import { fetchRecipes } from "../redux/slices/recipes";
+import { selectIsAuth } from "../redux/slices/auth";
 
-const Cards = () => { 
-   const dispatch = useDispatch();  
-   const { recipes } = useSelector((state) => state.recipes); //refering to store
-   const isPostsLoading = recipes.status == "loading";
-   useEffect(() => {
+const Cards = () => {
+  const dispatch = useDispatch();
+  const { recipes } = useSelector((state) => state.recipes);
+  const isPostsLoading = recipes.status === "loading";
+  const userId = useSelector((state) => state.auth.data);
+  const isAuth = useSelector(selectIsAuth);
+
+  useEffect(() => {
     dispatch(fetchRecipes());
   }, [dispatch]);
 
-  const handleLike = (recipeId) => {
-    dispatch(likeRecipe(recipeId));
+  const handleLike = async (recipeId, liked) => {
+  
+    try {
+      const response = await axios.post(`/api/recipe/like/${recipeId}`, {
+        liked,
+      });
+      const data = response.data;
+  
+      if (response.status === 200) {
+        dispatch(fetchRecipes()); 
+      } else {
+        console.error(data.msg);
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
   };
 
   return (
@@ -35,7 +49,6 @@ const Cards = () => {
       >
         <p style={{ fontSize: "25px", fontWeight: "800" }}>Recipes</p>
       </div>
-      <TagBubble />
       <div className="container-xxl">
         <Row gutter={[16, 16]}>
           {isPostsLoading
@@ -51,20 +64,22 @@ const Cards = () => {
                     className="custom-card"
                     bodyStyle={{ padding: "16px" }}
                   >
-                    {/* <div className="card-image" > */}
-                    <img
-              src={`http://localhost:3040${obj.image}`}
-              alt=""
-              className="card-img-top img-fluid p-2"
-            />
-                    {/* </div> */}
+                    <div className="card-image">
+                      <img
+                        src={`http://localhost:3040${obj.image}`}
+                        alt=""
+                        className="card-img-top p-2"
+                      />
+                    </div>
                     <div className="card-content">
                       <Link to={`/details/${obj._id}`}>
-                        {" "}
-                        <h3 className="card-title">{obj.title}</h3>
+                        <h3 className="card-title">
+                          {obj.title.length > 10
+                            ? obj.title.substring(0, 10) + "..."
+                            : obj.title}
+                        </h3>
                         <i>Created by {obj.user.username}</i>
                         <div>
-                          {" "}
                           <p className="card-description">
                             {obj.instructions.length > 100
                               ? obj.instructions.substring(0, 100) + "..."
@@ -73,14 +88,27 @@ const Cards = () => {
                         </div>
                       </Link>
                       <div className="card-content-icon">
-                      <FontAwesomeIcon
-                          icon={obj.isLiked ? solidHeart : faHeart}
-                          onClick={() => handleLike(obj._id)}
-                          // style={{
-                          //   color: obj.isLiked ? "red" : "grey",
-                          // }}
-                          className="card-content-icon-heart"
-                        />
+                      {isAuth ? (
+    <FontAwesomeIcon
+      icon={faHeart}
+      
+      onClick={() => {
+        if (userId && userId.user && userId.user._id) {
+          handleLike(obj._id, !obj.likes.includes(userId.user._id));
+        }
+      }}
+      style={{
+
+        color: userId && userId.user && obj.likes.includes(userId.user._id) ? "pink" : "grey",
+      }}
+    />
+  ) : (
+    <FontAwesomeIcon icon={faHeart} />
+  )}
+
+                      
+                        <span className="card-content-icon-heart">{obj.likes.length}</span>
+                 
                         <FontAwesomeIcon
                           icon={faComment}
                           style={{ color: "grey" }}

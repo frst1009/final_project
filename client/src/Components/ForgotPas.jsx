@@ -49,13 +49,13 @@ const ForgotPassword = () => {
                   </div>{" "}
                   {error && <p className="text-danger">{error}</p>}
                   <div className="d-grid gap-2">
-                    <button type="submit" className="btn btn-primary">
+                    <button type="submit" className="input-button ">
                       Send Reset Link
                     </button>
                   </div>
                 </form>
                 <div className="mt-3 text-center">
-                  <Link to="/login" className="form-link">
+                  <Link to="/login" className="form-link login-wrapper">
                     Back to Login
                   </Link>
                 </div>

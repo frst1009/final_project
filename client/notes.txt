@@ -17,7 +17,10 @@ todo
 4.comment
 5.likes
 6.recipe page addong place to comment---done
-
+7.look for the cards sizes
+8.fix buttons
+9.add functionality to add avartar
+10.get all the recipes by categories and tags
 
 maybes
 1.all recipes

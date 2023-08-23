@@ -23,9 +23,7 @@ const Footer = () => {
           <Link className='gap-3' id='footer-link'>
           <FontAwesomeIcon icon={faFacebook} />
           </Link>
-          {/* <Link to='https://app.slack.com/client/T0195LMKD1R/D04QEBN1J80/rimeto_profile/U04PQHERFM1?cdn_fallback=2' id='footer-link' target='_blank' className='gap-3'>
-          <BsSlack />
-          </Link> */}
+
           </div>
         </div>
         <div className="col-md-2 col-lg-2 mb-3 mb-md-0">
@@ -33,12 +31,13 @@ const Footer = () => {
         <p>Let Your recipe and creativity speak with signing and sharing your experience and delicious goodies on this website. Shall we begin?</p>
         </div>
         <div className="col-md-4 col-lg-4">
-          <h2 className='footer-title mb-3'><b>Leave comment</b></h2>
-          <p className='mb-3'>some comment</p>
-        
-      
+          <h2 className='footer-title mb-3'><b>What we offer?</b></h2>
+          <p className='mb-3'>Community</p>
+          <p className='mb-3'>Great recipes</p>
+          <p className='mb-3'>Feedbacks</p>
         </div>
       </div>
+      <div><p style={{fontSize:"10px"}}>2023, RecipeMonsters</p></div>
     </div>
   </footer>
   </>;

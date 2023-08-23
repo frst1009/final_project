@@ -1,13 +1,17 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { fetchUserData, selectIsAuth } from "../redux/slices/auth";
+import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 
 const Login = () => {
   const isAuth = useSelector(selectIsAuth);
   const dispatch = useDispatch();
+  const [showPassword, setShowPassword] = useState(false);
   const {
     register,
     handleSubmit, //funstion provided by the hook itself
@@ -61,20 +65,27 @@ if(isAuth){
                     )}
                   </div>
                   <div className="mb-3">
-                    <label htmlFor="password" className="form-label mb-3">
-                      Enter Your password
-                    </label>
-                    <input
-                      type="password"
-                      className="form-control"
-                      id="password"
-                      placeholder="enter password here..."
-                      {...register("password", { required: "Add password!" })}
-                    />
-                    {errors.password && (
-                      <p className="text-danger">{errors.password.message}</p>
-                    )}
-                  </div>
+        <label htmlFor="password" className="form-label mb-3">
+          Enter Your password
+        </label>
+        <div className="password-input">
+          <input
+            type={showPassword ? "text" : "password"}
+            className="form-control"
+            id="password"
+            placeholder="enter password here..."
+            {...register("password", { required: "Add password!" })}
+          />
+          <FontAwesomeIcon
+            icon={showPassword ? faEye : faEyeSlash}
+            className="password-toggle-icon"
+            onClick={() => setShowPassword(!showPassword)}
+          />
+        </div>
+        {errors.password && (
+          <p className="text-danger">{errors.password.message}</p>
+        )}
+      </div>
                   <div className="d-flex justify-content-between align-items-center mb-3">
                     <p className="m-0">Forgot Password?</p>
                     <Link to="/forgotpassword" className="form-link">

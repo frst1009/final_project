@@ -172,6 +172,22 @@ const RecipeController = {
       });
     }
   },
+
+  categories: async (req, res) => {
+    try {
+      const selectedCategory = req.query.category;
+      
+      const recipes = await Recipe.find({ category: selectedCategory });
+  
+      res.status(200).json(recipes);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({
+        error: "An error occurred while retrieving recipes by category.",
+      });
+    }
+  },
+
  searchByTitle: async (req, res) => {
   const searchQuery = req.query.title; 
   try {

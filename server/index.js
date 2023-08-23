@@ -43,9 +43,10 @@ app.post('/upload', tokenAuth, upload.single('image'), (req, res) => {
 app.post("/api/recipe/add",tokenAuth, postCreateValidation, validationError, RecipeController.add)
 app.get("/api/recipe/", RecipeController.getAll);
 app.get("/api/recipe/tags", RecipeController.tags);
+app.get("/api/recipe/category", RecipeController.categories);
 app.get("/api/recipe/search", RecipeController.searchByTitle);
+app.post("/api/recipe/like/:id",tokenAuth, RecipeController.hanldlelike);
 app.get("/api/recipe/:id", RecipeController.getById);
-app.put("/api/recipe/like/:id",tokenAuth, RecipeController.hanldlelike);
 app.delete("/api/recipe/:id",tokenAuth, RecipeController.deleterecipe);
 app.patch("/api/recipe/:id", postCreateValidation, validationError, RecipeController.update);
 app.post("/api/recipe/:id/comments",tokenAuth, RecipeController.comments);

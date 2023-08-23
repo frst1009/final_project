@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "../axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useLocation, useNavigate } from "react-router-dom";
+import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 
 const ChangePas = () => {
   const navigate = useNavigate();
@@ -10,7 +12,7 @@ const ChangePas = () => {
   const URLSearch= new URLSearchParams(search)
   const token=URLSearch.get("token")
   const userId=URLSearch.get("userId")
-  
+  const [showPassword, setShowPassword] = useState(false); 
   // useEffect(() => {
   //   if (!token || !userId) {
   //     // navigate("/login");
@@ -42,20 +44,29 @@ const ChangePas = () => {
 
   return (
     <div className="profile-page">
-      <h1>Change password</h1>
-      <form onSubmit={handleChangePassword}>
-      <div className="profile-info">
-        <label>Password</label>
-        <input
-          className="input"
-          type="password"
-          value={password}
-          onChange={(e)=>setPassword(e.target.value)}
-          placeholder="Your password"
-        />
-      </div>
-      <button className="input-button" type="submit">Change Password</button>
-      {message && <p>{message}</p>}
+    <h2 className="text-center">Forgot Password</h2>
+    <form onSubmit={handleChangePassword}>
+        <div className="profile-info">
+          <label>Password</label>
+          <div className="password-input input">
+            <input
+            
+              type={showPassword ? "text" : "password"} // Toggle between "text" and "password" types
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Your password"
+            />
+            <FontAwesomeIcon
+              icon={showPassword ? faEye : faEyeSlash} // Toggle eye and eye-slash icons
+              className="password-toggle-icon"
+              onClick={() => setShowPassword(!showPassword)} // Toggle password visibility
+            />
+          </div>
+        </div>
+        <button className="input-button" type="submit">
+          Change Password
+        </button>
+        {message && <p>{message}</p>}
       </form>
     </div>
   );
