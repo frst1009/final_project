@@ -4,6 +4,7 @@ import axios from "../axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Spinner from "./Spinner";
+import Comments from "./Comments";
 
 const ProductDetails = () => {
   const [data, setData] = useState();
@@ -40,7 +41,7 @@ const ProductDetails = () => {
         </div>
 
         <div className="col-lg-6" > 
-          <div className="card p-5 m-auto" style={{backgroundColor:"transparent"}}>
+          <div className="card p-5 m-auto">
             <div className="card-body">
               <h5 className="card-title">{data.title}</h5>
               <h2 className="card-text">Created by: {data.user.username}</h2>
@@ -74,35 +75,7 @@ const ProductDetails = () => {
           <p className="card-text mb-3">{data.instructions}</p>
           {/* Comment Section */}
         </div>{" "}
-        <div className="card mb-3">
-          <div className="card-header">Comments</div>
-          <div className="card-body">
-            {/* Comment Form */}
-            <div className="mb-3">
-              <textarea
-                className="form-control"
-                rows="3"
-                placeholder="Write a comment..."
-              ></textarea>
-            </div>
-            <button className="btn btn-primary">Submit</button>
-          </div>
-          <ul className="list-group list-group-flush">
-            {/* Comment List */}
-            <li className="list-group-item">
-              <div className="d-flex">
-                <div className="flex-grow-1">
-                  <h4>User123</h4>
-                  <h5>Great recipe!</h5>
-                </div>
-                <div>
-                  <small>Posted 2 days ago</small>
-                </div>
-              </div>
-            </li>
-            {/* Add more comments here */}
-          </ul>
-        </div>
+        <Comments recipeId={id}/>
         </div>
       </div>
     </div>

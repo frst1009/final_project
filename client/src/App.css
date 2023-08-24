@@ -386,19 +386,23 @@ align-items: center;
 margin-bottom: 30px;
 }
 /* tagbubbles */
-
-.replies button{
-font-size: 16px;
-transition: 0.5s;
-border:  1px solid transparent;
+/* .card .card-body{
+height: 200px;
+}
+.replies {
+font-size: 14px;
 }
 
-.replies button:hover{
-background-color: var(--primary1);
-color: var(--search);
-/* border: 1px solid var(--lighter); */
+@media (min-width: 751px) and (max-width: 1100px) {
+  .replies{
+   font-size: 9px;
+  }
+  .card .card-body{
+    height: 200px;
+    }
 
-}
+} */
+
 
 
 /* header */

@@ -7,7 +7,6 @@ const store = configureStore({
 	reducer: {
 		recipes: recipeReducer,
 		auth: authReducer,
-		// users: usersReducer,
 	},
 });
 

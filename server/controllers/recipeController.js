@@ -1,4 +1,5 @@
 const { Recipe } = require("../models/recipe");
+const { User } = require("../models/user");
 
 const RecipeController = {
   add: async (req, res) => {
@@ -127,19 +128,27 @@ const RecipeController = {
   },
   comments: async (req, res) => {
     try {
-      const { comment, postId } = req.body;
-
+      const { comment} = req.body;
+const postId = req.params.id;
+const userId = req.userId; 
       const recipe = await Recipe.findById(postId);
       if (!recipe) {
         return res.status(404).json({ message: "Recipe not found" });
       }
+      const user = await User.findById(userId);
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
 
       const newComment = {
-        user: req.userId,
         comment: comment,
         postId: postId,
       };
-
+      
+      if (user) {
+        newComment.user = user._id; 
+  newComment.username = user.username;
+      }
       recipe.comments.push(newComment);
       await recipe.save();
 
