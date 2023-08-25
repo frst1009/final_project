@@ -45,6 +45,10 @@ const recipeSchema = new mongoose.Schema({
         ref: "User",
         required: true,
       },
+      username: {
+        type: String,
+      },
+      
       comment: {
         type: String,
         required: true,

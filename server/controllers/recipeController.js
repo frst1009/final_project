@@ -139,16 +139,17 @@ const userId = req.userId;
       if (!user) {
         return res.status(404).json({ message: "User not found" });
       }
-
       const newComment = {
+        username: user.username,
+        user: req.userId,
         comment: comment,
         postId: postId,
       };
       
-      if (user) {
-        newComment.user = user._id; 
-  newComment.username = user.username;
-      }
+  //     if (user) {
+  //       newComment.user = user._id; 
+  // newComment.username = user.username;
+  //     }
       recipe.comments.push(newComment);
       await recipe.save();
 

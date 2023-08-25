@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { commentsAdd, fetchRecipes } from '../redux/slices/recipes';
+import moment from 'moment';
 
 function Comments({ recipeId }) {
   const dispatch = useDispatch();
@@ -56,7 +57,7 @@ function Comments({ recipeId }) {
                 <h5>{comment.comment}</h5>
               </div>
               <div>
-                <small>Posted {comment.createdAt} ago</small>
+                <small>Posted: <td>{moment(comment.createdAt).format("DD/MM/YYYY")}</td></small>
               </div>
             </div>
           </li>
