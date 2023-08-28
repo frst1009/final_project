@@ -12,6 +12,7 @@ import { fetchLogin, selectIsAuth } from "./redux/slices/auth";
 import PersonalPage from "./Pages/PersonalPage";
 import ForgotPass from "./Pages/ForgotPass";
 import Changepassword from "./Pages/ChangePassword";
+import CategoryPage from "./Pages/CategoryPage";
 
 
 function App() {
@@ -33,7 +34,7 @@ function App() {
           <Route path='details/:id' element={<Details/>}/> 
           <Route path='forgotpassword' element={<ForgotPass/>}/>
           <Route path='personalpage' element={<PersonalPage/>}/>
-          
+          <Route path='category/:category' element={<CategoryPage/>}/>
           </Route>
         </Routes>
     </>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Carousel, Card } from "antd";
+import { Link } from "react-router-dom";
 
 const CustomCarousel = () => {
   const [categories, setCategories] = useState([]);
@@ -52,7 +53,7 @@ const CustomCarousel = () => {
           },
         ];
         resolve(categoriesData);
-      }, 1000);
+      }, 800);
     });
   };
 
@@ -74,16 +75,17 @@ const CustomCarousel = () => {
         <p style={{ fontSize: "25px", fontWeight: "800" }}>Categories</p>
       </div>
       <Carousel slidesToShow={3} autoplay autoplaySpeed={2000} className="Card">
-        {categories.map((category) => (
-          <Card
-            key={category.id}
-            className="custom-card"
-            cover={<img alt={category.name} src={category.image} />}
-            hoverable
-          >
-            <Card.Meta title={category.name} />
-          </Card>
-        ))}
+      {categories.map((category) => (
+  <Link key={category.id} to={`/category/${category.name.toLowerCase()}`}>
+    <Card
+      className="custom-card"
+      cover={<img alt={category.name} src={category.image} />}
+      hoverable
+    >
+      <Card.Meta title={category.name} />
+    </Card>
+  </Link>
+))}
       </Carousel>
     </div>
   );

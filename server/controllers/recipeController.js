@@ -140,16 +140,11 @@ const userId = req.userId;
         return res.status(404).json({ message: "User not found" });
       }
       const newComment = {
+        comment: comment,
         username: user.username,
         user: req.userId,
-        comment: comment,
         postId: postId,
       };
-      
-  //     if (user) {
-  //       newComment.user = user._id; 
-  // newComment.username = user.username;
-  //     }
       recipe.comments.push(newComment);
       await recipe.save();
 
@@ -186,7 +181,6 @@ const userId = req.userId;
   categories: async (req, res) => {
     try {
       const selectedCategory = req.query.category;
-      
       const recipes = await Recipe.find({ category: selectedCategory });
   
       res.status(200).json(recipes);

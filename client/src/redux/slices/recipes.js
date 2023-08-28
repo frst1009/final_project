@@ -11,9 +11,9 @@ export const fetchTags = createAsyncThunk("recipe/fetchTags", async () => {
   return data;
 });
 export const commentsAdd = createAsyncThunk("recipe/comments", async ({ recipeId, comment }) => {
-    const { data } = await axios.post(`/api/recipe/${recipeId}/comments`, {
+    const { data } = await axios.post(`/api/recipe/${recipeId}/comments`, 
       comment,
-    });
+    );
     return data;
   }
 );
