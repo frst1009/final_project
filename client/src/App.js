@@ -7,8 +7,8 @@ import Signup from "./Pages/Sign";
 import Details from "./Pages/Details";
 import Recipe from "./Pages/Recipe";
 import Login from "./Pages/Login";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchLogin, selectIsAuth } from "./redux/slices/auth";
+// import { useDispatch, useSelector } from "react-redux";
+// import { fetchLogin, selectIsAuth } from "./redux/slices/auth";
 import PersonalPage from "./Pages/PersonalPage";
 import ForgotPass from "./Pages/ForgotPass";
 import Changepassword from "./Pages/ChangePassword";
@@ -16,11 +16,11 @@ import CategoryPage from "./Pages/CategoryPage";
 
 
 function App() {
-  const dispatch = useDispatch();
-  const isAuth = useSelector(selectIsAuth);
-  useEffect(() => {
-    dispatch(fetchLogin());
-  }, [])
+  // const dispatch = useDispatch();
+  // const isAuth = useSelector(selectIsAuth);
+  // useEffect(() => {
+  //   dispatch(fetchLogin());
+  // }, [])
   
   return (
     <>

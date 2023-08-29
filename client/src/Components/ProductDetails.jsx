@@ -30,8 +30,8 @@ const ProductDetails = () => {
   return (
     <div className="container p-5" id={data._id}>
       <div className="row">
-        <div className="col-lg-6">
-          <div className="card m-auto">
+        <div className="col-lg-6 product-card">
+          <div className="card m-auto products">
             <img
               src={`http://localhost:3040${data.image}`}
               alt=""
@@ -41,16 +41,16 @@ const ProductDetails = () => {
         </div>
 
         <div className="col-lg-6" > 
-          <div className="card p-5 m-auto">
+          <div className="card p-5 m-auto products">
             <div className="card-body">
               <h5 className="card-title">{data.title}</h5>
               <h2 className="card-text">Created by: {data.user.username}</h2>
-              <p className="card-text">Likes: {data.likes.length}</p>
-              <h2 className="text-danger me-2">
+              {/* <p className="card-text">Likes: {data.likes.length}</p> */}
+              <h2 className="card-text me-2">
                 Required cooking time: {data.cookingTime}
               </h2>
 
-              <h2 className="card-text mb-3">{data.instructions}</h2>
+              {/* <h2 className="card-text mb-3">{data.instructions}</h2> */}
             </div>
           </div>
           {/* <div className="card">
@@ -65,7 +65,7 @@ const ProductDetails = () => {
       </div>
       <div className="row">
         <div className="col-lg-12" >
-        <div className="card p-5 m-auto">
+        <div className="card p-5 m-auto products">
           <h2>Ingredients</h2>
           <ul>
             {" "}

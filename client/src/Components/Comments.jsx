@@ -2,14 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { commentsAdd, fetchRecipes } from '../redux/slices/recipes';
 import moment from 'moment';
+import { fetchLogin, selectIsAuth } from '../redux/slices/auth';
 
 function Comments({ recipeId }) {
+  const isAuth = useSelector(selectIsAuth);
   const dispatch = useDispatch();
   const [comment, setComment] = useState('');
   const { recipes } = useSelector((state) => state.recipes);
   const currentUser = useSelector((state) => state.auth.data);
   useEffect(() => {
     dispatch(fetchRecipes());
+    dispatch(fetchLogin());
   }, [dispatch]);
 
   const currentRecipe = recipes.items.find((recipe) => recipe._id === recipeId);
@@ -31,9 +34,10 @@ function Comments({ recipeId }) {
   };
 
   return (
-    <div className="card mb-3">
+    <div className="card mb-3 products">
       <div className="card-header">Comments</div>
-      <div className="card-body">
+      {isAuth ? (
+                    <> <div className="card-body">
         <div className="mb-3">
           <textarea
             className="form-control"
@@ -46,13 +50,13 @@ function Comments({ recipeId }) {
         <button className="btn btn-primary" onClick={handleCommentSubmit}>
           Submit
         </button>
-      </div>
+      </div></>):(<>{" "}</>)}
       <ul className="list-group list-group-flush">
         {/* Comment List */}
         {currentRecipe && currentRecipe.comments.map((obj) => (
           <li className="list-group-item" key={obj._id}>
             <div className="d-flex">
-              <div className="flex-grow-1">
+              <div className="flex-grow-1 ">
                 <h4>{obj.username}</h4>
                 <h5>{obj.comment}</h5>
               </div>

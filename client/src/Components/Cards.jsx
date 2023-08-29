@@ -6,17 +6,16 @@ import { faComment, faHeart } from "@fortawesome/free-regular-svg-icons";
 import axios from "../axios";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchRecipes } from "../redux/slices/recipes";
-import { selectIsAuth } from "../redux/slices/auth";
+import { fetchLogin, selectIsAuth } from "../redux/slices/auth";
 
-const Cards = () => {
+const Cards = ({recipeData, isPostsLoading}) => {
   const dispatch = useDispatch();
-  const { recipes } = useSelector((state) => state.recipes);
-  const isPostsLoading = recipes.status === "loading";
   const userId = useSelector((state) => state.auth.data);
   const isAuth = useSelector(selectIsAuth);
 
   useEffect(() => {
     dispatch(fetchRecipes());
+    dispatch(fetchLogin());
   }, [dispatch]);
 
   const handleLike = async (recipeId, liked) => {
@@ -57,7 +56,7 @@ const Cards = () => {
                   <Card className="custom-card loading-card" />
                 </Col>
               ))
-            : recipes.items.map((obj) => (
+            : recipeData.items.map((obj) => (
                 <Col key={obj._id} xs={24} md={8}>
                   <Card
                     hoverable

@@ -15,7 +15,7 @@ todo
 2.forgot password---done
 3.personal page
 4.comment---done
-5.likes---half done
+5.likes---done
 6.recipe page addong place to comment---done
 7.look for the cards sizes---done
 8.fix buttons---done

@@ -377,7 +377,11 @@ border: 1px solid var(--darker);
   font-size: 14px;
   height: 40px;
   }
-  
+  .products{
+    background-color: transparent;
+    border-style: none;
+    color:var(--search);
+  }
 /* tagbubbles */
 .tags-section {
   display: flex;

@@ -5,9 +5,12 @@ import Cards from '../Components/Cards';
 import { faSearch, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from '../axios';
+import { useSelector } from 'react-redux';
 const Home = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const { recipes } = useSelector((state) => state.recipes);
+  const isPostsLoading = recipes.status === "loading";
 
   const handleSearch = async () => {
     try {
@@ -83,7 +86,7 @@ const Home = () => {
     </div>
   </section>
   <CustomCarousel /> 
-  <Cards/>
+  <Cards recipeData={recipes} isPostsLoading={isPostsLoading}/>
   <section className="replies p-5">
   <div className="container-xxl">
     <div className="row">
