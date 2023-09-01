@@ -11,7 +11,7 @@ const Home = () => {
   const [searchResults, setSearchResults] = useState([]);
   const { recipes } = useSelector((state) => state.recipes);
   const isPostsLoading = recipes.status === "loading";
-
+console.log(recipes);
   const handleSearch = async () => {
     try {
       const response = await axios.get(`/api/recipe/search?title=${searchQuery}`);
@@ -86,7 +86,7 @@ const Home = () => {
     </div>
   </section>
   <CustomCarousel /> 
-  <Cards recipeData={recipes} isPostsLoading={isPostsLoading}/>
+  <Cards recipeData={recipes.items} isPostsLoading={isPostsLoading}/>
   <section className="replies p-5">
   <div className="container-xxl">
     <div className="row">

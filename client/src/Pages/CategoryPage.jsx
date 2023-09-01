@@ -16,25 +16,24 @@ import Cards from "../Components/Cards";
           setLoading(false);
         } catch (error) {
           console.error(error.message);
+          setLoading(false);
         }
-        setLoading(false);
+    
       }
 
       fetchData();
-    }, []);
-
+     
+    }, [category]);
+    console.log(recipes); 
     return (
       <section className="product-details p-5">
         <div className="conntainer-xxl">
-          <div className="row">
-            <h2>{recipes.length} Recipes</h2>
-            {/* {recipes.map((recipe) => (
-              <div key={recipe._id}>
-                <h3>{recipe.title}</h3>
-              </div>
-            ))} */}
-            <Cards recipeData={recipes} isPostsLoading={loading}/>
-          </div>
+        <div className="row">
+        <h1 style={{display: "flex", justifyContent:"center"}}>{recipes.length} {category.charAt(0).toUpperCase()+category.slice(1)} Recipes Found</h1>
+        
+          <Cards recipeData={recipes} isPostsLoading={loading} />
+     
+      </div>
         </div>
       </section>
     );

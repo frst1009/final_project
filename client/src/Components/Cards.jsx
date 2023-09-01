@@ -43,10 +43,10 @@ const Cards = ({recipeData, isPostsLoading}) => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          marginBottom: "40px",
+          marginBottom: "70px",
         }}
       >
-        <p style={{ fontSize: "25px", fontWeight: "800" }}>Recipes</p>
+        <p style={{ fontSize: "25px", fontWeight: "800" }}> Recipes</p>
       </div>
       <div className="container-xxl">
         <Row gutter={[16, 16]}>
@@ -56,7 +56,7 @@ const Cards = ({recipeData, isPostsLoading}) => {
                   <Card className="custom-card loading-card" />
                 </Col>
               ))
-            : recipeData.items.map((obj) => (
+            : recipeData.map((obj) => (
                 <Col key={obj._id} xs={24} md={8}>
                   <Card
                     hoverable
@@ -78,13 +78,13 @@ const Cards = ({recipeData, isPostsLoading}) => {
                             : obj.title}
                         </h3>
                         <i>Created by {obj.user.username}</i>
-                        <div>
+                        {/* <div>
                           <p className="card-description">
-                            {obj.instructions.length > 100
-                              ? obj.instructions.substring(0, 100) + "..."
+                            {obj.instructions.length > 20
+                              ? obj.instructions.substring(0, 20) + "..."
                               : obj.instructions}
                           </p>
-                        </div>
+                        </div> */}
                       </Link>
                       <div className="card-content-icon">
                       {isAuth ? (

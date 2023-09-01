@@ -68,8 +68,9 @@ const ProductDetails = () => {
         <div className="card p-5 m-auto products">
           <h2>Ingredients</h2>
           <ul>
-            {" "}
-            <li className=" mb-2">{data.ingredients}</li>
+          {data.ingredients.map((ingredient, index) => (
+      <li key={index} className="mb-2">{ingredient}</li>
+    ))}
           </ul>
 
           <p className="card-text mb-3">{data.instructions}</p>
