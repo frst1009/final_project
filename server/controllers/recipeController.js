@@ -191,6 +191,18 @@ const userId = req.userId;
       });
     }
   },
+recipeOfUser: async (req,res)=>{
+try {
+  const userId = req.userId; 
+  const recipe = await Recipe.find({ user: userId });
+  res.status(200).json(recipe);
+} catch (error) {
+  console.log(error);
+  res.status(500).json({
+    error: "An error occurred while retrieving recipes for user.",
+  });
+}
+},
 
  searchByTitle: async (req, res) => {
   const searchQuery = req.query.title; 

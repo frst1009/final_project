@@ -54,14 +54,14 @@ function Comments({ recipeId }) {
       <ul className="list-group list-group-flush">
         {/* Comment List */}
         {currentRecipe && currentRecipe.comments.map((obj) => (
-          <li className="list-group-item" key={obj._id}>
+          <li className="list-group-item comment-div" key={obj._id}>
             <div className="d-flex">
               <div className="flex-grow-1 ">
-                <h4>{obj.username}</h4>
-                <h5>{obj.comment}</h5>
+                <p>User: {obj.username}</p>
+                <p>{obj.comment}</p>
               </div>
               <div>
-                <small>Posted: <p>{moment(obj.createdAt).format("DD/MM/YYYY")}</p></small>
+                <p>Posted: <p>{moment(obj.createdAt).format("DD/MM/YYYY")}</p></p>
               </div>
             </div>
           </li>

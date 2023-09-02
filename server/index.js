@@ -45,6 +45,7 @@ app.get("/api/recipe/", RecipeController.getAll);
 app.get("/api/recipe/tags", RecipeController.tags);
 app.get("/api/recipe/category", RecipeController.categories);
 app.get("/api/recipe/search", RecipeController.searchByTitle);
+app.get("/api/recipe/userRecipe", tokenAuth,RecipeController.recipeOfUser);
 app.post("/api/recipe/like/:id",tokenAuth, RecipeController.hanldlelike);
 app.get("/api/recipe/:id", RecipeController.getById);
 app.delete("/api/recipe/:id",tokenAuth, RecipeController.deleterecipe);

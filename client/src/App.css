@@ -8,6 +8,7 @@
 --additional:#4d233f;
 --burgandy:#4d233f12;
 --recipepage: #ffe5d53a;
+--background: #1c1c1c;
 }
 
 *{
@@ -18,7 +19,7 @@ font-family: 'League Spartan',sans-serif;
 list-style: none;
 }
 body{
-  background-color: #1c1c1c;
+  background-color: var(--background);
 }
 /* loading cards */
 .loading-card {
@@ -76,6 +77,18 @@ label {
   cursor: pointer;
 }
 /* profile */
+
+/* personalPage */
+.profpage{
+  background-color: var(--background);
+}
+.profpage .space{
+  background:  url("https://www.mowglistreetfood.com/wp-content/uploads/2023/01/Landing_image_Desktop.jpg"); 
+  height: 200px;
+  z-index: 1;
+}
+
+/* personalPage */
 
 
 /* Center the cards horizontally within Carousel */
@@ -381,6 +394,9 @@ border: 1px solid var(--darker);
     background-color: transparent;
     border-style: none;
     color:var(--search);
+  }
+  .comment-div{
+    background-color: transparent;
   }
 /* tagbubbles */
 .tags-section {
