@@ -74,13 +74,14 @@ const CustomCarousel = () => {
       >
         <p style={{ fontSize: "25px", fontWeight: "800" }}>Categories</p>
       </div>
-      <Carousel slidesToShow={3} autoplay autoplaySpeed={2000} className="Card">
+      <Carousel slidesToShow={3} autoplay dots={false} autoplaySpeed={2000} className="crd">
       {categories.map((category) => (
   <Link key={category.id} to={`/category/${category.name.toLowerCase()}`}>
     <Card
       className="custom-card"
       cover={<img alt={category.name} src={category.image} />}
       hoverable
+      style={{backgroundColor:"transparent"}}
     >
       <Card.Meta title={category.name} />
     </Card>

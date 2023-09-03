@@ -61,7 +61,8 @@ const Cards = ({recipeData, isPostsLoading}) => {
                   <Card
                     hoverable
                     className="custom-card"
-                    bodyStyle={{ padding: "16px" }}
+                    bodyStyle={{ padding: "16px"}}
+                    style={{backgroundColor:"transparent"}}
                   >
                     <div className="card-image">
                       <img
@@ -106,12 +107,12 @@ const Cards = ({recipeData, isPostsLoading}) => {
   )}
 
                       
-                        <span className="card-content-icon-heart">{obj.likes.length}</span>
-                 
+                        <span className="card-content-icon-heart" style={{color:"white"}}>{obj.likes.length}</span>
+{/*                  
                         <FontAwesomeIcon
                           icon={faComment}
                           style={{ color: "grey" }}
-                        />
+                        /> */}
                       </div>
                     </div>
                   </Card>

@@ -47,7 +47,7 @@ function Comments({ recipeId }) {
             onChange={(e) => setComment(e.target.value)}
           ></textarea>
         </div>
-        <button className="btn btn-primary" onClick={handleCommentSubmit}>
+        <button className="btn" id='button-link' onClick={handleCommentSubmit}>
           Submit
         </button>
       </div></>):(<>{" "}</>)}

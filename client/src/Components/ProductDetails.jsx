@@ -29,8 +29,11 @@ const ProductDetails = () => {
   }
   return (
     <div className="container p-5" id={data._id}>
-      <div className="row">
-        <div className="col-lg-6 product-card">
+       <div className="container-xxl">
+
+        <div className="col-12 product-card">
+        <h1 className="card-title">{data.title}</h1>
+        <h5 className="card-title">Created by user: {data.user.username}</h5>
           <div className="card m-auto products">
             <img
               src={`http://localhost:3040${data.image}`}
@@ -40,29 +43,18 @@ const ProductDetails = () => {
           </div>
         </div>
 
-        <div className="col-lg-6" > 
+        {/* <div className="col-lg-6" > 
           <div className="card p-5 m-auto products">
             <div className="card-body">
               <h5 className="card-title">{data.title}</h5>
               <h2 className="card-text">Created by: {data.user.username}</h2>
               {/* <p className="card-text">Likes: {data.likes.length}</p> */}
-              <h2 className="card-text me-2">
+              {/* <h2 className="card-text me-2">
                 Required cooking time: {data.cookingTime}
               </h2>
-
-              {/* <h2 className="card-text mb-3">{data.instructions}</h2> */}
             </div>
           </div>
-          {/* <div className="card">
-            <div className="d-flex justify-content-center flex-column align-items-center">
-             
-              <p className="mb-2">
-               something
-              </p>
-            </div>
-          </div> */}
-        </div>
-      </div>
+        </div> */}
       <div className="row">
         <div className="col-lg-12" >
         <div className="card p-5 m-auto products">
@@ -78,6 +70,7 @@ const ProductDetails = () => {
         </div>{" "}
         <Comments recipeId={id}/>
         </div>
+      </div>
       </div>
     </div>
   );

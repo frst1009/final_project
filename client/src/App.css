@@ -92,10 +92,11 @@ label {
 
 
 /* Center the cards horizontally within Carousel */
-.Card {
+.crd {
   display: flex;
   justify-content: center;
 }
+
 /* caards */
 
 
@@ -106,7 +107,9 @@ label {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s;
 }
-
+.custom-card .ant-card-meta-title {
+  color: var(--search);
+}
 .custom-card:hover {
   transform: translateY(-5px) scale(1.02);
 }
@@ -133,6 +136,7 @@ object-position: center top; /* Center the image horizontally */
   display: flex;
   flex-direction: column;
   justify-content: space-between; 
+  
 }
 .card-content-icon{
   display: flex;
@@ -145,9 +149,10 @@ object-position: center top; /* Center the image horizontally */
 
 }
 .card-title {
-  font-size: 26px;
   font-weight: bold;
-  margin-bottom: 8px;
+  margin-bottom: 30px;
+  text-align: center;
+  color:var(--search)
 }
 
 .card-description {
@@ -422,8 +427,9 @@ font-size: 14px;
     }
 
 } */
-
-
+.card-body textarea{
+background-color: var(--search) !important;  
+}
 
 /* header */
 #basic-addon2{
