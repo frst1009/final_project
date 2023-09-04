@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { selectIsAuth } from '../redux/slices/auth';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchLogin, selectIsAuth } from '../redux/slices/auth';
 import { Navigate } from 'react-router-dom';
 import axios from '../axios';
 import Spinner from '../Components/Spinner';
 import { Card, Button, Typography } from 'antd';
 import { EditOutlined } from '@ant-design/icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPenToSquare, faRectangleXmark } from '@fortawesome/free-regular-svg-icons';
+import { fetchRecipes, fetchRemoveRecipe } from '../redux/slices/recipes';
 
 const { Meta } = Card;
 
 const PersonalPage = () => {
+  const dispatch = useDispatch();
   const isAuth = useSelector(selectIsAuth);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -21,13 +25,37 @@ const PersonalPage = () => {
       .then((res) => {
         setData(res.data);
         setLoading(false);
+        dispatch(fetchLogin());
       })
       .catch((err) => {
         console.warn(err);
         alert("Error finding recipe!");
         setLoading(false);
       });
-  }, []);
+  }, [dispatch]);
+  const handleDeleteRecipe = async (recipeId) => {
+    // const confirmDelete = window.confirm('Are you sure you want to delete this recipe?');
+    
+    // if (confirmDelete) {
+    //   try {
+    //     const response = await axios.delete(`/api/recipe/${recipeId}`);
+    //     const data = response.data;
+
+    //     if (response.status === 200) {
+    //       window.location.reload();
+    //     } else {
+    //       console.error(data.msg);
+    //     }
+    //   } catch (error) {
+    //     console.error("An error occurred:", error);
+    //   }
+    // }
+    if(window.confirm('Are you sure you want to delete this recipe?')){
+      dispatch(fetchRemoveRecipe(recipeId))
+      window.location.reload();
+    }
+  };
+
   if (loading) {
     return <Spinner loading={loading} />;
   }
@@ -41,7 +69,7 @@ const PersonalPage = () => {
     <div className="container-xxl">
       <div className="row">
         <div className="col-md-12">
-          <Card>
+          <Card style={{background:"url(https://st4.depositphotos.com/11601342/19648/v/450/depositphotos_196487286-stock-illustration-vector-fast-food-pattern-word.jpg)"}}>
             <div className="d-flex flex-column align-items-center">
               <img
                 src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
@@ -62,6 +90,7 @@ const PersonalPage = () => {
             </div>
           </Card>
           {/* Recipe Content */}
+          <h1 style={{textAlign:"center", marginTop:"40px", marginBottom:"30px"}}>Recipes</h1>
           <div className="col-12 p-3">
             <div className="row">
               {data.map((recipe) => (
@@ -75,6 +104,9 @@ const PersonalPage = () => {
                       <div className="col-md-8">
                         <div className="card-body">
                           <h5 className="card-title">{recipe.title}</h5>
+                          <FontAwesomeIcon icon={faPenToSquare}
+                        style={{color:"white", marginRight:"15px"}}/>
+                        <FontAwesomeIcon icon={faRectangleXmark} onClick={() => handleDeleteRecipe(recipe._id)} style={{color:"white"}}/>
                         </div>
                       </div>
                     </div>

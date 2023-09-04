@@ -2,10 +2,10 @@ import React, { useEffect } from "react";
 import { Card, Row, Col } from "antd";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faComment, faHeart } from "@fortawesome/free-regular-svg-icons";
+import { faComment, faHeart, faPenToSquare, faRectangleXmark, faXmarkCircle } from "@fortawesome/free-regular-svg-icons";
 import axios from "../axios";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchRecipes } from "../redux/slices/recipes";
+import { fetchRecipes, fetchRemoveRecipe } from "../redux/slices/recipes";
 import { fetchLogin, selectIsAuth } from "../redux/slices/auth";
 
 const Cards = ({recipeData, isPostsLoading}) => {
@@ -17,6 +17,29 @@ const Cards = ({recipeData, isPostsLoading}) => {
     dispatch(fetchRecipes());
     dispatch(fetchLogin());
   }, [dispatch]);
+
+  const handleDeleteRecipe = async (recipeId) => {
+    // const confirmDelete = window.confirm('Are you sure you want to delete this recipe?');
+    
+    // if (confirmDelete) {
+    //   try {
+    //     const response = await axios.delete(`/api/recipe/${recipeId}`);
+    //     const data = response.data;
+
+    //     if (response.status === 200) {
+    //       // Recipe deleted successfully, you can update your UI as needed
+    //       dispatch(fetchRecipes());
+    //     } else {
+    //       console.error(data.msg);
+    //     }
+    //   } catch (error) {
+    //     console.error("An error occurred:", error);
+    //   }
+    // }
+    if(window.confirm('Are you sure you want to delete this recipe?')){
+      dispatch(fetchRemoveRecipe(recipeId))
+    }
+  };
 
   const handleLike = async (recipeId, liked) => {
   
@@ -99,7 +122,7 @@ const Cards = ({recipeData, isPostsLoading}) => {
       }}
       style={{
 
-        color: userId && userId.user && obj.likes.includes(userId.user._id) ? "pink" : "grey",
+        color: userId && userId.user && obj.likes.includes(userId.user._id) ? "aqua" : "white",
       }}
     />
   ) : (
@@ -113,6 +136,10 @@ const Cards = ({recipeData, isPostsLoading}) => {
                           icon={faComment}
                           style={{ color: "grey" }}
                         /> */}
+  {userId && userId.user && userId.user._id === obj.user._id && (<>
+                        <FontAwesomeIcon icon={faPenToSquare}
+                        style={{color:"white", marginRight:"15px"}}/>
+                        <FontAwesomeIcon icon={faRectangleXmark} onClick={() => handleDeleteRecipe(obj._id)} style={{color:"white"}}/> </>) }
                       </div>
                     </div>
                   </Card>

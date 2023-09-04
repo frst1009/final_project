@@ -1,11 +1,15 @@
 /* eslint-disable no-unused-vars */
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Navigate } from 'react-router-dom';
 import { fetchRegister, selectIsAuth } from '../redux/slices/auth';
+// import axios from "../axios";
+// import { Avatar, Space, Upload } from 'antd';
+// import { UserOutlined } from '@ant-design/icons';
 
 const Signup = () => {
+  const [image, setImage] = useState("");
   const isAuth = useSelector(selectIsAuth);
 	const dispatch = useDispatch();
 	const {
@@ -21,7 +25,20 @@ const Signup = () => {
 		},
 		mode: 'onChange',
 	});
-
+  // const handleChangeFile = async (event) => {
+  //   try {
+  //     const formData = new FormData();
+  //     const file = event.fileList[0].originFileObj;
+  //     formData.append("image", file);
+  //     const { data } = await axios.post("/upload", formData);
+  //     console.log(data);
+  //    setImage(data.url);
+  //   } catch (error) {
+  //     console.error("Error in file upload:", error);
+  //     alert("Error uploading image. Please try again.");
+  //   }
+  // };
+  
   const onSubmit = async (values) => {
     const data = await dispatch(fetchRegister(values))
     // Dispatch the fetchUserData action to initiate the login process
@@ -45,8 +62,32 @@ if(isAuth){
               <div className="card">
                 <div className="card-body p-5">
                   <h2 className="text-center">Sign Up</h2>
-                  <p className="text-center mb-3">Join us in shopping!!</p>
+                  <p className="text-center mb-3">Join us in this adventure to heavenly taste!!</p>
                   <form onSubmit={handleSubmit(onSubmit)}>
+                  {/* <label htmlFor="profileImage" className="form-label mb-3">
+  Choose Your Profile Image
+</label>
+<div className='mb-3' style={{display:"flex", justifyContent:"center"}}>
+<Upload
+                      name="image"
+                      action="/upload"
+                      accept="image/*"
+                      showUploadList={false}
+                      onChange={handleChangeFile}
+                    >
+                      <Space direction="vertical" size={16}>
+                        <Space wrap size={16}>
+                          <Avatar
+                            size={64}
+                            icon={<UserOutlined />}
+                            src={image}
+                            style={{ cursor: 'pointer' }}
+                          />
+                        </Space>
+                      </Space>
+                    </Upload>
+</div> */}
+
                     <div className="mb-3">
                       <label htmlFor="email" className="form-label mb-3">
                         Enter Your Email address

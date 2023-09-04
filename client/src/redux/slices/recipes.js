@@ -17,6 +17,9 @@ export const commentsAdd = createAsyncThunk("recipe/comments", async ({ recipeId
     return data;
   }
 );
+export const fetchRemoveRecipe = createAsyncThunk("recipe/remove", async (id) => await axios.delete(`/api/recipe/${id}`),
+);
+
 
 const initialState = {
   recipes: {
@@ -60,6 +63,9 @@ const recipeSlice = createSlice({
     [fetchTags.rejected]: (state) => {
       state.tags.items = [];
       state.tags.status = "error";
+    },
+    [fetchRemoveRecipe.pending]: (state,action) => {
+      state.recipes.items = state.recipes.items.filter(obj=> obj._id!==action.meta.arg)
     },
   },
 });

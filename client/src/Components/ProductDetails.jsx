@@ -32,8 +32,8 @@ const ProductDetails = () => {
        <div className="container-xxl">
 
         <div className="col-12 product-card">
-        <h1 className="card-title">{data.title}</h1>
-        <h5 className="card-title">Created by user: {data.user.username}</h5>
+        <h1 className="card-title" style={{textAlign:"center"}}>{data.title}</h1>
+        <h5 className="card-title" style={{textAlign:"center"}}>Created by user: {data.user.username}</h5>
           <div className="card m-auto products">
             <img
               src={`http://localhost:3040${data.image}`}
