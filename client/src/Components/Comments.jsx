@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { commentsAdd, fetchRecipes } from '../redux/slices/recipes';
 import moment from 'moment';
 import { fetchLogin, selectIsAuth } from '../redux/slices/auth';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit, faX } from '@fortawesome/free-solid-svg-icons';
 
 function Comments({ recipeId }) {
   const isAuth = useSelector(selectIsAuth);
@@ -63,6 +65,10 @@ function Comments({ recipeId }) {
               <div>
                 <p>Posted: <p>{moment(obj.createdAt).format("DD/MM/YYYY")}</p></p>
               </div>
+              {currentUser && currentUser.user && currentUser.user._id===obj.user && (<>
+                <div style={{display:"flex", alignItems:"center", flexDirection:"column", margin:"0 0 0 20px" }}><FontAwesomeIcon icon={faX} style={{color:"white", marginBottom: "5px"}}/><FontAwesomeIcon icon={faEdit} style={{color:"white"}}/></div>
+              </>)
+              }
             </div>
           </li>
         ))}

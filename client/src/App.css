@@ -105,13 +105,14 @@ label {
 .custom-card {
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s;
+  transition: transform 0.3s, box-shadow 0.3s;;
 }
 .custom-card .ant-card-meta-title {
   color: var(--search);
 }
 .custom-card:hover {
   transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 4px 8px var(--additional);
 }
 
 .card-image {
@@ -247,8 +248,8 @@ top: 12px;
 }
 
 .banner{
-  /* background: url("https://www.mowglistreetfood.com/wp-content/uploads/2023/01/Landing_image_Desktop.jpg"); */
-  background-image: url(./Components/img/1619242838_57-phonoteka_org-p-fon-dlya-menyu-fast-fuda-65.jpg);
+  background: url("https://jooinn.com/images/table-with-food-5.jpg");
+  /* background-image: url(./Components/img/1619242838_57-phonoteka_org-p-fon-dlya-menyu-fast-fuda-65.jpg); */
 
   background-size: cover; 
 
@@ -258,24 +259,20 @@ height: 80vh;
 background-position: top 25% right 0;
 width: 100%;
 padding: 0 80px;
-align-items: flex-start;
+align-items: center;
 justify-content: center;
 display: flex;
 flex-direction: column;
 }
-.banner .back-details h1{
-/* font-size: 52px; */
-/* background-color: var(--lighter2); */
-/* border-bottom: 1px solid var(--primary1);
-border-top-right-radius: 10px; */
-/* box-shadow: 10px 30px 40px rgba(41, 46, 43, 0.432); */
-color: var(--search);
-}
+/* .back-details h1{
+  color: blueviolet;
+} */
 .banner .back-details h2{
 /* font-size: 32px; */
 /* background-color: var(--lighter2);
 box-shadow: 10px 30px 40px rgba(41, 46, 43, 0.432); */
 color: var(--search);
+text-align: center;
 width: 35%;
 }
 
@@ -532,7 +529,9 @@ border: 1px solid var(--lighter);
 border-radius: 10px;
 
 }
-
+.ant-card-bordered {
+  border: transparent;
+}
 .login-wrapper label{
 font-size: 18px;
 }

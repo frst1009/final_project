@@ -158,6 +158,35 @@ const userId = req.userId;
     }
   },
 
+deleteComment: async (req, res) => {
+  try {
+    const commentId = req.params.commentId;
+    const userId = req.userId;
+    const recipe = await Recipe.findById(req.params.id);
+    if (!recipe) {
+      return res.status(404).json({ message: 'Recipe not found' });
+    }
+    const commentToDelete = recipe.comments.find(
+      (comment) => comment._id.toString() === commentId
+    );
+    if (!commentToDelete) {
+      return res.status(404).json({ message: 'Comment not found' });
+    }
+    if (commentToDelete.user.toString() !== userId) {
+      return res.status(403).json({ message: 'Permission denied' });
+    }
+    recipe.comments.pull(commentToDelete);
+    await recipe.save();
+
+    res.status(200).json({ message: 'Comment deleted successfully' });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json({ message: 'Failed to delete comment' });
+  }
+
+},
+
+
   tags: async (req, res) => {
     try {
       const recipe = await Recipe.find().limit(5).exec();

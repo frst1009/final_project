@@ -81,7 +81,7 @@ const CustomCarousel = () => {
       className="custom-card"
       cover={<img alt={category.name} src={category.image} />}
       hoverable
-      style={{backgroundColor:"transparent"}}
+      style={{backgroundColor:"transparent", margin:"0 15px"}}
     >
       <Card.Meta title={category.name} />
     </Card>

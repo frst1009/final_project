@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Card, Row, Col } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faComment, faHeart, faPenToSquare, faRectangleXmark, faXmarkCircle } from "@fortawesome/free-regular-svg-icons";
 import axios from "../axios";
@@ -40,6 +40,10 @@ const Cards = ({recipeData, isPostsLoading}) => {
       dispatch(fetchRemoveRecipe(recipeId))
     }
   };
+  const navigate = useNavigate();
+ const handleEdit=(recipeId)=>{
+  navigate(`/details/${recipeId}/edit`)
+ }
 
   const handleLike = async (recipeId, liked) => {
   
@@ -138,7 +142,7 @@ const Cards = ({recipeData, isPostsLoading}) => {
                         /> */}
   {userId && userId.user && userId.user._id === obj.user._id && (<>
                         <FontAwesomeIcon icon={faPenToSquare}
-                        style={{color:"white", marginRight:"15px"}}/>
+                        style={{color:"white", marginRight:"15px"}} onClick={() => handleEdit(obj._id)}/>
                         <FontAwesomeIcon icon={faRectangleXmark} onClick={() => handleDeleteRecipe(obj._id)} style={{color:"white"}}/> </>) }
                       </div>
                     </div>

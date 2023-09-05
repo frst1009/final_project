@@ -30,6 +30,7 @@ function App() {
           <Route path='login' element={<Login />} />
           <Route path='signup' element={<Signup />} />
           <Route path='recipe' element={<Recipe />} />
+          <Route path='details/:id/edit' element={<Recipe />} />
           <Route path='changepassword' element={<Changepassword/>}/>
           <Route path='details/:id' element={<Details/>}/> 
           <Route path='forgotpassword' element={<ForgotPass/>}/>

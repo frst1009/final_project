@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectIsAuth } from "../redux/slices/auth";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { Button, Select, Upload } from "antd";
 import { Option } from "antd/es/mentions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,6 +11,7 @@ import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import axios from "../axios";
 
 const Recipe = () => {
+  const {id}=useParams();
   const navigate = useNavigate();
   const isAuth = useSelector(selectIsAuth);
   const [loading, setloading] = useState(false);
@@ -22,6 +23,22 @@ const Recipe = () => {
   const [instructions, setInstructions] = useState("");
   const [image, setImage] = useState("");
 
+  const isEditing = Boolean(id);
+
+  useEffect(() => {
+if(id){
+  axios.get(`/api/recipe/${id}`).then(({data})=>{
+    setTitle(data.title);
+    setCategories(data.category);
+    setTags(data.tags.join(','));
+    setCookingt(data.cookingTime);
+    setIngredients(data.ingredients);
+    setInstructions(data.instructions);
+    setImage(data.image)
+  })
+}
+  }, [])
+  
   const handleChangeFile = async (event) => {
     try {
       const formData = new FormData();
@@ -54,9 +71,10 @@ ingredients,
 instructions,
 image
   };
-  const {data} = await axios.post('/api/recipe/add',fields);
+  const {data} = isEditing ? await axios.patch(`/api/recipe/${id}`,fields)
+  : await axios.post('/api/recipe/add',fields);
 
-  const id = data._id;
+  // const _id = isEditing ? id : data._id;
   navigate(`/`);
 } catch (error) {
 console.warn(error);
@@ -236,7 +254,7 @@ alert('Upload error!');
                     </div>
                     <div className="col-12 text-center gap-2">
                       <button id="button-link" type="submit">
-                        Submit
+                       {isEditing ? "Save changes" : "Submit"}
                       </button>
                     </div>
                   </div>

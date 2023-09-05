@@ -16,12 +16,12 @@ todo
 3.personal page
 4.comment---done
 5.likes---done
-6.recipe page addong place to comment---done
+6.recipe page adding place to comment---done
 7.look for the cards sizes---done
 8.fix buttons---done
 9.add functionality to add avartar
 10.get all the recipes by categories and tags---half done
-11.delete update posts, userinfo
+11.delete update posts, userinfo---done
 
 maybes
 1.all recipes

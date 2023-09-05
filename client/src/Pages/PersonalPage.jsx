@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchLogin, selectIsAuth } from '../redux/slices/auth';
-import { Navigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import axios from '../axios';
 import Spinner from '../Components/Spinner';
 import { Card, Button, Typography } from 'antd';
@@ -55,7 +55,10 @@ const PersonalPage = () => {
       window.location.reload();
     }
   };
-
+  const navigate = useNavigate();
+ const handleEdit=(recipeId)=>{
+  navigate(`/details/${recipeId}/edit`)
+ }
   if (loading) {
     return <Spinner loading={loading} />;
   }
@@ -93,7 +96,7 @@ const PersonalPage = () => {
           <h1 style={{textAlign:"center", marginTop:"40px", marginBottom:"30px"}}>Recipes</h1>
           <div className="col-12 p-3">
             <div className="row">
-              {data.map((recipe) => (
+              {data.map((recipe) => ( <Link to={`/details/${recipe._id}`}>
                 <div className="col-6 mb-3" key={recipe._id}>
                   <div className="card" style={{backgroundColor:"transparent"}}>
                     <div className="row g-0">
@@ -105,13 +108,13 @@ const PersonalPage = () => {
                         <div className="card-body">
                           <h5 className="card-title">{recipe.title}</h5>
                           <FontAwesomeIcon icon={faPenToSquare}
-                        style={{color:"white", marginRight:"15px"}}/>
+                        style={{color:"white", marginRight:"15px"}} onClick={()=> handleEdit(recipe._id)}/>
                         <FontAwesomeIcon icon={faRectangleXmark} onClick={() => handleDeleteRecipe(recipe._id)} style={{color:"white"}}/>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
+                </div></Link> 
               ))}
             </div>
           </div>
