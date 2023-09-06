@@ -83,7 +83,7 @@ const CustomCarousel = () => {
       hoverable
       style={{backgroundColor:"transparent", margin:"0 15px"}}
     >
-      <Card.Meta title={category.name} />
+      <Card.Meta title={category.name} style={{textAlign:"center"}} />
     </Card>
   </Link>
 ))}

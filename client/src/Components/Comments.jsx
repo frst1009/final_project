@@ -5,11 +5,13 @@ import moment from 'moment';
 import { fetchLogin, selectIsAuth } from '../redux/slices/auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faX } from '@fortawesome/free-solid-svg-icons';
+import axios from "../axios";
 
 function Comments({ recipeId }) {
   const isAuth = useSelector(selectIsAuth);
   const dispatch = useDispatch();
   const [comment, setComment] = useState('');
+  const [editComment, setEditComment] = useState(null);
   const { recipes } = useSelector((state) => state.recipes);
   const currentUser = useSelector((state) => state.auth.data);
   useEffect(() => {
@@ -34,12 +36,38 @@ function Comments({ recipeId }) {
       }
     }
   };
+  const handleDeleteComment = async (commentId) => {
+    if (window.confirm('Are you sure you want to delete this comment?')) {
+      try {
+        // Assuming you have a route to delete comments by commentId
+        await axios.delete(`/api/recipe/${recipeId}/comments/${commentId}`);
+        // After successful deletion, refresh the comments by fetching recipes
+        dispatch(fetchRecipes());
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
+  const handleEditComment = (commentId) => {
+    setEditComment(commentId);
+  };
+  
+  const handleSaveEditComment = async (commentId) => {
+    try {
+      await axios.put(`/api/recipe/${recipeId}/comments/${commentId}`, { comment: comment });
+      setEditComment(null);
+      dispatch(fetchRecipes());
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
 
   return (
     <div className="card mb-3 products">
       <div className="card-header">Comments</div>
       {isAuth ? (
-                    <> <div className="card-body">
+                    <> <div>
         <div className="mb-3">
           <textarea
             className="form-control"
@@ -47,32 +75,64 @@ function Comments({ recipeId }) {
             placeholder="Write a comment..."
             value={comment}
             onChange={(e) => setComment(e.target.value)}
+            style={{backgroundColor:"#ffe5d5"}}
           ></textarea>
         </div>
         <button className="btn" id='button-link' onClick={handleCommentSubmit}>
           Submit
         </button>
       </div></>):(<>{" "}</>)}
-      <ul className="list-group list-group-flush">
-        {/* Comment List */}
-        {currentRecipe && currentRecipe.comments.map((obj) => (
-          <li className="list-group-item comment-div" key={obj._id}>
-            <div className="d-flex">
-              <div className="flex-grow-1 ">
-                <p>User: {obj.username}</p>
-                <p>{obj.comment}</p>
+<ul className="list-group list-group-flush">
+  {currentRecipe &&
+    currentRecipe.comments.map((obj) => (
+      <li className="list-group-item comment-div" key={obj._id}>
+        <div className="d-flex">
+          <div className="flex-grow-1">
+            <p>User: {obj.username}</p>
+            {editComment === obj._id ? (
+              <textarea
+                className="form-control"
+                rows="3"
+                value={comment} 
+                style={{backgroundColor:"transparent"}}
+                onChange={(e) => setComment(e.target.value)}
+              ></textarea>
+            ) : (
+              <p>{obj.comment}</p>
+            )}
+          </div>
+          <div>
+            <p>
+              Posted: <p>{moment(obj.createdAt).format("DD/MM/YYYY")}</p>
+            </p>
+          </div>
+          {currentUser && currentUser.user && currentUser.user._id === obj.user && (
+            <>
+              <div style={{ display: "flex", alignItems: "center", flexDirection: "column", margin: "0 0 0 20px" }}>
+                <FontAwesomeIcon
+                  icon={faX}
+                  style={{ color: "white", marginBottom: "5px" }}
+                  onClick={() => handleDeleteComment(obj._id)}
+                />
+                {editComment === obj._id ? (
+                  <button className="btn" onClick={() => handleSaveEditComment(obj._id)} style={{color:"white"}}>
+                    Save
+                  </button>
+                ) : (
+                  <FontAwesomeIcon
+                    icon={faEdit}
+                    style={{ color: "white" }}
+                    onClick={() => handleEditComment(obj._id)}
+                  />
+                )}
               </div>
-              <div>
-                <p>Posted: <p>{moment(obj.createdAt).format("DD/MM/YYYY")}</p></p>
-              </div>
-              {currentUser && currentUser.user && currentUser.user._id===obj.user && (<>
-                <div style={{display:"flex", alignItems:"center", flexDirection:"column", margin:"0 0 0 20px" }}><FontAwesomeIcon icon={faX} style={{color:"white", marginBottom: "5px"}}/><FontAwesomeIcon icon={faEdit} style={{color:"white"}}/></div>
-              </>)
-              }
-            </div>
-          </li>
-        ))}
-      </ul>
+            </>
+          )}
+        </div>
+      </li>
+    ))}
+</ul>
+
     </div>
   );
 }

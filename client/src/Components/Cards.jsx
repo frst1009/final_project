@@ -105,7 +105,7 @@ const Cards = ({recipeData, isPostsLoading}) => {
                             ? obj.title.substring(0, 10) + "..."
                             : obj.title}
                         </h3>
-                        <i>Created by {obj.user.username}</i>
+                        <i>Created by {obj.user?.username}</i>
                         {/* <div>
                           <p className="card-description">
                             {obj.instructions.length > 20

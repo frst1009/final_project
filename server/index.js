@@ -47,11 +47,13 @@ app.get("/api/recipe/category", RecipeController.categories);
 app.get("/api/recipe/search", RecipeController.searchByTitle);
 app.get("/api/recipe/userRecipe", tokenAuth,RecipeController.recipeOfUser);
 app.post("/api/recipe/like/:id",tokenAuth, RecipeController.hanldlelike);
+app.get("/api/recipe/populars", RecipeController.getpopulars);
 app.get("/api/recipe/:id", RecipeController.getById);
 app.delete("/api/recipe/:id",tokenAuth, RecipeController.deleterecipe);
 app.patch("/api/recipe/:id", postCreateValidation, validationError, RecipeController.update);
 app.post("/api/recipe/:id/comments",tokenAuth, RecipeController.comments);
 app.delete("/api/recipe/:id/comments/:commentId",tokenAuth, RecipeController.deleteComment);
+app.put("/api/recipe/:id/comments/:commentId",tokenAuth, RecipeController.editComment);
 
 
 app.post("/api/user/register",registerValidation, validationError, UserController.register);

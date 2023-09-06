@@ -152,7 +152,7 @@ if(isAuth){
                         )}
                     </div>
                     <div className="d-flex justify-content-between align-items-center mb-3">
-                      <p>
+                      <p className='text-center'>
                         Have an account?
                       </p>
                       <Link to="/login" className="form-link">

@@ -72,7 +72,7 @@ const PersonalPage = () => {
     <div className="container-xxl">
       <div className="row">
         <div className="col-md-12">
-          <Card style={{background:"url(https://st4.depositphotos.com/11601342/19648/v/450/depositphotos_196487286-stock-illustration-vector-fast-food-pattern-word.jpg)"}}>
+          <Card style={{backgroundColor:"#4d233f12"}}>
             <div className="d-flex flex-column align-items-center">
               <img
                 src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
@@ -105,11 +105,11 @@ const PersonalPage = () => {
  alt="" className="img-fluid rounded-start" />
                       </div>
                       <div className="col-md-8">
-                        <div className="card-body">
+                        <div style={{display:"flex", justifyContent: "start", flexDirection:"column", margin:"30px"}}>
                           <h5 className="card-title">{recipe.title}</h5>
-                          <FontAwesomeIcon icon={faPenToSquare}
+                          <div><FontAwesomeIcon icon={faPenToSquare}
                         style={{color:"white", marginRight:"15px"}} onClick={()=> handleEdit(recipe._id)}/>
-                        <FontAwesomeIcon icon={faRectangleXmark} onClick={() => handleDeleteRecipe(recipe._id)} style={{color:"white"}}/>
+                        <FontAwesomeIcon icon={faRectangleXmark} onClick={() => handleDeleteRecipe(recipe._id)} style={{color:"white"}}/></div>
                         </div>
                       </div>
                     </div>

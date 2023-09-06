@@ -424,10 +424,10 @@ font-size: 14px;
     }
 
 } */
-.card-body textarea{
-background-color: var(--search) !important;  
-}
 
+.card .card-body{
+  background-color: var(--search);
+}
 /* header */
 #basic-addon2{
 background-color: transparent;
@@ -544,16 +544,17 @@ height: 40px;
 .login-wrapper .form-link{
 font-size: 14px;
 transition: 0.5s ease;
+color:var(--lighter);
 }
 
 .login-wrapper .form-link:hover{
-color: var(--search);
+color: var(--additional);
 }
 
 .login-wrapper button{
 font-size: 18px;
 padding: 12px 24px;
-background-color: var(--search);
+background-color: var(--primary1);
 color: white;
 border: 1px solid transparent;
 transition: 0.5s ease;
@@ -582,9 +583,13 @@ color: var(--primary1);
   color: white;
 }
 }
+.password-toggle-icon{
+  margin: auto 10px auto -30px;
 
+}
 .password-input input{
 border-style: none;
+
 }
 .password-input{
   display: flex;

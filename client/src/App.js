@@ -13,6 +13,8 @@ import PersonalPage from "./Pages/PersonalPage";
 import ForgotPass from "./Pages/ForgotPass";
 import Changepassword from "./Pages/ChangePassword";
 import CategoryPage from "./Pages/CategoryPage";
+import Populars from "./Pages/Populars";
+import About from "./Pages/AboutPage";
 
 
 function App() {
@@ -36,6 +38,9 @@ function App() {
           <Route path='forgotpassword' element={<ForgotPass/>}/>
           <Route path='personalpage' element={<PersonalPage/>}/>
           <Route path='category/:category' element={<CategoryPage/>}/>
+          <Route path='populars' element={<Populars/>}/>
+          <Route path='about' element={<About/>}/>
+          
           </Route>
         </Routes>
     </>

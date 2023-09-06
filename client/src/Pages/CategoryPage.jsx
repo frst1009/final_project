@@ -4,7 +4,8 @@
 import Cards from "../Components/Cards";
   const CategoryPage = () => {
     const [loading, setLoading] = useState(true);
-    const [recipes, setRecipes] = useState([]); // Renamed from `data` to `recipes`
+    const [recipes, setRecipes] = useState([]);
+    
     const { category } = useParams(); 
     useEffect(() => {
       const fetchData = async () => {

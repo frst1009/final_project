@@ -88,7 +88,17 @@ const Header = () => {
                       Home
                     </NavLink>
                   </div>
-
+                  <div className="ms-auto gap-3">
+                    <NavLink
+                      to="/populars"
+                      className={
+                        location.pathname === "/populars" ? "active" : "not-active"
+                      }
+                      onClick={toggleMenu}
+                    >
+                      Populars
+                    </NavLink>
+                  </div>
                   {isAuth ? (
                     <>
                       <div className="ms-auto gap-3">
@@ -201,6 +211,17 @@ const Header = () => {
                       onClick={toggleMenu}
                     >
                       Home
+                    </NavLink>
+                  </div>
+                  <div className="mb-2">
+                    <NavLink
+                      to="/populars"
+                      className={
+                        location.pathname === "/populars" ? "active" : "not-active"
+                      }
+                      onClick={toggleMenu}
+                    >
+                      Populars
                     </NavLink>
                   </div>
                   {isAuth ? (

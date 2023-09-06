@@ -87,7 +87,7 @@ if(isAuth){
         )}
       </div>
                   <div className="d-flex justify-content-between align-items-center mb-3">
-                    <p className="m-0">Forgot Password?</p>
+                    <p className="m-0 text-center" >Forgot Password?</p>
                     <Link to="/forgotpassword" className="form-link">
                      Click here!
                     </Link>

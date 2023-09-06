@@ -22,6 +22,9 @@ todo
 9.add functionality to add avartar
 10.get all the recipes by categories and tags---half done
 11.delete update posts, userinfo---done
+12.weird thing happens to burger menu when i switch to responsive
+13.newly added ones are coming first---done
+
 
 maybes
 1.all recipes

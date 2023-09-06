@@ -24,7 +24,7 @@ const RecipeController = {
   },
   getAll: async (req, res) => {
     try {
-      const recipes = await Recipe.find().populate("user").exec();
+      const recipes = await Recipe.find().populate("user").sort({ createdAt: -1 }).exec();
 
       res.status(200).json(recipes);
     } catch (error) {
@@ -75,6 +75,19 @@ const RecipeController = {
       res.json({ msg: error.message, liked: false });
     }
   },
+getpopulars: async (req, res) => {
+  try {
+    const popularRecipes = await Recipe.find().populate("user")
+      .sort({ likes: -1 })
+      .limit(50)
+      .exec();
+
+    res.status(200).json(popularRecipes);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+},
+
   deleterecipe: async (req, res) => {
     try {
       const recipeId = req.params.id;
@@ -126,6 +139,8 @@ const RecipeController = {
       });
     }
   },
+
+// comments
   comments: async (req, res) => {
     try {
       const { comment} = req.body;
@@ -173,20 +188,48 @@ deleteComment: async (req, res) => {
       return res.status(404).json({ message: 'Comment not found' });
     }
     if (commentToDelete.user.toString() !== userId) {
-      return res.status(403).json({ message: 'Permission denied' });
+      return res.status(403).json({ message: 'Can not delete comment!' });
     }
     recipe.comments.pull(commentToDelete);
     await recipe.save();
 
-    res.status(200).json({ message: 'Comment deleted successfully' });
+    res.status(200).json({ message: 'Comment was deleted successfully!' });
   } catch (error) {
     console.error(error.message);
-    res.status(500).json({ message: 'Failed to delete comment' });
+    res.status(500).json({ message: 'Could not delete comment!' });
   }
 
 },
+editComment: async(req,res)=>{
+try {
+  const { comment } = req.body;
+  const commentId = req.params.commentId;
+  const recipeId = req.params.id;
+  const userId = req.userId;
+  const recipe = await Recipe.findById(recipeId);
+  if (!recipe) {
+    return res.status(404).json({ message: "Recipe not found" });
+  }
+  const editedComment = recipe.comments.find((c) => c._id.toString() === commentId);
+  if (!editedComment) {
+    return res.status(404).json({ message: "Comment not found" });
+  }
+  if (editedComment.user.toString() !== userId) {
+    return res.status(403).json({ message: "You are not authorized to edit this comment" });
+  }
+  editedComment.comment = comment;
+  await recipe.save();
 
-
+  res.status(200).json({
+    msg: "Comment edited successfully",
+    comment: editedComment,
+  });
+} catch (error) {
+  console.error(error.message);
+  res.status(500).json({ msg: "Failed to edit comment" });
+}
+},
+// comments
   tags: async (req, res) => {
     try {
       const recipe = await Recipe.find().limit(5).exec();
@@ -210,7 +253,7 @@ deleteComment: async (req, res) => {
   categories: async (req, res) => {
     try {
       const selectedCategory = req.query.category;
-      const recipes = await Recipe.find({ category: selectedCategory });
+      const recipes = await Recipe.find({ category: selectedCategory }).populate("user").exec();
   
       res.status(200).json(recipes);
     } catch (error) {
