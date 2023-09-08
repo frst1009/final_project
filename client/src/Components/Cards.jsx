@@ -102,11 +102,11 @@ const Cards = ({recipeData, isPostsLoading}) => {
                     </div>
                     <div className="card-content">
                       <Link to={`/details/${obj._id}`}>
-                        <h3 className="card-title">
-                          {obj.title.length > 10
-                            ? obj.title.substring(0, 10) + "..."
+                        <h5 className="card-title">
+                          {obj.title.length > 20
+                            ? obj.title.substring(0, 20) + "..."
                             : obj.title}
-                        </h3>   </Link>
+                        </h5>   </Link>
                        <div> <p>Cooking Time: {obj.cookingTime}min</p></div>
                         <i>Created by {obj.user?.username}</i>
                         {/* <div>

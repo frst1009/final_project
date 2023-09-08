@@ -42,13 +42,13 @@ app.post('/upload', tokenAuth, upload.single('image'), (req, res) => {
   
 app.post("/api/recipe/add",tokenAuth, postCreateValidation, validationError, RecipeController.add)
 app.get("/api/recipe/", RecipeController.getAll);
-app.get("/api/recipe/tags", RecipeController.tags);
+app.get("/api/recipe/alltags", RecipeController.tags);
+app.get("/api/recipe/tags/:tag", RecipeController.gettags);
 app.get("/api/recipe/category", RecipeController.categories);
 app.get("/api/recipe/search", RecipeController.searchByTitle);
 app.get("/api/recipe/userRecipe", tokenAuth,RecipeController.recipeOfUser);
 app.post("/api/recipe/like/:id",tokenAuth, RecipeController.hanldlelike);
 app.get("/api/recipe/populars", RecipeController.getpopulars);
-app.get("/api/recipes/tag", RecipeController.gettags);
 app.get("/api/recipe/:id", RecipeController.getById);
 app.delete("/api/recipe/:id",tokenAuth, RecipeController.deleterecipe);
 app.patch("/api/recipe/:id", postCreateValidation, validationError, RecipeController.update);

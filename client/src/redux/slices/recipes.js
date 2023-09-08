@@ -7,7 +7,7 @@ export const fetchRecipes = createAsyncThunk( "recipe/fetchRecipes", async () =>
   }
 );
 export const fetchTags = createAsyncThunk("recipe/fetchTags", async () => {
-  const { data } = await axios.get("/api/recipe/tags");
+  const { data } = await axios.get("/api/recipe/alltags");
   return data;
 });
 export const commentsAdd = createAsyncThunk("recipe/comments", async ({ recipeId, comment }) => {

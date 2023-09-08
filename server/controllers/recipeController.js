@@ -28,7 +28,6 @@ const RecipeController = {
 
       res.status(200).json(recipes);
     } catch (error) {
-      
       res
         .status(500)
         .json({ error: "An error occurred while retrieving recipes." });
@@ -250,20 +249,20 @@ try {
     }
   },
 
-gettags: async (req, res) => {
-  try {
-    const tag = req.params.tag;
-    const recipes = await Recipe.find({ tags: tag }).populate("user").exec();
-
-    res.status(200).json(recipes);
-  } catch (err) {
-    console.log(err);
-    res.status(500).json({
-      error: err.message,
-    });
-  }
-},
-
+  gettags: async (req, res) => {
+    try {
+      const tag = req.params.tag;
+      const recipes = await Recipe.find({ tags: { $in: [tag] } }).populate("user").exec();
+  
+      res.status(200).json(recipes);
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({
+        error: err.message,
+      });
+    }
+  },
+  
   categories: async (req, res) => {
     try {
       const selectedCategory = req.query.category;

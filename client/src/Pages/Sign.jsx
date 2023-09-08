@@ -30,7 +30,7 @@ const Signup = () => {
   const onSubmit = async (values) => {
     const data = await dispatch(fetchRegister(values))
 if(!data.payload){
-  return alert("Cant register!");
+  return alert("Registration failed. Please check your data and try again.");
 }
     if('token' in data.payload){
   window.localStorage.setItem('token', data.payload.token)

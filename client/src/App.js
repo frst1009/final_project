@@ -41,7 +41,7 @@ function App() {
           <Route path='personalpage' element={<PersonalPage/>}/>
           <Route path='category/:category' element={<CategoryPage/>}/>
           <Route path='populars' element={<Populars/>}/>
-          <Route path='tags/:tags' element={<TagsPage/>}/>
+          <Route path='tags/:tag' element={<TagsPage/>}/>
           {/* <Route path='edit' element={<EditProfileComponent/>}/> */}
           </Route>
         </Routes>

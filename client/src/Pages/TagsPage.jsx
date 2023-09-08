@@ -11,7 +11,7 @@ const TagsPage = () => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(`/api/recipe/?tag=${tag}`);
+        const response = await axios.get(`/api/recipe/tags/${tag}`);
         console.log(response.data);
         setRecipes(response.data); 
         setLoading(false);

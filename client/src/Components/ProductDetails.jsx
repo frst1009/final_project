@@ -2,9 +2,10 @@
 /* eslint-disable no-unused-vars */
 import axios from "../axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Spinner from "./Spinner";
 import Comments from "./Comments";
+import TagBubble from "./TagBubbles";
 
 const ProductDetails = () => {
   const [data, setData] = useState();
@@ -65,8 +66,13 @@ const ProductDetails = () => {
       <li key={index} className="mb-2">{ingredient}</li>
     ))}
           </ul>
-
+          <h2>Instructions</h2>
           <p className="card-text mb-3">{data.instructions}</p>
+          <ul>
+          {data.tags.map((tag, index) => (
+      <Link to={`/tags/${tag}`}><li key={index} className="mb-2">#{tag}</li></Link>
+    ))}
+          </ul>
           {/* Comment Section */}
         </div>{" "}
         <Comments recipeId={id}/>
