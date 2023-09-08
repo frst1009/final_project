@@ -58,6 +58,7 @@ const ProductDetails = () => {
       <div className="row">
         <div className="col-lg-12" >
         <div className="card p-5 m-auto products">
+        <h2 style={{margin:"auto"}}>Time to make: {data.cookingTime}min</h2>
           <h2>Ingredients</h2>
           <ul>
           {data.ingredients.map((ingredient, index) => (

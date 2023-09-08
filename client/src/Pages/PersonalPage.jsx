@@ -74,16 +74,10 @@ const PersonalPage = () => {
         <div className="col-md-12">
           <Card style={{backgroundColor:"#4d233f12"}}>
             <div className="d-flex flex-column align-items-center">
-              <img
-                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
-                alt="Profile Image"
-                className="mt-4 mb-2 img-thumbnail"
-                style={{ width: '150px', zIndex: '1' }}
-              />
               <Button outline color="dark" style={{ height: '36px', overflow: 'visible' }}>
                 Edit Profile
               </Button>
-              <Typography.Title level={5} className="mt-3">
+              <Typography.Title level={5} className="mt-3" style={{color:"white"}}>
                 {currentUser && currentUser.user && currentUser.user.username}
               </Typography.Title>
               <Typography.Text>Email Address</Typography.Text>
@@ -96,7 +90,7 @@ const PersonalPage = () => {
           <h1 style={{textAlign:"center", marginTop:"40px", marginBottom:"30px"}}>Recipes</h1>
           <div className="col-12 p-3">
             <div className="row">
-              {data.map((recipe) => ( <Link to={`/details/${recipe._id}`}>
+              {data.map((recipe) => ( 
                 <div className="col-6 mb-3" key={recipe._id}>
                   <div className="card" style={{backgroundColor:"transparent"}}>
                     <div className="row g-0">
@@ -106,7 +100,7 @@ const PersonalPage = () => {
                       </div>
                       <div className="col-md-8">
                         <div style={{display:"flex", justifyContent: "start", flexDirection:"column", margin:"30px"}}>
-                          <h5 className="card-title">{recipe.title}</h5>
+                        <Link to={`/details/${recipe._id}`}><h5 className="card-title">{recipe.title}</h5></Link>  
                           <div><FontAwesomeIcon icon={faPenToSquare}
                         style={{color:"white", marginRight:"15px"}} onClick={()=> handleEdit(recipe._id)}/>
                         <FontAwesomeIcon icon={faRectangleXmark} onClick={() => handleDeleteRecipe(recipe._id)} style={{color:"white"}}/></div>
@@ -114,7 +108,7 @@ const PersonalPage = () => {
                       </div>
                     </div>
                   </div>
-                </div></Link> 
+                </div>
               ))}
             </div>
           </div>

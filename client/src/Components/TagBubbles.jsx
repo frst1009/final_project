@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTags } from '../redux/slices/recipes';
+import { Link } from 'react-router-dom';
 
 const TagBubble = () => {
     const dispatch = useDispatch();
@@ -8,12 +9,13 @@ const TagBubble = () => {
     useEffect(() => {
         dispatch(fetchTags());
       }, []);
+
   return (
     <section className='tags-section'><div className="tag-bubble-container">
      {tags.items.map((tag, index)  => (
-                <span key={index} className="tag-bubble">
+            <Link to={`/tags/${tag}`}><span key={index} className="tag-bubble">
                     #{tag}
-                </span>
+                </span></Link>    
             ))}
     </div></section>
     

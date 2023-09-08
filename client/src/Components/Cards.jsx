@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faComment, faHeart, faPenToSquare, faRectangleXmark, faXmarkCircle } from "@fortawesome/free-regular-svg-icons";
 import axios from "../axios";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchRecipes, fetchRemoveRecipe } from "../redux/slices/recipes";
+import { fetchRecipes, fetchRemoveRecipe, likeRecipe } from "../redux/slices/recipes";
 import { fetchLogin, selectIsAuth } from "../redux/slices/auth";
 
 const Cards = ({recipeData, isPostsLoading}) => {
@@ -62,7 +62,9 @@ const Cards = ({recipeData, isPostsLoading}) => {
       console.error("An error occurred:", error);
     }
   };
-
+  // const handleLike = (recipeId, liked) => {
+  //   dispatch(likeRecipe({ recipeId, liked }));
+  // };
   return (
     <section className="recipe-cards p-5">
       <div
@@ -104,7 +106,8 @@ const Cards = ({recipeData, isPostsLoading}) => {
                           {obj.title.length > 10
                             ? obj.title.substring(0, 10) + "..."
                             : obj.title}
-                        </h3>
+                        </h3>   </Link>
+                       <div> <p>Cooking Time: {obj.cookingTime}min</p></div>
                         <i>Created by {obj.user?.username}</i>
                         {/* <div>
                           <p className="card-description">
@@ -113,7 +116,8 @@ const Cards = ({recipeData, isPostsLoading}) => {
                               : obj.instructions}
                           </p>
                         </div> */}
-                      </Link>
+                      
+                   
                       <div className="card-content-icon">
                       {isAuth ? (
     <FontAwesomeIcon

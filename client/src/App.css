@@ -110,6 +110,9 @@ label {
 .custom-card .ant-card-meta-title {
   color: var(--search);
 }
+.ant-typography{
+  color:white;
+}
 .custom-card:hover {
   transform: translateY(-5px) scale(1.02);
   box-shadow: 0 4px 8px var(--additional);
@@ -151,7 +154,7 @@ object-position: center top; /* Center the image horizontally */
 }
 .card-title {
   font-weight: bold;
-  margin-bottom: 30px;
+  margin-bottom: 5px;
   /* text-align: center; */
   color:var(--search)
 }
@@ -183,6 +186,9 @@ font-weight: 500;
 text-decoration: inherit;
 transition: 0.5s ease;
 color:var(--search)
+}
+a:hover{
+  color:var(--lighter);
 }
 .active{
   text-decoration: underline;
@@ -246,7 +252,12 @@ left: 10px;
 border: none;
 top: 12px;
 }
-
+.banner_additional{
+  background: url("https://www.sodhatravel.com/hs-fs/hubfs/North%20India%20Food%20Collage.jpg?width=5120&name=North%20India%20Food%20Collage.jpg");
+  background-size: cover; 
+  height: 10rem;
+  margin-top: 50px;
+}
 .banner{
   background: url("https://jooinn.com/images/table-with-food-5.jpg");
   /* background-image: url(./Components/img/1619242838_57-phonoteka_org-p-fon-dlya-menyu-fast-fuda-65.jpg); */
@@ -328,38 +339,6 @@ color: var(--primary1);
 }
 /* home */
 
-@media only screen and (max-width: 768px) {
-
-h1{
-  font-size: 30px;
-  font-weight: 500;
-}
-.banner .back-details {
-  height: auto;
-  background-position: center;
-  padding: 50px;
-  align-items: center;
-  text-align: center;
-}
-
-.banner .back-details h1 {
-  font-size: 36px;
-}
-
-.banner .back-details h2 {
-  font-size: 24px;
-}
-}
-@media (min-width: 768px) and (max-width: 1000px) {
-
-  .recipe-cards  h3{
-    font-size: 18px;
-  }
-.card-image{
-  height: 200px;
-}
-
-}
 
 .recipe-cards .card img{
 min-height: 180px;
@@ -406,6 +385,8 @@ border: 1px solid var(--darker);
 justify-content: center;
 align-items: center;
 margin-bottom: 30px;
+margin-top: 30px;
+
 }
 /* tagbubbles */
 /* .card .card-body{
@@ -427,6 +408,7 @@ font-size: 14px;
 
 .card .card-body{
   background-color: var(--search);
+  font-size: 10px;
 }
 /* header */
 #basic-addon2{
@@ -573,16 +555,6 @@ color: var(--primary1);
   color: var(--search);
 }
 
-@media (max-width: 768px) {
-
-.logo{
-  padding:0;
-}
-
-.banner h1, p{
-  color: white;
-}
-}
 .password-toggle-icon{
   margin: auto 10px auto -30px;
 
@@ -595,3 +567,42 @@ border-style: none;
   display: flex;
   justify-content: space-between;
 }
+@media only screen and (max-width: 768px) {
+
+  h1{
+    font-size: 30px;
+    font-weight: 500;
+  }
+  .banner .back-details {
+    height: auto;
+    background-position: center;
+    padding: 50px;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .banner .back-details h1 {
+    font-size: 36px;
+  }
+  
+  .banner .back-details h2 {
+    font-size: 24px;
+  }
+  .logo{
+    padding:0;
+  }
+  
+  .banner h1, p{
+    color: white;
+  } 
+  }
+  @media (min-width: 768px) and (max-width: 1000px) {
+  
+    .recipe-cards  h3{
+      font-size: 18px;
+    }
+  .card-image{
+    height: 200px;
+  }
+  
+  }

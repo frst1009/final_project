@@ -6,6 +6,8 @@ import { faSearch, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from '../axios';
 import { useSelector } from 'react-redux';
+import Additional from '../Components/Additional';
+import TagBubble from '../Components/TagBubbles';
 const Home = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -41,7 +43,7 @@ console.log(recipes);
             <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
               <div className="carousel-inner">
                   <div className='back-details'>
-                  <h1 >Recipe Heaven</h1>
+                  <h1 >Cooking Monsters</h1>
                   <h2 >You totally know where good food recipes located!</h2>
                 <div className="search-container">
       <div className="input-group d-none d-md-flex">
@@ -87,6 +89,8 @@ console.log(recipes);
   </section>
   <CustomCarousel /> 
   <Cards recipeData={recipes.items} isPostsLoading={isPostsLoading}/>
+  <Additional/>
+  <TagBubble/>
   <section className="replies p-5">
   <div className="container-xxl">
     <div className="row">

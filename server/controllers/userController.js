@@ -7,7 +7,7 @@ const crypto = require("crypto");
 
 const UserController = {
   register: async (req, res) => {
-    const { username, email, password, confirmpassword, profilepicture } = req.body;
+    const { username, email, password, confirmpassword} = req.body;
     try {
       const data = await User.findOne({ email: email, username: username });
       if (data) {
@@ -20,7 +20,6 @@ const UserController = {
           username: username,
           password: hashedPassword,
           confirmpassword: hashedPassword,
-          profilepicture: profilepicture,
         });
 
         await newUser.save();

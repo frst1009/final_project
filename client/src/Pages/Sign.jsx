@@ -25,23 +25,10 @@ const Signup = () => {
 		},
 		mode: 'onChange',
 	});
-  // const handleChangeFile = async (event) => {
-  //   try {
-  //     const formData = new FormData();
-  //     const file = event.fileList[0].originFileObj;
-  //     formData.append("image", file);
-  //     const { data } = await axios.post("/upload", formData);
-  //     console.log(data);
-  //    setImage(data.url);
-  //   } catch (error) {
-  //     console.error("Error in file upload:", error);
-  //     alert("Error uploading image. Please try again.");
-  //   }
-  // };
+
   
   const onSubmit = async (values) => {
     const data = await dispatch(fetchRegister(values))
-    // Dispatch the fetchUserData action to initiate the login process
 if(!data.payload){
   return alert("Cant register!");
 }
@@ -64,30 +51,6 @@ if(isAuth){
                   <h2 className="text-center">Sign Up</h2>
                   <p className="text-center mb-3">Join us in this adventure to heavenly taste!!</p>
                   <form onSubmit={handleSubmit(onSubmit)}>
-                  {/* <label htmlFor="profileImage" className="form-label mb-3">
-  Choose Your Profile Image
-</label>
-<div className='mb-3' style={{display:"flex", justifyContent:"center"}}>
-<Upload
-                      name="image"
-                      action="/upload"
-                      accept="image/*"
-                      showUploadList={false}
-                      onChange={handleChangeFile}
-                    >
-                      <Space direction="vertical" size={16}>
-                        <Space wrap size={16}>
-                          <Avatar
-                            size={64}
-                            icon={<UserOutlined />}
-                            src={image}
-                            style={{ cursor: 'pointer' }}
-                          />
-                        </Space>
-                      </Space>
-                    </Upload>
-</div> */}
-
                     <div className="mb-3">
                       <label htmlFor="email" className="form-label mb-3">
                         Enter Your Email address

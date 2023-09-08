@@ -19,6 +19,14 @@ export const commentsAdd = createAsyncThunk("recipe/comments", async ({ recipeId
 );
 export const fetchRemoveRecipe = createAsyncThunk("recipe/remove", async (id) => await axios.delete(`/api/recipe/${id}`),
 );
+// export const likeRecipe = createAsyncThunk(
+//   "recipe/likeRecipe",
+//   async ({ recipeId, liked }) => {
+//       const response = await axios.post(`/api/recipe/like/${recipeId}`,
+//         liked,);
+//         return response; 
+//   }
+// );
 
 
 const initialState = {
@@ -67,6 +75,7 @@ const recipeSlice = createSlice({
     [fetchRemoveRecipe.pending]: (state,action) => {
       state.recipes.items = state.recipes.items.filter(obj=> obj._id!==action.meta.arg)
     },
+    
   },
 });
 export const recipeReducer = recipeSlice.reducer;

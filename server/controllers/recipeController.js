@@ -232,7 +232,7 @@ try {
 // comments
   tags: async (req, res) => {
     try {
-      const recipe = await Recipe.find().limit(5).exec();
+      const recipe = await Recipe.find().sort({ createdAt: -1 }).limit(5).exec();
 
 
       const tags = recipe
@@ -249,6 +249,20 @@ try {
       });
     }
   },
+
+gettags: async (req, res) => {
+  try {
+    const tag = req.params.tag;
+    const recipes = await Recipe.find({ tags: tag }).populate("user").exec();
+
+    res.status(200).json(recipes);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      error: err.message,
+    });
+  }
+},
 
   categories: async (req, res) => {
     try {

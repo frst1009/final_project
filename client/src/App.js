@@ -15,6 +15,8 @@ import Changepassword from "./Pages/ChangePassword";
 import CategoryPage from "./Pages/CategoryPage";
 import Populars from "./Pages/Populars";
 import About from "./Pages/AboutPage";
+import TagsPage from "./Pages/TagsPage";
+// import EditProfileComponent from "./Pages/EditUserInfo";
 
 
 function App() {
@@ -39,8 +41,8 @@ function App() {
           <Route path='personalpage' element={<PersonalPage/>}/>
           <Route path='category/:category' element={<CategoryPage/>}/>
           <Route path='populars' element={<Populars/>}/>
-          <Route path='about' element={<About/>}/>
-          
+          <Route path='tags/:tags' element={<TagsPage/>}/>
+          {/* <Route path='edit' element={<EditProfileComponent/>}/> */}
           </Route>
         </Routes>
     </>

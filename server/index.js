@@ -48,6 +48,7 @@ app.get("/api/recipe/search", RecipeController.searchByTitle);
 app.get("/api/recipe/userRecipe", tokenAuth,RecipeController.recipeOfUser);
 app.post("/api/recipe/like/:id",tokenAuth, RecipeController.hanldlelike);
 app.get("/api/recipe/populars", RecipeController.getpopulars);
+app.get("/api/recipes/tag", RecipeController.gettags);
 app.get("/api/recipe/:id", RecipeController.getById);
 app.delete("/api/recipe/:id",tokenAuth, RecipeController.deleterecipe);
 app.patch("/api/recipe/:id", postCreateValidation, validationError, RecipeController.update);
