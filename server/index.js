@@ -16,8 +16,17 @@ const multer = require("multer");
 const fs = require("fs")
 
 
-
-
+const avatarStorage = multer.diskStorage({
+  destination: (_, __, cb) => {
+    if (!fs.existsSync('avatars')) {
+      fs.mkdirSync('avatars');
+    }
+    cb(null, 'avatars');
+  },
+  filename: (_, file, cb) => {
+    cb(null, file.originalname);
+  },
+});
 
 const storage = multer.diskStorage({
     destination: (_, __, cb) => {
@@ -30,9 +39,17 @@ const storage = multer.diskStorage({
       cb(null, file.originalname);
     },
   });
-  const upload = multer({ storage });
+  const uploadAvatar = multer({ storage: avatarStorage }).single('avatar');
+  const uploadRecipeImage = multer({ storage }).single('image');
   app.use("/uploads", express.static("uploads"));
-app.post('/upload', tokenAuth, upload.single('image'), (req, res) => {
+  app.use("/avatars", express.static("avatars"));
+  app.post('/upload-avatar', uploadAvatar, (req, res) => {
+    console.log("Avatar Original Name:", req.file.originalname);
+    res.json({
+      url: `/avatars/${req.file.originalname}`,
+    });
+  });
+app.post('/upload', tokenAuth, uploadRecipeImage, (req, res) => {
   console.log("Original Name:", req.file.originalname);  
   res.json({
       url: `/uploads/${req.file.originalname}`,

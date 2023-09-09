@@ -7,7 +7,7 @@ const UserSchema = new mongoose.Schema({
   confirmpassword: { type: String, required: true },
   resetToken: { type: String },
   resetTokenExpiry:  { type: Date },
-  
+  avatar: { type: String}
 }, { timestamps: true } );
 
 const User = new mongoose.model("User", UserSchema);

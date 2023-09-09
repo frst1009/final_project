@@ -30,7 +30,7 @@ if(id){
   axios.get(`/api/recipe/${id}`).then(({data})=>{
     setTitle(data.title);
     setCategories(data.category);
-    setTags(data.tags.join(','));
+    setTags(data.tags);
     setCookingt(data.cookingTime);
     setIngredients(data.ingredients);
     setInstructions(data.instructions);
@@ -45,19 +45,19 @@ if(id){
       const file = event.fileList[0].originFileObj;
       formData.append("image", file);
       const { data } = await axios.post("/upload", formData);
-      // console.log(data);
+      // console.log(data.url);
      setImage(data.url);
     } catch (error) {
       alert("error in file upload!");
     }
   };
   const handleImageSelection = (event) => {
-    event.preventDefault(); // Prevent default behavior of the button
-    // Implement the logic to open the file picker dialog
+    event.preventDefault(); 
   };
   const handleCategoryChange = (values) => {
     setCategories(values);
   };
+    // const onClickRemove=()=>{setImage("")}
   const onSubmit = async(event)=>{
     event.preventDefault();
 try {
@@ -81,7 +81,7 @@ console.warn(error);
 alert('Upload error!');
 }
   }
-  const onClickRemove=()=>{setImage("")}
+
 
   if (!window.localStorage.getItem("token") && !isAuth) {
     return <Navigate to="/" />;
@@ -227,29 +227,29 @@ alert('Upload error!');
                         beforeUpload={() => false} 
                         onChange={handleChangeFile}
                       >
-                        {image && (
+                        {image ? (
                           <>
-                            <Button
+                            {/* <Button
                               icon={<FontAwesomeIcon icon={faTrashCan} />}
                               onClick={onClickRemove}
                             >
                               Delete
-                            </Button>
+                            </Button> */}
                             <div className="image-preview">
-                          <img
+                           <img
                             src={`http://localhost:3040${image}`}
                             alt=""
-                            className="img-fluid" // This class makes the image responsive
+                            className="img-fluid"
                           />
                         </div>
                           </>
-                        )}
-                          <Button
+                        ) : (<><Button
             icon={<FontAwesomeIcon icon={faImage} type="button" />}
-            onClick={handleImageSelection} // Use your custom handler here
+            onClick={handleImageSelection}
           >
             Select Image
-          </Button>
+          </Button></>)}
+                          
                       </Upload>
                     </div>
                     <div className="col-12 text-center gap-2">

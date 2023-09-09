@@ -9,7 +9,6 @@ import { fetchRegister, selectIsAuth } from '../redux/slices/auth';
 // import { UserOutlined } from '@ant-design/icons';
 
 const Signup = () => {
-  const [image, setImage] = useState("");
   const isAuth = useSelector(selectIsAuth);
 	const dispatch = useDispatch();
 	const {
@@ -21,7 +20,8 @@ const Signup = () => {
 			username: 'Morales',
 			email: 'morales@gmail.com',
 			password: 'hello',
-      confirmpassword:"hello"
+      confirmpassword:"hello",
+      avatar:""
 		},
 		mode: 'onChange',
 	});
@@ -51,6 +51,18 @@ if(isAuth){
                   <h2 className="text-center">Sign Up</h2>
                   <p className="text-center mb-3">Join us in this adventure to heavenly taste!!</p>
                   <form onSubmit={handleSubmit(onSubmit)}>
+                  <div className="mb-3">
+        <label htmlFor="image" className="form-label mb-3">
+          Upload Your Profile Image
+        </label>
+        <input
+          type="file"
+          accept="image/*"
+          className="form-control"
+          id="image"
+          {...register("avatar")}
+        />
+      </div>
                     <div className="mb-3">
                       <label htmlFor="email" className="form-label mb-3">
                         Enter Your Email address
