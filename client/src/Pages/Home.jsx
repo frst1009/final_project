@@ -99,9 +99,9 @@ console.log(recipes);
         <p className="mb-4">Look what they have to say about our site</p>
       </div>
       <div className="col-md-3 col-sm-6 mb-4">
-        <div className="card">
+        <div className="feedback">
           {/* <img src={blog1} className="card-img-top img-fluid" alt="..." /> */}
-          <div className="card-body">
+          <div className="card-feedback">
          <blockquote>"The website impresses with its clean and intuitive design. The user interface is a delight to navigate, creating a seamless experience that mirrors the harmony of flavors in a gourmet meal."</blockquote>
          <figcaption>Amelia Finch - Renowned Culinary Columnist</figcaption>
             {/* <Link to='/'>
@@ -112,8 +112,8 @@ console.log(recipes);
       </div>
 
       <div className="col-md-3 col-sm-6 mb-4">
-        <div className="card">
-          <div className="card-body">
+        <div className="feedback">
+          <div className="card-feedback">
           <blockquote>"While the content is engaging and informative, the website's layout could use some refinement. Just as a chef a more organized presentation would enhance the overall user experience."
 </blockquote>
          <figcaption>Isabella Martinez - Michelin-Starred Chef Critic
@@ -126,9 +126,9 @@ console.log(recipes);
       </div>
 
       <div className="col-md-3 col-sm-6 mb-4">
-        <div className="card">
+        <div className="feedback">
           {/* <img src={blog3} className="card-img-top img-fluid" alt="..." /> */}
-          <div className="card-body">
+          <div className="card-feedback">
           <blockquote>"This website is a digital feast for the eyes, capturing the essence of culinary artistry. The use of interactive elements mirrors the excitement of savoring a creative culinary creation."
 </blockquote>
          <figcaption>Ethan Thornton - Gourmet Magazine Editor
@@ -141,9 +141,9 @@ console.log(recipes);
       </div>
 
       <div className="col-md-3 col-sm-6 mb-4">
-        <div className="card">
+        <div className="feedback">
           {/* <img src={blog4} className="card-img-top img-fluid" alt="..." /> */}
-          <div className="card-body">
+          <div className="card-feedback">
           <blockquote>"The website's performance leaves a lot to be desired. As a front-end developer, focusing on optimizing loading times and overall responsiveness would greatly enhance user satisfaction."
 </blockquote>
          <figcaption>Jackson Reed - Digital Food Culture Blogger

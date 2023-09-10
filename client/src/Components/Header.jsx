@@ -14,6 +14,7 @@ const Header = () => {
   const location = useLocation();
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  
 
   const handleSearch = async () => {
     console.log("Handling search:", searchQuery);
@@ -46,7 +47,10 @@ const Header = () => {
     }
   };
   const toggleMenu = () => {
-    setShowMenu(!showMenu);
+    const isInputFocused = document.activeElement === document.getElementById("search-input");
+    if (!isInputFocused) {
+      setShowMenu(!showMenu);
+    }
   };
   return (
     <>
@@ -177,6 +181,7 @@ const Header = () => {
             <div className="input-group mb-3">
   <input
     type="text"
+    id="search-input" 
     value={searchQuery}
     className="form-control"
     placeholder="Recipe?..."

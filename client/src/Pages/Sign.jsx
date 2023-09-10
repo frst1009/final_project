@@ -4,11 +4,12 @@ import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Navigate } from 'react-router-dom';
 import { fetchRegister, selectIsAuth } from '../redux/slices/auth';
-// import axios from "../axios";
-// import { Avatar, Space, Upload } from 'antd';
-// import { UserOutlined } from '@ant-design/icons';
+import axios from "../axios";
+import { Avatar } from 'antd';
+import { UserOutlined } from '@ant-design/icons';
 
 const Signup = () => {
+  const [avatar, setImage] = useState("");
   const isAuth = useSelector(selectIsAuth);
 	const dispatch = useDispatch();
 	const {
@@ -21,21 +22,56 @@ const Signup = () => {
 			email: 'morales@gmail.com',
 			password: 'hello',
       confirmpassword:"hello",
-      avatar:""
+
 		},
 		mode: 'onChange',
 	});
 
   
+  
   const onSubmit = async (values) => {
-    const data = await dispatch(fetchRegister(values))
-if(!data.payload){
-  return alert("Registration failed. Please check your data and try again.");
-}
-    if('token' in data.payload){
-  window.localStorage.setItem('token', data.payload.token)
-}
-}
+    try {
+      // Create an object with the registration data
+      const registrationData = {
+        email: values.email,
+        username: values.username,
+        password: values.password,
+        confirmpassword: values.confirmpassword,
+        avatar: avatar, // Include the image
+      };
+
+      const data = await dispatch(fetchRegister(registrationData));
+
+      if (!data.payload) {
+        return alert(
+          'Registration failed. Please check your data and try again.'
+        );
+      }
+
+      if ('token' in data.payload) {
+        window.localStorage.setItem('token', data.payload.token);
+      }
+    } catch (error) {
+      console.warn(error);
+      alert('Registration error!');
+    }
+  };
+
+  const handleImageSelection = async (event) => {
+    try {
+      const formData = new FormData();
+      const file = event.target.files[0];
+      if (!file) {setImage("https://ionicframework.com/docs/img/demos/avatar.svg"); 
+    
+    } else {
+        formData.append('avatar', file);
+      const { data } = await axios.post('/upload-avatar', formData);
+      setImage(data.url);
+    }
+    } catch (error) {
+      alert('Error in image upload!');
+    }
+  };
 
 if(isAuth){
   return <Navigate to='/'/>
@@ -52,17 +88,24 @@ if(isAuth){
                   <p className="text-center mb-3">Join us in this adventure to heavenly taste!!</p>
                   <form onSubmit={handleSubmit(onSubmit)}>
                   <div className="mb-3">
-        <label htmlFor="image" className="form-label mb-3">
-          Upload Your Profile Image
+                    <input
+                      type="file"
+                      id="avatar"
+                      accept="image/*"
+                      onChange={handleImageSelection}
+                      style={{display:"none"}}
+                    />
+                       <label htmlFor="avatar" className="form-label mb-3 d-flex justify-content-center">
+                      Profile Image
+                    </label>
+                    <label htmlFor="avatar" className="avatar-label d-flex justify-content-center" >
+          <Avatar
+            size={70}
+            src={avatar ? `http://localhost:3040${avatar}` : undefined}
+            icon={avatar ? undefined : <UserOutlined />}
+          />
         </label>
-        <input
-          type="file"
-          accept="image/*"
-          className="form-control"
-          id="image"
-          {...register("avatar")}
-        />
-      </div>
+                  </div>
                     <div className="mb-3">
                       <label htmlFor="email" className="form-label mb-3">
                         Enter Your Email address

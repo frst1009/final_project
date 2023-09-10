@@ -72,7 +72,7 @@ instructions,
 image
   };
   const {data} = isEditing ? await axios.patch(`/api/recipe/${id}`,fields)
-  : await axios.post('/api/recipe/add',fields);
+  : await axios.post('/api/recipe/add',fields); 
 
   // const _id = isEditing ? id : data._id;
   navigate(`/`);

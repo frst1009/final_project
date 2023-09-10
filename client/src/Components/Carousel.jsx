@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Carousel, Card } from "antd";
 import { Link } from "react-router-dom";
+import Spinner from "./Spinner";
 
 const CustomCarousel = () => {
   const [categories, setCategories] = useState([]);
@@ -58,7 +59,7 @@ const CustomCarousel = () => {
   };
 
   if (categories.length === 0) {
-    return <div>Loading...</div>;
+    return <Spinner/>;
   }
 
   return (

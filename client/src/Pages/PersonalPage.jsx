@@ -73,10 +73,20 @@ const PersonalPage = () => {
       <div className="row">
         <div className="col-md-12">
           <Card style={{backgroundColor:"#4d233f12"}}>
-            <div className="d-flex flex-column align-items-center">
-              <Button outline color="dark" style={{ height: '36px', overflow: 'visible' }}>
+            <div className="d-flex flex-column align-items-center">  
+             <div className="mb-3">
+                      <img
+                        src={currentUser && currentUser.user && currentUser.user.avatar
+                          ? `http://localhost:3040${currentUser.user.avatar}`
+                          : 'https://static.vecteezy.com/system/resources/previews/013/331/127/original/account-avatar-dark-mode-glyph-ui-icon-personal-page-of-site-user-user-interface-design-white-silhouette-symbol-on-black-space-solid-pictogram-for-web-mobile-isolated-illustration-vector.jpg'}
+                        alt="Selected Image"
+                        className="img-thumbnail"
+                        style={{ maxWidth: '120px', height:"120px",objectFit: 'cover' }}
+                      />
+                    </div>
+              {/* <Button outline color="dark" style={{ height: '36px', overflow: 'visible' }}>
                 Edit Profile
-              </Button>
+              </Button> */}
               <Typography.Title level={5} className="mt-3" style={{color:"white"}}>
                 {currentUser && currentUser.user && currentUser.user.username}
               </Typography.Title>
@@ -84,6 +94,7 @@ const PersonalPage = () => {
               <Typography.Paragraph className="font-italic">
                 {currentUser && currentUser.user && currentUser.user.email}
               </Typography.Paragraph>
+           
             </div>
           </Card>
           {/* Recipe Content */}

@@ -7,6 +7,7 @@ import axios from "../axios";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchRecipes, fetchRemoveRecipe, likeRecipe } from "../redux/slices/recipes";
 import { fetchLogin, selectIsAuth } from "../redux/slices/auth";
+import Spinner from "./Spinner";
 
 const Cards = ({recipeData, isPostsLoading}) => {
   const dispatch = useDispatch();
@@ -54,7 +55,8 @@ const Cards = ({recipeData, isPostsLoading}) => {
       const data = response.data;
   
       if (response.status === 200) {
-        dispatch(fetchRecipes()); 
+        // dispatch(fetchRecipes()); 
+        window.location.reload();
       } else {
         console.error(data.msg);
       }
@@ -80,11 +82,7 @@ const Cards = ({recipeData, isPostsLoading}) => {
       <div className="container-xxl">
         <Row gutter={[16, 16]}>
           {isPostsLoading
-            ? [...Array(5)].map((_, index) => (
-                <Col key={index} xs={24} md={8}>
-                  <Card className="custom-card loading-card" />
-                </Col>
-              ))
+            ?  <Spinner/>
             : recipeData.map((obj) => (
                 <Col key={obj._id} xs={24} md={8}>
                   <Card
@@ -108,7 +106,7 @@ const Cards = ({recipeData, isPostsLoading}) => {
                             : obj.title}
                         </h5>   </Link>
                        <div> <p>Cooking Time: {obj.cookingTime}min</p></div>
-                        <i>Created by {obj.user?.username}</i>
+                        <i style={{color:"white"}}>Created by {obj.user?.username}</i>
                         {/* <div>
                           <p className="card-description">
                             {obj.instructions.length > 20
