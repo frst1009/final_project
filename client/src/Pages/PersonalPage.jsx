@@ -99,10 +99,11 @@ const PersonalPage = () => {
           </Card>
           {/* Recipe Content */}
           <h1 style={{textAlign:"center", marginTop:"40px", marginBottom:"30px"}}>Recipes</h1>
-          <div className="col-12 p-3">
-            <div className="row">
+          <div className="container p-3">
+      <div className="container-xl">
+        <div className="row">
               {data.map((recipe) => ( 
-                <div className="col-6 mb-3" key={recipe._id}>
+                <div className="col-md-6 mb-3" key={recipe._id}>
                   <div className="card" style={{backgroundColor:"transparent"}}>
                     <div className="row g-0">
                       <div className="col-md-4">
@@ -126,6 +127,7 @@ const PersonalPage = () => {
         </div>
       </div>
     </div></div>
+    </div>
   );
 };
 

@@ -29,17 +29,21 @@ const ProductDetails = () => {
     return <Spinner loading={loading} />;
   }
   return (
-    <div className="container p-5" id={data._id}>
-       <div className="container-xxl">
-
-        <div className="col-12 product-card">
+    <div className="container p-3" id={data._id}>
+       <div className="container-xl">
+       <div className="row">
+        <div className="col-md-12 product-card">
         <h1 className="card-title" style={{textAlign:"center"}}>{data.title}</h1>
-        <h5 className="card-title" style={{textAlign:"center"}}>Created by user: {data.user.username}</h5>
-          <div className="card m-auto products">
+        <h5 className="card-title text-center">Created by user: {data.user.username}</h5>
+        </div>
+        </div>
+        <div className="row">
+          <div className="col-md-6">
+            <div className="card p-3 m-2 products">
             <img
               src={`http://localhost:3040${data.image}`}
               alt=""
-              className="card-img-top img-fluid p-2"
+              className="card-img-top img-fluid"
             />
           </div>
         </div>
@@ -56,9 +60,8 @@ const ProductDetails = () => {
             </div>
           </div>
         </div> */}
-      <div className="row">
-        <div className="col-lg-12" >
-        <div className="card p-5 m-auto products">
+        <div className="col-md-6" >
+        <div className="card p-3 m-2 products">
         <h2 style={{margin:"auto"}}>Time to make: {data.cookingTime}min</h2>
           <h2>Ingredients</h2>
           <ul>
@@ -74,10 +77,14 @@ const ProductDetails = () => {
     ))}
           </ul>
           {/* Comment Section */}
-        </div>{" "}
-        <Comments recipeId={id}/>
+          </div>
+          </div>
         </div>
-      </div>
+        <div className="row">
+          <div className="col-md-12">
+            <Comments recipeId={id} />
+          </div>
+        </div>
       </div>
     </div>
   );

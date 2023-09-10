@@ -43,7 +43,7 @@ console.log(recipes);
             <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
               <div className="carousel-inner">
                   <div className='back-details'>
-                  <h1 >Cooking Monsters</h1>
+                  <h1 className='cooking'>Cooking Monsters</h1>
                   <h2 >You totally know where good food recipes located!</h2>
                 <div className="search-container">
       <div className="input-group d-none d-md-flex">

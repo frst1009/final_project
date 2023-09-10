@@ -63,14 +63,14 @@ const CustomCarousel = () => {
   }
 
   return (
-    <div style={{ margin: "5%" }}>
+    <div style={{ margin: "5% 5% 3% 5%" }}>
       <div
         style={{
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          marginBottom: "70px",
-          marginTop: "100px",
+          marginBottom: "4%",
+          marginTop: "15%",
         }}
       >
         <p style={{ fontSize: "25px", fontWeight: "800" }}>Categories</p>

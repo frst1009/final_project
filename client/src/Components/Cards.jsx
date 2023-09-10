@@ -74,7 +74,7 @@ const Cards = ({recipeData, isPostsLoading}) => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          marginBottom: "70px",
+          marginBottom: "5%",
         }}
       >
         <p style={{ fontSize: "25px", fontWeight: "800" }}> Recipes</p>
