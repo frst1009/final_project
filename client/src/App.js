@@ -42,6 +42,7 @@ function App() {
           <Route path='category/:category' element={<CategoryPage/>}/>
           <Route path='populars' element={<Populars/>}/>
           <Route path='tags/:tag' element={<TagsPage/>}/>
+          <Route path="about" element={<About/>}/>
           {/* <Route path='edit' element={<EditProfileComponent/>}/> */}
           </Route>
         </Routes>

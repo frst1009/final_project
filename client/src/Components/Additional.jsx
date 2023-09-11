@@ -8,7 +8,7 @@ function Additional() {
     <div className="container-xxl">
       <div className="row">
           <div className="col-lg-12 col-md-12 col-sm-12 d-flex justify-content-center">
-          <Link><h1 style={{color:"#1c1c1c"}}>Get to Know us!</h1></Link>
+          <Link to={"/about"}><h1 style={{color:"#1c1c1c"}}>Get to Know us!</h1></Link>
             </div>
             </div></div>
             </section></>

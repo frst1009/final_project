@@ -79,14 +79,14 @@ label {
 /* profile */
 
 /* personalPage */
-.profpage{
+/* .profpage{
   background-color: var(--background);
 }
 .profpage .space{
   background:  url("https://www.mowglistreetfood.com/wp-content/uploads/2023/01/Landing_image_Desktop.jpg"); 
   height: 200px;
   z-index: 1;
-}
+} */
 
 /* personalPage */
 
@@ -253,13 +253,13 @@ border: none;
 top: 12px;
 }
 .banner_additional{
-  background: url("https://www.sodhatravel.com/hs-fs/hubfs/North%20India%20Food%20Collage.jpg?width=5120&name=North%20India%20Food%20Collage.jpg");
+  background: url(./Components/img/North\ India\ Food\ Collage.webp);
   background-size: cover; 
   height: 10rem;
   margin-top: 50px;
 }
 .banner{
-  background: url("https://jooinn.com/images/table-with-food-5.jpg");
+  background: url(./Components/img/table-with-food-5.jpg);
   /* background-image: url(./Components/img/1619242838_57-phonoteka_org-p-fon-dlya-menyu-fast-fuda-65.jpg); */
 
   background-size: cover; 
