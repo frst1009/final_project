@@ -86,15 +86,14 @@ function Comments({ recipeId }) {
   {currentRecipe &&
     currentRecipe.comments.map((obj) => (
       <li className="list-group-item comment-div" key={obj._id}>
-        <div className="d-flex">   
-         {/* <img
+        <div className="d-flex">    <img
                         src={obj.avatar
                           ? `http://localhost:3040${currentUser.user.avatar}`
                           : 'https://static.vecteezy.com/system/resources/previews/013/331/127/original/account-avatar-dark-mode-glyph-ui-icon-personal-page-of-site-user-user-interface-design-white-silhouette-symbol-on-black-space-solid-pictogram-for-web-mobile-isolated-illustration-vector.jpg'}
                         alt="Selected Image"
                         className="img-thumbnail"
                         style={{ maxWidth: '30px', height:"30px",objectFit: 'cover', marginRight:"10px" }}
-                      /> */}
+                      />
           <div className="flex-grow-1">
       
             <p>User: {obj.username}</p>

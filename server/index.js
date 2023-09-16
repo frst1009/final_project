@@ -1,7 +1,6 @@
 const express = require("express");
 const { db } = require("./db");
 const { createServer } = require("http");
-require('dotenv').config();
 const app = express();
 const cors = require("cors");
 const { postCreateValidation, registerValidation, loginValidation } = require("./utilities/validation");
@@ -15,7 +14,6 @@ db.connect();
 const { UserController } = require("./controllers/userController");
 const multer = require("multer");
 const fs = require("fs")
-
 
 
 const avatarStorage = multer.diskStorage({
