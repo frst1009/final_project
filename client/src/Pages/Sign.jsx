@@ -17,13 +17,7 @@ const Signup = () => {
 		handleSubmit,
 		formState: { errors, isValid },
 	} = useForm({
-		defaultValues: {
-			username: 'Morales',
-			email: 'morales@gmail.com',
-			password: 'hello',
-      confirmpassword:"hello",
-
-		},
+	
 		mode: 'onChange',
 	});
 
