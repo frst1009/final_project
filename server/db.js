@@ -1,9 +1,9 @@
 const { default: mongoose } = require("mongoose");
-
+const key = process.env.SECRET_KEY;
 const db = {
     connect: async () => {
         try {
-            await mongoose.connect("mongodb+srv://ilahaeshu:E83U1GSN8C5eOnVZ@cluster0.ehxhrlt.mongodb.net/recipepage");
+            await mongoose.connect(key);
             console.log('CONNECTED!');
 
         } catch (err) {
