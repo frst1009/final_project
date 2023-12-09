@@ -17,10 +17,6 @@ const Login = () => {
     handleSubmit, //funstion provided by the hook itself
     formState: { errors, isValid },
   } = useForm({
-    defaultValues: {
-      email: "morales@gmail.com",
-      password: "hello",
-    },
     mode:"onChange",
   });
 
