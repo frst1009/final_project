@@ -93,7 +93,7 @@ const Cards = ({recipeData, isPostsLoading}) => {
                   >
                     <div className="card-image">
                       <img
-                        src={`http://localhost:3040${obj.image}`}
+                        src={`https://recipepage-3fda.onrender.com${obj.image}`}
                         alt=""
                         className="card-img-top p-2"
                       />

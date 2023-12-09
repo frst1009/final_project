@@ -101,7 +101,7 @@ if(isAuth){
                     <label htmlFor="avatar" className="avatar-label d-flex justify-content-center" >
           <Avatar
             size={70}
-            src={avatar ? `http://localhost:3040${avatar}` : undefined}
+            src={avatar ? `https://recipepage-3fda.onrender.com${avatar}` : undefined}
             icon={avatar ? undefined : <UserOutlined />}
           />
         </label>

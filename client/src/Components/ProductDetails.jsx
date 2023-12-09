@@ -41,7 +41,7 @@ const ProductDetails = () => {
           <div className="col-md-6">
             <div className="card p-3 m-2 products">
             <img
-              src={`http://localhost:3040${data.image}`}
+              src={`https://recipepage-3fda.onrender.com${data.image}`}
               alt=""
               className="card-img-top img-fluid"
             />

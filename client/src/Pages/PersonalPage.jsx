@@ -77,7 +77,7 @@ const PersonalPage = () => {
              <div className="mb-3">
                       <img
                         src={currentUser && currentUser.user && currentUser.user.avatar
-                          ? `http://localhost:3040${currentUser.user.avatar}`
+                          ? `https://recipepage-3fda.onrender.com${currentUser.user.avatar}`
                           : 'https://static.vecteezy.com/system/resources/previews/013/331/127/original/account-avatar-dark-mode-glyph-ui-icon-personal-page-of-site-user-user-interface-design-white-silhouette-symbol-on-black-space-solid-pictogram-for-web-mobile-isolated-illustration-vector.jpg'}
                         alt="Selected Image"
                         className="img-thumbnail"
@@ -107,7 +107,7 @@ const PersonalPage = () => {
                   <div className="card" style={{backgroundColor:"transparent"}}>
                     <div className="row g-0">
                       <div className="col-md-4">
-                        <img src={`http://localhost:3040${recipe.image}`} style={{ width: '100%', height: '150px', objectFit: 'cover' }}
+                        <img src={`https://recipepage-3fda.onrender.com${recipe.image}`} style={{ width: '100%', height: '150px', objectFit: 'cover' }}
  alt="" className="img-fluid rounded-start" />
                       </div>
                       <div className="col-md-8">

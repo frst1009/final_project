@@ -141,7 +141,7 @@ const UserController = {
           html: `
                       <p> In order to change your password click here</p>
                       <p> 
-                      <a href="http://localhost:3000/changepassword?token=${resetToken}&userId=${user._id}">
+                      <a href="https://cookingmonsters.onrender.com/changepassword?token=${resetToken}&userId=${user._id}">
                     Reset your password!
                       </a>
                       </p>

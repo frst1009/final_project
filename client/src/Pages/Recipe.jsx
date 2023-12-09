@@ -237,7 +237,7 @@ alert('Upload error!');
                             </Button> */}
                             <div className="image-preview">
                            <img
-                            src={`http://localhost:3040${image}`}
+                            src={`https://recipepage-3fda.onrender.com${image}`}
                             alt=""
                             className="img-fluid"
                           />
