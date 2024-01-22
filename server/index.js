@@ -79,8 +79,8 @@ app.post("/api/user/login", loginValidation, validationError,UserController.logi
 app.get("/api/user/authuser", tokenAuth, UserController.profileData);
 app.patch("/api/user/update", tokenAuth, UserController.profileUpdate);
 app.get("/api/user/getUsers", UserController.getUsers );
-app.post("/api/user/forgottenPassword", UserController.forgottenPassword);
-app.put("/api/user/changepassword",UserController.changepassword);
+// app.post("/api/user/forgottenPassword", UserController.forgottenPassword);
+// app.put("/api/user/changepassword",UserController.changepassword);
 
 
 httpServer.listen(3040);

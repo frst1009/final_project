@@ -9,8 +9,8 @@ const isSignupAndLoginEnabled = false;
 const UserController = {
   register: async (req, res) => {
     if (!isSignupAndLoginEnabled) {
-      return res.status(403).json({ message: 'Signup is currently disabled.' });
-    }
+      return res.status(403).json({ msg: 'Signup is currently disabled.' });
+        }
     // const { username, email, password, confirmpassword, avatar} = req.body;
     // try {
     //   const data = await User.findOne({ email: email, username: username });
@@ -45,7 +45,7 @@ const UserController = {
   },
   login: async (req, res) => {
     if (!isSignupAndLoginEnabled) {
-      return res.status(403).json({ message: 'Logins are currently disabled.' });
+      return res.status(403).json({ msg: 'Logins are currently disabled.' });
     }
     // try {
     //   let user = await User.findOne({
