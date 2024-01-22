@@ -42,9 +42,12 @@ if(isAuth){
           <div className="col-lg-4 col-md-8 col-sm-10">
             <div className="card">
               <div className="card-body p-5">
-                <h2 className="text-center">LOGIN</h2>
-                <p className="text-center mb-4">Welcome Back!!</p>
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <h2 className="text-center">LOGIN Currently Unavailable</h2>
+                {/* <p className="text-center mb-4">Welcome Back!!</p> */}
+                <p style={{color: "black", textAlign: "center"}}>
+              The Login disabled check the code to see the functionality perks!
+            </p>
+                {/* <form onSubmit={handleSubmit(onSubmit)}> */}
                   <div className="mb-3">
                     <label htmlFor="email" className="form-label mb-3">
                       Enter Your Email address
@@ -84,14 +87,15 @@ if(isAuth){
       </div>
                   <div className="d-flex justify-content-between align-items-center mb-3">
                     <p className="m-0 text-center" >Forgot Password?</p>
-                    <Link to="/forgotpassword" className="form-link">
+                    {/* <Link to="/forgotpassword" className="form-link">
                      Click here!
-                    </Link>
+                    </Link> */}
+                    <a href="" className="form-link">Click Here</a>
                   </div>
                   <div className="d-grid gap-2">
-                    <button disabled={!isValid} type="submit">Login</button>
+                    <button disabled type="submit">Login</button>
                   </div>
-                </form>
+                {/* </form> */}
               </div>
             </div>
           </div>

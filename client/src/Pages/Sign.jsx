@@ -51,21 +51,21 @@ const Signup = () => {
     }
   };
 
-  const handleImageSelection = async (event) => {
-    try {
-      const formData = new FormData();
-      const file = event.target.files[0];
-      if (!file) {setImage("https://ionicframework.com/docs/img/demos/avatar.svg"); 
+  // const handleImageSelection = async (event) => {
+  //   try {
+  //     const formData = new FormData();
+  //     const file = event.target.files[0];
+  //     if (!file) {setImage("https://ionicframework.com/docs/img/demos/avatar.svg"); 
     
-    } else {
-        formData.append('avatar', file);
-      const { data } = await axios.post('/upload-avatar', formData);
-      setImage(data.url);
-    }
-    } catch (error) {
-      alert('Error in image upload!');
-    }
-  };
+  //   } else {
+  //       formData.append('avatar', file);
+  //     const { data } = await axios.post('/upload-avatar', formData);
+  //     setImage(data.url);
+  //   }
+  //   } catch (error) {
+  //     alert('Error in image upload!');
+  //   }
+  // };
 
 if(isAuth){
   return <Navigate to='/'/>
@@ -78,15 +78,19 @@ if(isAuth){
           <div className="col-lg-4 col-md-8 col-sm-10">
               <div className="card">
                 <div className="card-body p-5">
-                  <h2 className="text-center">Sign Up</h2>
-                  <p className="text-center mb-3">Join us in this adventure to heavenly taste!!</p>
-                  <form onSubmit={handleSubmit(onSubmit)}>
+                  <h2 className="text-center">Signup Currently Unavailable</h2>
+                  {/* <p className="text-center mb-3">Join us in this adventure to heavenly taste!!</p> */}
+                  <p style={{color: "black", textAlign: "center"}}>
+              The SignUp disabled check the code to see the functionality perks!
+            </p>
+                  {/* <form onSubmit={handleSubmit(onSubmit)}> */}
                   <div className="mb-3">
                     <input
                       type="file"
                       id="avatar"
                       accept="image/*"
-                      onChange={handleImageSelection}
+                      // onChange={handleImageSelection}
+                      disabled
                       style={{display:"none"}}
                     />
                        <label htmlFor="avatar" className="form-label mb-3 d-flex justify-content-center">
@@ -172,9 +176,9 @@ if(isAuth){
                       </Link>
                     </div>
                     <div className="d-grid gap-2">
-                      <button disabled={!isValid} type="submit">Sign Up</button>
+                      <button disabled type="submit">Sign Up</button>
                     </div>
-                  </form>
+                  {/* </form> */}
                 </div>
               </div>
           </div>
