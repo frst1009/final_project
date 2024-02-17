@@ -1,14 +1,14 @@
   @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@500&family=DynaPuff&family=League+Spartan:wght@300&family=Mulish:wght@200&family=Prompt:wght@100&family=Tektur&display=swap');
 :root{
   --darker:#43ff64d9;
-  --lighter: #1c1a1b5a;
+  --lighter: #0908095a;
   --lighter2:#83c4be7b;
   --search: #ffe5d5;
   --primary1: #6f6c6b;
 --additional:#4d233f;
 --burgandy:#4d233f12;
 --recipepage: #ffe5d53a;
---background: #1c1c1c;
+--background: #111111;
 }
 
 *{
@@ -104,8 +104,7 @@ label {
 
 .custom-card {
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s, box-shadow 0.3s;;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 .custom-card .ant-card-meta-title {
   color: var(--search);
@@ -115,7 +114,7 @@ label {
 }
 .custom-card:hover {
   transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 4px 8px var(--additional);
+  box-shadow: 0 4px 8px var(--lighter2);
 }
 
 .card-image {
@@ -259,9 +258,8 @@ top: 12px;
   margin-top: 50px;
 }
 .banner{
-  background: url(./Components/img/table-with-food-5.jpg);
+  background: url(./Components/img/666.jpg);
   /* background-image: url(./Components/img/1619242838_57-phonoteka_org-p-fon-dlya-menyu-fast-fuda-65.jpg); */
-
   background-size: cover; 
 
 }

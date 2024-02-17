@@ -89,7 +89,7 @@ const Cards = ({recipeData, isPostsLoading}) => {
                     hoverable
                     className="custom-card"
                     bodyStyle={{ padding: "16px"}}
-                    style={{backgroundColor:"transparent"}}
+                    style={{backgroundColor:"transparent", border:"solid gray 1px"}}
                   >
                     <div className="card-image">
                       <img
