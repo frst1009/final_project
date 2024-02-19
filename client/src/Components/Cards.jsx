@@ -82,7 +82,7 @@ const Cards = ({recipeData, isPostsLoading}) => {
       <div className="container-xxl">
         <Row gutter={[16, 16]}>
           {isPostsLoading
-            ?  <Spinner/>
+            ? <div style={{width:"100%", display:"flex", justifyContent:"center"}}><Spinner/></div> 
             : recipeData.map((obj) => (
                 <Col key={obj._id} xs={24} md={8}>
                   <Card
@@ -128,11 +128,11 @@ const Cards = ({recipeData, isPostsLoading}) => {
       }}
       style={{
 
-        color: userId && userId.user && obj.likes.includes(userId.user._id) ? "aqua" : "white",
+        color: userId && userId.user && obj.likes.includes(userId.user._id) ? "violet" : "white",
       }}
     />
   ) : (
-    <FontAwesomeIcon icon={faHeart} />
+    <FontAwesomeIcon icon={faHeart} style={{color:"white"}} />
   )}
 
                       
